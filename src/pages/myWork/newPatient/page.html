@@ -17,15 +17,15 @@
       </p>
       <p>
         <label for="patient-name">患者姓名:</label>
-        <input id="patient-name" placeholder="壮壮"></input>
+        <input id="patient-name" placeholder="患者姓名"></input>
       </p>
       <p>
         <label for="patient-phone-number">手机:</label>
-        <input id="patient-phone-number"></input>
+        <input id="patient-phone-number" placeholder="手机"></input>
       </p>
       <p>
         <label for="patient-tel-number">座机（选填）:</label>
-        <input id="patient-tel-number"></input>
+        <input id="patient-tel-number" placeholder="座机（选填）"></input>
       </p>
       <p id="sex-p">
         <span class="no-focus-needed">性别:</span>
@@ -48,25 +48,24 @@
         <span class="arraw-into"></span>
       </p>
       <p id="doctor-name-p">
-        <label>医生:</label>
+        <label for="doctor-name">医生:</label>
         <!-- <input id="doctor-name" readonly placeholder="请选择医生"/> -->
-        <select id="doctor-name">
-        </select>
+        <a name="cd" id="doctor-name"></a>
         <span class="arraw-into"></span>
       </p>
       <p id="patient-src-p">
-        <label>患者来源:</label>
+        <label for="patient-src">患者来源:</label>
         <!-- <input id="patient-src" readonly placeholder="患者来源"/> -->
-        <select id="patient-src">
+        <a id="patient-src">患者来源
           <!-- <option value="1">Atlanta</option>
           <option value="2">Berlin</option>
           <option value="3">Boston</option> -->
-        </select>
+          </a>
         <span class="arraw-into"></span>
       </p>
       <p>
         <label>住址:</label>
-        <input id="patient-addr" readonly placeholder="请输入地址"></input>
+        <a id="patient-addr">华阳</a>
         <span class="arraw-into locate-icon"></span>
       </p>
       <div class="save" id="save">保存</div>

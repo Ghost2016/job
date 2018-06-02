@@ -10,9 +10,14 @@ exportModule.render = function(id, jsonObj) {
       item.type = 4
     } else if (item.isff === '否') {
       item.type = 2
-    } else {
+    } else if (item.state === '完成') {
+      item.type = 0
+    } else if (item.state === '爽约') {
       item.type = 3
+    } else if (item.state === '预约') {
+      item.type = 1
     }
+    item.date = (item.bdate && item.bdate.substring(11, 16)) || (item.ffdate && item.ffdate.substring(11, 16))
   })
   const tempObj = { items: jsonObj }
   console.log(tempObj)

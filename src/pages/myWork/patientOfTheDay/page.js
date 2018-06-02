@@ -21,10 +21,20 @@ var tabIndex = 0
 // var today = new Date()
 // 改变的时间
 // var changeIndex = 0
-var timer = new Timer()
 $(function() {
-  updateDate()
-  fetchData()
+  var timer = new Timer({
+    LeftArrowId: 'left-arrow',
+    RightArrowId: 'right-arrow',
+    TextId: 'timer-text',
+    regFormat: 'YYYY年MM月DD日',
+    onAdd: function(date) {
+      fetchData(date)
+    },
+    onMinus: function(date) {
+      fetchData(date)
+    }
+  })
+  fetchData(timer.getParsedTime())
   // todo
   $('#tab ul li').on('click', function() {
     const $this = $(this)
@@ -36,24 +46,12 @@ $(function() {
     tabIndex = $this.index()
     updatePatients()
   })
-  $('.left-arrow').on('click', () => {
-    timer.minusOneDay()
-    // changeIndex--
-    updateDate()
-    fetchData()
-  })
-  $('.right-arrow').on('click', () => {
-    timer.addOneDay()
-    // changeIndex++
-    updateDate()
-    fetchData()
-  })
 })
 
 // 获取数据
-function fetchData() {
+function fetchData(date) {
   // fetchPatientList({ today: parseTime() }).then(
-  fetchPatientList({ today: timer.getParsedTime() }).then(
+  fetchPatientList({ today: date }).then(
     res => {
       patientList = res.data.Data
       updateTabs()
@@ -100,8 +98,4 @@ function updatePatients() {
     patientList: renderList
   })
 }
-
-// function parseTime() {
-//   return moment(today).add(changeIndex, 'days').format('YYYY-MM-DD')
-// }
 

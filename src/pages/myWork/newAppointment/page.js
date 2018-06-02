@@ -7,9 +7,17 @@ require('@/lib/common.js')
 import { newAppointmentWithOutNumber, newAppointmentWithNumber,
   deleteAppointment, editAppointmentWithOutNumber, editAppointmentWithNumber
 } from '@/api/appointment'
+
+// 新增 编辑
+const isAdd = false
+// 有号 无号
+const WithNumer = true
 $(function() {
   // window.mobiscroll.date('#appointment-time', {})
   // var currYear = (new Date()).getFullYear()
+  if (!isAdd) {
+
+  }
   var opt = {}
   opt.date = { preset: 'date' }
   opt.datetime = { preset: 'datetime' }
@@ -48,6 +56,7 @@ $(function() {
     }
   })
 })
+// 检查数据
 function _validate() {
   return true
 }

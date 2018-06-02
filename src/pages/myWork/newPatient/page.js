@@ -4,9 +4,8 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 }
 require('@/lib/common.js')
 import './page.less'
-import { newPatient } from '@/api/patient'
+import { newPatient, fetchPatientDetailByBlh, deletePatientByBlh, editPatient } from '@/api/patient'
 import { fetchPatientSrc, fetchDoctorList } from '@/api/common'
-import { Timer } from '@/lib/utils'
 
 // const native = require('@/lib/native.js')
 // $('#app').html('通过jquery')
@@ -18,48 +17,26 @@ import { Timer } from '@/lib/utils'
 //     flag: 3
 //   }
 // )
+var patientSrc = []
+var patientSrcSelector = null
+var doctorList = []
+var doctorListSelector = null
+var isAdd = false
+var blh = 0
 $(function() {
-  var patientSrc = []
-  var doctorList = []
-  fetchPatientSrc().then(
-    res => {
-      var length = res.data.Data.length
-      for (var i = 0; i < length; i++) {
-        patientSrc.push({ value: i, text: res.data.Data[i].name })
+  if (!isAdd) {
+    fetchPatientDetailByBlh().then(
+      res => {
+        console.log(res)
+        blh = res.data.Data[0].blh
+        fillData(res.data.Data)
       }
-      window.mobiscroll.select('#patient-src', {
-        theme: 'ios',
-        display: 'bottom',
-        minWidth: 200,
-        data: patientSrc
-      })
-      fetchDoctorList().then(
-        res => {
-          console.log(res)
-          var length = res.data.Data.length
-          for (var i = 0; i < length; i++) {
-            doctorList.push({ value: res.data.Data[i].id, text: res.data.Data[i].name })
-          }
-          window.mobiscroll.select('#doctor-name', {
-            theme: 'ios',
-            display: 'bottom',
-            minWidth: 200,
-            data: doctorList
-          })
-        }
-      ).catch(
-        e => {
-          console.log(e)
-        }
-      )
-    }
-  ).catch(
-    e => {
-      console.log(e)
-    }
-  )
-  // alert($('#sex-p .is-checked').attr('data-sex'))
-
+    ).catch(
+      e => {
+        console.log(e)
+      }
+    )
+  }
   // todo
   const GDialog = require('@/components/gDialog/gDialog.js')
   GDialog.render('gDialog', {
@@ -73,49 +50,68 @@ $(function() {
   $('#save').on('click', (e) => {
     if (validate()) {
       const form = {
-        name: $('#patient-name').html(),
-        phone: $('#patient-phone-number').html(),
-        tel: $('#patient-tel-number').html(),
+        name: $('#patient-name').val(),
+        phone: $('#patient-phone-number').val(),
+        tel: $('#patient-tel-number').val(),
         sex: $('#sex-p .is-checked').attr('data-sex'),
         birth: $('#patient-birthday').val(),
         docid: $('#doctor-name').val() - 0,
-        docname: $('#doctor-name')[0].textContent,
+        // 封装后的结果
+        docname: $('#doctor-name_dummy').val(),
         hzsource: $('#patient-src')[0].textContent,
-        address: '华阳'
+        address: $('#patient-addr').html()
       }
-      newPatient(form).then(
-        res => {
-          console.log(res)
-        }
-      ).catch(
-        e => {
-          console.log(e)
-        }
-      )
+      console.log(form)
+      return
+      if (isAdd) {
+        newPatient(form).then(
+          res => {
+            console.log(res)
+          }
+        ).catch(
+          e => {
+            console.log(e)
+          }
+        )
+      } else {
+        form.blh = blh
+        editPatient(form).then(
+          res => {
+            console.log(res)
+          }
+        ).catch(
+          e => {
+            console.log(e)
+          }
+        )
+      }
     } else {
       GDialog.show()
     }
   })
-
+  // 患者来源
   $('#patient-src-p').on('click', () => {
-    window.mobiscroll.select('#patient-src', {
-      theme: 'ios',
-      display: 'bottom',
-      minWidth: 200,
-      data: patientSrc
-    })
+    if (patientSrcSelector) {
+      patientSrcSelector.show()
+    } else {
+      fetchPatientSrcList()
+    }
   })
+  // 医生
+  $('#doctor-name-p').on('click', () => {
+    if (doctorListSelector) {
+      doctorListSelector.show()
+    } else {
+      fetchDoctorSrcList()
+    }
+  })
+
   // 使用日期控件
-  // var now = new Date()
   window.mobiscroll.date('#patient-birthday', {
     // theme: 'ios',
     display: 'bottom',
     dateFormat: 'yy-mm-dd',
     lang: 'zh'
-    // setText: '确定',
-    // onInit: function(event, inst) {
-    //   inst.setVal(now, true)
-    // }
   })
   // 切换性别
   $('#sex-p>label').on('click', function(e) {
@@ -126,3 +122,91 @@ $(function() {
     return true
   }
 })
+
+// 获取医生列表
+function fetchDoctorSrcList() {
+  fetchDoctorList().then(
+    res => {
+      console.log(res)
+      var length = res.data.Data.length
+      for (var i = 0; i < length; i++) {
+        doctorList.push({ value: res.data.Data[i].id, text: res.data.Data[i].name })
+      }
+      doctorListSelector = window.mobiscroll.select('#doctor-name', {
+        theme: 'ios',
+        display: 'bottom',
+        minWidth: 200,
+        data: doctorList
+      })
+      doctorListSelector.show()
+    }
+  ).catch(
+    e => {
+      console.log(e)
+    }
+  )
+}
+
+// 获取患者来源列表
+function fetchPatientSrcList() {
+  fetchPatientSrc().then(
+    res => {
+      var length = res.data.Data.length
+      for (var i = 0; i < length; i++) {
+        patientSrc.push({ value: i, text: res.data.Data[i].name })
+      }
+      patientSrcSelector = window.mobiscroll.select('#patient-src', {
+        theme: 'ios',
+        display: 'bottom',
+        minWidth: 200,
+        data: patientSrc
+      })
+      patientSrcSelector.show()
+    }
+  ).catch(
+    e => {
+      console.log(e)
+    }
+  )
+}
+// 填充数据
+function fillData(data) {
+  data = [
+    {
+      'name': '测试2',
+      'sex': '男',
+      'age': '18岁',
+      'cfz': '复诊患者',
+      'xfje': null,
+      'qf': null,
+      'blh': 1703076588,
+      'ys': '',
+      'jzsj': '2018-05-25 01:23:03',
+      'yysj': null,
+      'yybz': null,
+      'bl': null
+    }
+  ][0]
+  console.log(data)
+  $('#patient-name').val(data.name),
+  $('#patient-phone-number').val(),
+  $('#patient-tel-number').val(),
+  $('#sex-p .is-checked').attr('data-sex'),
+  $('#patient-birthday').val(),
+  $('#doctor-name').val() - 0,
+  $('#doctor-name')[0].textContent,
+  $('#patient-src')[0].textContent,
+  $('#patient-addr').val()
+}
+// 删除
+function deletePatient() {
+  deletePatientByBlh(blh).then(
+    res => {
+      console.log(res)
+    }
+  ).catch(
+    e => {
+      console.log(e)
+    }
+  )
+}

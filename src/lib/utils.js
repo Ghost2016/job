@@ -17,20 +17,37 @@ export function getSearchParam(name, locationSearch) {
 }
 
 // 用于控制时间一天的加减
-export function Timer() {
+export function Timer({ LeftArrowId, RightArrowId, TextId, onAdd, onMinus, regFormat }) {
   this.today = new Date()
   this.changeIndex = 0
+  this.textDom = $(`#${TextId}`)
+  this.regFormat = regFormat || 'YYYY年MM月DD日'
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(`${this.regFormat}`)
+  this.textDom.html(this.formattedTime)
+  $(`#${LeftArrowId}`).on('click', () => {
+    this.minusOneDay()
+    onMinus()
+  })
+  $(`#${RightArrowId}`).on('click', () => {
+    this.addOneDay()
+    onAdd()
+  })
 }
-
 Timer.prototype.getParsedTime = function() {
-  return moment(this.today).add(this.changeIndex, 'days').format('YYYY-MM-DD')
+  return this.formattedTime
 }
 Timer.prototype.addOneDay = function() {
   this.changeIndex++
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
+  this.textDom.html(this.formattedTime)
 }
 Timer.prototype.minusOneDay = function() {
   this.changeIndex--
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
+  this.textDom.html(this.formattedTime)
 }
+
+// 转换成YYYY-MM-DD格式
 Timer.parseTime = function(date) {
   return moment(date).format('YYYY-MM-DD')
 }
@@ -38,3 +55,4 @@ Timer.parseTime = function(date) {
 export function getToken() {
   return 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G'
 }
+

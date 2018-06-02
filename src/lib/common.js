@@ -3,6 +3,6 @@ require('@assets/less/common.less')
 require('./flexible.js')
 import FastClick from 'fastclick'
 $(function() {
-  FastClick.attach(document.body)
+  // FastClick.attach(document.body)
 })
 

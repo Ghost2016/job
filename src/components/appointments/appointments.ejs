@@ -28,20 +28,22 @@
     
      <!-- 左边时间-->
     <div class="appointment-item-left-time">
-      09:00
+      <!-- 09:00 -->
+      <%=items[i].date %>
     </div>
     <!-- 左边姓名-->
     <div class="appointment-item-left-name">
-      王七里
+      <!-- 王七里 -->
+      <%=items[i].name %>
     </div>
   </div>
   <div class="appointment-item-right">
     <div class="appointment-item-right-content">
         <div class="appointment-item-right-content-top">
-          内容：<%=items[i].ffcontext %>
+          内容：<%=items[i].ffcontext || items[i].context %>
         </div>
         <div class="appointment-item-right-content-bottom">
-          医生：<%=items[i].docname %>
+          医生：<%=items[i].docname || items[i].doctname %>
         </div>
     </div>
     <a class="appointment-item-right-tel" href="tel:<%=items[i].tel %>">

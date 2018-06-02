@@ -7,28 +7,26 @@ require('@/lib/common.js')
 import { fetchReturnVisitList } from '@/api/returnVisit'
 const Appointments = require('@/components/appointments/appointments.js')
 import { Timer } from '@/lib/utils.js'
-var timer = new Timer()
+
 $(function() {
-  updateDate()
-  fetchData()
-  $('.left-arrow').on('click', () => {
-    timer.minusOneDay()
-    updateDate()
-    fetchData()
+  var timer = new Timer({
+    LeftArrowId: 'left-arrow',
+    RightArrowId: 'right-arrow',
+    TextId: 'timer-text',
+    regFormat: 'YYYY年MM月DD日应回访',
+    onAdd: function(date) {
+      fetchData(date)
+    },
+    onMinus: function(date) {
+      fetchData(date)
+    }
   })
-  $('.right-arrow').on('click', () => {
-    timer.addOneDay()
-    updateDate()
-    fetchData()
-  })
+  fetchData(timer.getParsedTime())
 })
-// 更新date内值
-function updateDate() {
-  $('.appointment-time>span').html(timer.getParsedTime())
-}
+
 // 获取数据
-function fetchData() {
-  fetchReturnVisitList({ today: timer.getParsedTime() }).then(
+function fetchData(date) {
+  fetchReturnVisitList({ today: date }).then(
     res => {
       const data = res.data.Data
       console.log(data)

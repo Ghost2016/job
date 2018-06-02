@@ -14,7 +14,11 @@ require('@/lib/common.js')
 //     flag: 3
 //   }
 // )
+import { fetchApointmentList } from '@/api/appointment'
 const GDialog = require('@/components/gDialog/gDialog.js')
+const Appointments = require('@/components/appointments/appointments.js')
+import { Timer } from '@/lib/utils.js'
+
 GDialog.render('gDialog', {
   titleText: '选择预约方式',
   hasCancel: true,
@@ -27,23 +31,40 @@ GDialog.render('gDialog', {
     console.log(' 有号预约')
   }
 })
-const Appointments = require('@/components/appointments/appointments.js')
-Appointments.render('appointments', {
-  // titleText: '选择预约方式',
-  // hasCancel: true,
-  // onEnsureClick: () => {
-  //   GDialog.dismiss()
-  //   console.log('无号预约')
-  // },
-  // onCancelClick: () => {
-  //   GDialog.dismiss()
-  //   console.log(' 有号预约')
-  // }
-})
 
 $(function() {
+  var timer = new Timer({
+    LeftArrowId: 'left-arrow',
+    RightArrowId: 'right-arrow',
+    TextId: 'timer-text',
+    regFormat: 'YYYY年MM月DD日的预约',
+    onAdd: function(date) {
+      fetchData(date)
+    },
+    onMinus: function(date) {
+      fetchData(date)
+    }
+  })
+  fetchData(timer.getParsedTime())
   // todo
   $('#save').on('click', (e) => {
     GDialog.show()
   })
 })
+// 获取数据
+function fetchData(date) {
+  fetchApointmentList({ today: date }).then(
+    res => {
+      const data = res.data.Data
+      updateAppointments(data)
+    }
+  ).catch(
+    e => {
+      console.log(e)
+    }
+  )
+}
+// 更新预约条目
+function updateAppointments(data) {
+  Appointments.render('appointments', data)
+}

@@ -11,9 +11,9 @@ import { getToken } from '@/lib/utils'
  *
  */
 export function fetchApointmentList({ today }) {
-  // if (APP_ENV !== 'production') {
-  //   today = '2017-05-19'
-  // }
+  if (APP_ENV !== 'production') {
+    today = '2017-05-19'
+  }
   return fetch({
     url: 'YY/List',
     data: {

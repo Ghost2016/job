@@ -12,9 +12,10 @@
 <body id="app">
   <div class="content-wrapper">
     <form id="form">
-      <p>
+      <p id="patient-name-p">
         <label for="patient-name">患者姓名:</label>
-        <input id="patient-name" placeholder="请选择" value=""></input>
+        <!-- <input id="patient-name" placeholder="请选择" disabled value=""></input> -->
+        <a id="patient-name">请选择</a>
         <span class="arraw-into"></span>
       </p>
       <div id="patient-info">
@@ -24,9 +25,9 @@
         <input id="current-return-visit-time" readonly placeholder="1991-01-01 04:00" value=""></input>
         <span class="arraw-into"></span>
       </p>
-      <p>
+      <p id="status-p">
         <label>状态:</label>
-        <input id="status" readonly placeholder="只能下拉选择" value=""/>
+        <a id="status" value="1">已回访</a>
         <span class="arraw-into"></span>
       </p>
       <p>
