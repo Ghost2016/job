@@ -1,0 +1,6 @@
+build/
+webpack-config/
+src/assets
+src/static
+/*.js
+*.ejs

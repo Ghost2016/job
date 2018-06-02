@@ -1,0 +1,51 @@
+@import '../../assets/less/constant.less';
+@import '../../assets/less/utils.less';
+
+._time-selector{
+  height:3.9rem;
+  background: #fff;
+  border-radius: 0.1rem;
+  margin:0.4rem;
+  >span{
+    height:0.66rem;
+    line-height:0.66rem;
+    text-align: center;
+    color: @font-color-gray;
+    display: block;
+    border-bottom: 1px solid @bottom-border-color-light-gray;
+  }
+  &-content{
+    margin:0 0.3rem;
+    position: relative;
+    &-item{
+      height:1.06rem;
+      line-height: 1.06rem;
+      list-style: initial;
+      color:red;
+      margin-left:0.78rem;
+      &-input{
+        font-size: 0.30rem;
+        color: @font-color-black
+        // margin-left:0.8rem;
+      }
+      &:first-child{
+        color:green;
+      }
+    }
+  }
+  &-search{
+    background-color: #1468f3;
+    margin:0 0.3rem;
+    text-align: center;
+    line-height: 0.7rem;
+    color:#fff;
+    height:0.7rem;
+    border-radius: 0.1rem;
+  }
+  &-devider{
+    height:1px;
+    display: block;
+    width:100%;
+    background: @bottom-border-color-light-gray;
+  }
+}

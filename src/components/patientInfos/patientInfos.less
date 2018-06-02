@@ -1,0 +1,75 @@
+@import '../../assets/less/utils.less';
+
+._patient-infos{
+  background: #e9e9e9;
+  padding:0.2rem 0;
+  ._patient-info{
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    height:4.56rem;
+    background: #fff;
+    margin: 0 0.2rem;
+    margin-bottom: 0.2rem;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    &-top{
+      height:1.8rem;
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid #e9e9e9;
+      &-avatar{
+        margin:0 0.2rem 0 0.3rem;
+        width:1.2rem;
+        height:100%;
+        .bg-image('../img/avatar-default');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      &-right{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &-status{
+          display: block;
+          margin-top: -0.08rem;
+          margin-bottom: 0.16rem;
+          span{
+            color: #fff;
+            padding:0.06rem 0.1rem;
+            border-radius: 0.1rem;
+            font-size:0.18rem;
+            display: inline;
+            background: #f7a15c;
+          }
+        }
+        &-cost{
+          span{
+            color:red;
+          }
+          span:first-child{
+            color:green;
+          }
+        }
+      }
+    }
+    &-bottom{
+      font-size:0.28rem;
+      margin:0 0.4rem;
+      display: flex;
+      flex:1;
+      flex-direction: column;
+      justify-content: center;
+      line-height:0.46rem;
+      p{
+        label{
+          color: #969696;
+        }
+      }
+      // background: red;
+      // flex:2;
+    }
+  }
+}

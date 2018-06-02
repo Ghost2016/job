@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>新增患者</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <!-- 去掉对电话号码的错误识别 -->
+  <meta name = "format-detection" content = "telephone=no"/>
+  <link rel="stylesheet" href="../../static/css/mobiscroll.javascript.min.css"/>
+</head>
+<body id="app">
+  <div class="content-wrapper">
+    <form id="form">
+      <p>
+        <label for="patient-number">病历号:</label>
+        <input id="patient-number" disabled/>
+      </p>
+      <p>
+        <label for="patient-name">患者姓名:</label>
+        <input id="patient-name" placeholder="壮壮"></input>
+      </p>
+      <p>
+        <label for="patient-phone-number">手机:</label>
+        <input id="patient-phone-number"></input>
+      </p>
+      <p>
+        <label for="patient-tel-number">座机（选填）:</label>
+        <input id="patient-tel-number"></input>
+      </p>
+      <p id="sex-p">
+        <span class="no-focus-needed">性别:</span>
+        <label class="checkbox-radio-label" for="male">
+          <span class="checkbox-radio-label-box is-checked" data-sex='男'>
+            <input class="checkbox-radio-label-input" type="radio" name="patient-sex" id="male">
+          </span>
+          <span class="checkbox-radio-label-content">男</span>
+        </label>
+        <label class="checkbox-radio-label" for="female">
+          <span class="checkbox-radio-label-box" data-sex='女'>
+            <input class="checkbox-radio-label-input" type="radio" name="patient-sex" id="female">
+          </span>
+          <span class="checkbox-radio-label-content">女</span>
+        </label>
+      </p>
+      <p>
+        <label>生日:</label>
+        <input id="patient-birthday"/>
+        <span class="arraw-into"></span>
+      </p>
+      <p id="doctor-name-p">
+        <label>医生:</label>
+        <!-- <input id="doctor-name" readonly placeholder="请选择医生"/> -->
+        <select id="doctor-name">
+        </select>
+        <span class="arraw-into"></span>
+      </p>
+      <p id="patient-src-p">
+        <label>患者来源:</label>
+        <!-- <input id="patient-src" readonly placeholder="患者来源"/> -->
+        <select id="patient-src">
+          <!-- <option value="1">Atlanta</option>
+          <option value="2">Berlin</option>
+          <option value="3">Boston</option> -->
+        </select>
+        <span class="arraw-into"></span>
+      </p>
+      <p>
+        <label>住址:</label>
+        <input id="patient-addr" readonly placeholder="请输入地址"></input>
+        <span class="arraw-into locate-icon"></span>
+      </p>
+      <div class="save" id="save">保存</div>
+    </form>
+    
+  </div>
+  <div id="gDialog"></div>
+  <script type="text/javascript" src="../../static/js/mobiscroll.javascript.min.js"></script>
+</body>
+</html>

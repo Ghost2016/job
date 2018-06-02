@@ -1,0 +1,72 @@
+._gDialog-wrapper{
+  z-index: 2;
+  height:100%;
+  width:100%;
+  position: fixed;
+  top:0;
+  display: none;
+  justify-content:center;
+  align-items: center;
+  ._mask{
+    z-index:3;
+    width:100%;
+    position: absolute;
+    top:0;
+    height:100%;
+    background: #000;
+    opacity: 0.5;
+  }
+  ._gDialog{
+    z-index: 3;
+    position: relative;
+    // position: absolute;
+    // top:50%;
+    // left:50%;
+    background: white;
+    // margin-left:-2.75rem;
+    // margin-top:-1.9rem;
+    border-radius: 0.2rem;
+    width:5.5rem;
+    text-align: center;
+    // width:5.5rem;
+    // height:3.8rem;
+    &-title{
+      color:#505050;
+      font-size:0.36rem;
+      margin:0.2rem 0;
+      height:0.6rem;
+      line-height:0.6rem;
+    }
+    &-content{
+      text-align: left;
+      color: #969696;
+      min-height:0.2rem;
+      margin:0.2rem 0.5rem;
+      line-height: 0.4rem;
+    }
+    &-footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.3rem 0 0.8rem 0;
+      color:#fff;
+      &-cancel{
+        flex:1;
+        >span{
+          border-radius: 0.2rem;
+          padding:0.2rem 0.5rem;
+          background-color: #14d05b;
+        }
+      }
+      &-ensure{
+        flex:1;
+        span{
+          border-radius: 0.2rem;
+          padding:0.2rem 0.5rem;
+          background-color: #349dfa;
+        }
+      }
+      
+    }
+  }
+}

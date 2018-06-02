@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>当日患者</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <!-- 去掉对电话号码的错误识别 -->
+  <meta name = "format-detection" content = "telephone=no">
+</head>
+<body id="app">
+  <div class="content-wrapper">
+    <div id="tab">
+      <ul>
+        <li class="active">初诊患者</li>
+        <li>复诊患者</li>
+        <li>当日全部</li>
+      </ul>
+    </div>
+    <div class="detail-time">
+      <div class="left-arrow arrow"></div>
+      <div class="detail-time-current">
+        ----年--月--号
+      </div>
+      <div class="right-arrow arrow"></div>
+    </div>
+    <div id="patientInfos"></div>
+  </div>
+</body>
+</html>

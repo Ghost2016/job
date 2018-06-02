@@ -1,0 +1,133 @@
+// 工具类
+// 设置图片背景
+.bg-image(@url) {
+  background-image: url('@{url}@2x.png');
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    background-image: url('@{url}@3x.png');
+  }
+}
+.transform-rotate(@rotateDeg) {
+  transform: rotate(@rotateDeg);
+  -webkit-transform: rotate(@rotateDeg);
+}
+
+
+// 解决android上不显示的问题
+.border-bottom(@px,@style,@color){
+  position:relative;
+  box-sizing: border-box;
+  &::before{
+    display: block;
+    position: absolute;
+    left:0;
+    bottom:0;
+    border-bottom:1px @style @color;
+    width:100%;
+    content:' ';
+    .transform-border("Y");
+  }
+  // [data-dpr="2"] &::before {
+  //   transform: scaleY(0.5)
+  // }
+  // [data-dpr="3"] &::before {
+  //   transform: scaleY(0.3333333)
+  // }
+  
+}
+.scale(@scale, @direction)when (@direction="Y"){
+  transform: scaleY(@scale)
+}
+.scale(@scale, @direction)when (@direction="X"){
+  transform: scaleX(@scale)
+}
+// 默认是竖向
+.transform-border(@direction:"X"){
+  @media (-webkit-min-device-pixel-ratio: 1),(min-device-pixel-ratio: 1){
+    .scale(1,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5){
+    .scale(1/1.5,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
+    .scale(0.5,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 2.5),(min-device-pixel-ratio: 2.5){
+    .scale(0.4,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    .scale(0.333333,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 3.5),(min-device-pixel-ratio: 3.5){
+    .scale(1/3.5,@direction)
+  }
+  @media (-webkit-min-device-pixel-ratio: 4),(min-device-pixel-ratio: 4){
+    .scale(0.25,@direction)
+  }
+  // [data-dpr="2"] &::before {
+  //   transform: scaleY(0.5)
+  // }
+  // [data-dpr="3"] &::before {
+  //   transform: scaleY(0.3333333)
+  // }
+}
+.border-top(@px,@style,@color){
+  position:relative;
+  box-sizing: border-box;
+  &::before{
+    display: block;
+    position: absolute;
+    left:0;
+    top:0;
+    border-top:1px @style @color;
+    width:100%;
+    content:' ';
+    .transform-border("Y");
+  }
+  // [data-dpr="2"] &::before {
+  //   transform: scaleY(0.5)
+  // }
+  // [data-dpr="3"] &::before {
+  //   transform: scaleY(0.3333333)
+  // }
+}
+.border-left(@px,@style,@color){
+  position:relative;
+  box-sizing: border-box;
+  &::after{
+    display: block;
+    position: absolute;
+    left:0;
+    top:0;
+    border-left:1px @style @color;
+    height:100%;
+    content:' ';
+    .transform-border("X");
+  }
+  // [data-dpr="2"] &::after {
+  //   transform: scaleX(0.5)
+  // }
+  // [data-dpr="3"] &::after {
+  //   transform: scaleX(0.3333333)
+  // }
+  
+}
+.border-right(@px,@style,@color){
+  position:relative;
+  box-sizing: border-box;
+  &::after{
+    display: block;
+    position: absolute;
+    right:0;
+    top:0;
+    border-right:1px @style @color;
+    height:100%;
+    content:' ';
+    .transform-border("X");
+  }
+  // [data-dpr="2"] &::after {
+  //   transform: scaleX(0.5)
+  // }
+  // [data-dpr="3"] &::after {
+  //   transform: scaleX(0.3333333)
+  // }
+}

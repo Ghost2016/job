@@ -1,0 +1,13 @@
+<div class="content-wrapper">
+  <ul id="templateUl">
+    <% for(var i=0;i<msgTemplate.length;i++){ %>
+      <li>
+        <span><%= msgTemplate[i] %></span>
+      </li>
+    <%}%>
+  </ul>
+  <div class="msgContent">
+    <textarea placeholder="请在此输入消息内容"></textarea>
+  </div>
+  <div class="blue-button">发送</divclass>
+</div>

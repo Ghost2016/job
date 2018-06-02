@@ -1,0 +1,90 @@
+<!-- <div class="_patient-infos"> -->
+<% var length = patientList.length%>  
+<% for (var i=0; i<length; i++) { %>
+  <div class="_patient-info">
+    <div class="_patient-info-top">
+      <div class="_patient-info-top-avatar"></div>
+      <div class="_patient-info-top-right">
+        <div class="_patient-info-top-right-base-info">
+          <span><%=patientList[i].name%></span>
+          <span><%=patientList[i].sex%></span>
+          <span><%=patientList[i].age%></span>
+        </div>
+        <div class="_patient-info-top-right-status">
+          <span><%=patientList[i].cfz%></span>
+        </div>
+        <div class="_patient-info-top-right-cost">
+          消费：<span><%=patientList[i].xfje||0%>元</span>
+          欠费：<span><%=patientList[i].qf%>元</span>
+        </div>
+      </div>
+    </div>
+    <div class="_patient-info-bottom">
+      <p>
+        <label>
+          病历号:
+        </label>
+        <span><%=patientList[i].blh%></span>
+      </p>
+      <% if(isPatientOfTheDay){ %>
+      <p>
+        <label>
+          时间:
+        </label>
+        <span>2018/01/02</span>
+      </p>
+      <p>
+        <label>
+          描述:
+        </label>
+        <span>最后一次就诊描述</span>
+      </p>
+      <p>
+        <label>
+          就诊内容:
+        </label>
+        <span>就诊内容</span>
+      </p>
+      <p>
+        <label>
+          回访内容:
+        </label>
+        <span>上次回访内容等</span>
+      </p>
+      <% } else {%>
+        <p>
+          <label>
+            就诊医生:
+          </label>
+          <span><%=patientList[i].ys%></span>
+        </p>
+        <p>
+          <label>
+            就诊时间:
+          </label>
+          <span><%=patientList[i].jzsj%></span>
+        </p>
+        <p>
+          <label>
+            回访:
+          </label>
+          <span><%=patientList[i].hfsj%></span>
+        </p>
+        <p>
+          <label>
+            预约:
+          </label>
+          <span><%=patientList[i].yysj%></span>
+        </p>
+        <p>
+          <label>
+            备注:
+          </label>
+          <span><%=patientList[i].yybz%></span>
+        </p>
+      <% } %>
+    </div>
+  </div>
+<% } %>
+<!-- </div> -->
+

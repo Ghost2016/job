@@ -1,0 +1,49 @@
+@import '../../../assets/less/utils.less';
+
+.consume-brief{
+  background: #fff;
+  height:2rem;
+  &-inner{
+    padding:0.54rem 0.7rem 0.56rem 0.39rem;
+    &>h1{
+      font-size: 0.24rem;
+      font-weight: 100;
+    }
+    &-total{
+      font-size: 0.48rem;
+      font-weight: bold;
+      line-height:1rem;
+      float: left;
+    }
+    &-card{
+      // height:0.5rem;
+      line-height:0.5rem;
+      font-size: 0.24rem;
+      &>.icon::before{
+        .bg-image('../img/card-blue');
+      }
+    }
+    &-borrowed{
+      line-height:0.5rem;
+      font-size: 0.24rem;
+      &>.icon::before{
+        .bg-image('../img/borrowed-icon');
+      }
+    }
+    &>div{
+      display: flex;
+      height:1rem;
+      justify-content: space-between;
+      .icon::before{
+        content: '';
+        float: left;
+        width:0.22rem;
+        height:0.5rem;
+        margin-right:0.1rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+}

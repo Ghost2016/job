@@ -1,0 +1,191 @@
+@import '../../../assets/less/utils.less';
+
+.patient-brief{
+  background-color: #1d7cf5;
+  
+  height:3.2rem;
+  width:100%;
+  position: relative;
+  &-avatar{
+    position: absolute;
+    left: 0.4rem;
+    top: 0.6rem;
+    height:1.5rem;
+    width:1.5rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    &.male{
+      .bg-image('../img/patient-avatar-male-default');
+    }
+    &.female{
+      .bg-image('../img/patient-avatar-female-default');
+    }
+  }
+  &-top{
+    font-size: 0.24rem;
+    color:#cde5fb;
+    position: absolute;
+    top:0.5rem;
+    left:2.2rem;
+    &-sex-age{
+    }
+    &-anamnesis{
+      margin-left: 2rem;
+    }
+  }
+  &-bottom{
+    font-size: 0.36rem;
+    color:#cde5fb;
+    width:5rem;
+    height:1rem;
+    position: absolute;
+    top:1.2rem;
+    left:2.2rem;
+    display: flex;
+    &>div{
+      flex:1;
+      .border-right(1,solid,#349dfa);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      &:last-child{
+        border-right:0;
+      }
+      &>span{
+        text-align: center;
+        display: block;
+        &:last-child{
+          font-size: 0.24rem;
+          padding-top:0.2rem;
+          box-sizing: border-box;
+        }
+        &>span{
+          display: inline-block;
+          font-size: 0.24rem;
+        }
+      }
+    }
+  }
+}
+.consume{
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0.5rem 0.2rem;
+  margin:-0.6rem 0.35rem 0 0.35rem;
+  position: relative;
+  border-radius: 0.1rem;
+  z-index:5;
+}
+.times-to-see-a-doctor{
+  background: #fff;
+  margin:0.2rem 0.35rem;
+  
+  &-header{
+    padding-left:0.2rem;
+    height:0.68rem;
+    line-height:0.68rem;
+    .border-bottom(1,solid,#dedede);
+  }
+  &-content{
+    height:2.8rem;
+    margin:0 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &>span{
+      height:0.56rem;
+      line-height:0.56rem;
+      // flex: 1;
+      display: block;
+      // line-height: 2;
+      &:last-child{
+        // flex:2;
+        // margin:auto 0;
+      }
+    }
+    .devide-line{
+      line-height:0.3rem;
+      height:0.15rem;
+      margin-bottom: 0.14rem;
+      .border-bottom(1,solid,#dedede);
+    }
+  }
+}
+.operation{
+  display: flex;
+  background: #fff;
+  height:2rem;
+  margin-bottom:0.3rem;
+  &>div{
+    text-align: center;
+    // margin:0.36rem 0;
+    flex:1;
+    &::before{
+      content: '';
+      display: block;
+      .bg-image('../img/detail-message-send');
+      height:50%;
+      width:100%;
+      background-size: 0.5rem 0.5rem;
+      background-position-x: center;
+      background-position-y: bottom;
+      background-repeat: no-repeat;
+      margin-bottom: 0.2rem;
+    }
+    &:nth-child(1){
+      // color:red;
+      &::before{
+        .bg-image('../img/detail-call-right-now');
+      }
+    }
+    &:nth-child(2){
+      // color:blue;
+      &::before{
+        .bg-image('../img/detail-new-appointment');
+      }
+    }
+    &:nth-child(3){
+      // color:green;
+      &::before{
+        .bg-image('../img/detail-message-send');
+      }
+      
+    }
+    &:nth-child(4){
+      // color:yellow;
+      &::before{
+        .bg-image('../img/detail-message-edit');
+      }
+    }
+  }
+}
+.check{
+  background: #fff;
+  // height:6.5rem;
+  padding-bottom:0.3rem;
+  &>div{
+    height:1.2rem;
+    line-height:1.2rem;
+    box-sizing: border-box;
+    margin:0 0.21rem 0 0.51rem;
+    .border-bottom(1,solid,#dfdfdf);
+    // padding:0.32rem 0 0.34rem 0;
+    font-size: 0.3rem;
+    &::after{
+      position: absolute;
+      right:0;
+      content: '';
+      display: inline-block;
+      margin-left: 0.1rem;
+      height:1.2rem;
+      line-height:1.2rem;
+      width: 0.3rem;
+      .bg-image('../img/enter-arrow');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

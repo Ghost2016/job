@@ -1,0 +1,36 @@
+<!-- <div class="_statistics-detail"> -->
+  <div class="_statistics-detail-header">
+    <% switch(type){       //注意这里没有代码块结束符号，而是要和下面合并在一个代码块里，才能正常  
+      case 'income': %>  
+      <span class="_statistics-detail-header-income">总收入：<b>11000.00元</b></span>
+          <% break; %>    //但是这里就不需要合并，可以换行开始新的代码块  
+    <% case 'pre-save': %>  
+      <span class="_statistics-detail-header-pre-save">总收入：<b>11000.00元</b></span>
+            <% break; %>  
+    <% case 'out-work': %>  
+      <span class="_statistics-detail-header-out-work">总收入：<b>11000.00元</b></span>
+            <% break; %>  
+    <% case 'receive-patients': %>  
+      <span class="_statistics-detail-header-receive-patients">总收入：<b>11000.00元</b></span>
+            <% break; %>  
+    <% case 'work-quantity': %>  
+      <span class="_statistics-detail-header-work-quantity">总收入：<b>11000.00元</b></span>
+        <% break; %>
+    <% case 'return-visit': %>  
+      <span class="_statistics-detail-header-return-visit">总收入：<b>11000.00元</b></span>
+        <% break; %>
+   <% } %>
+    
+  </div>
+  <div class="_statistics-detail-content">
+    <ul>
+      <% for (var i=0; i<4; i++) { %>
+      <li>
+        <span>label<%=i%></span>
+        <span>value<%=i%></span>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+  
+<!-- </div> -->

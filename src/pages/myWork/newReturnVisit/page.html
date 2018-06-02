@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>新增回访</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <!-- 去掉对电话号码的错误识别 -->
+  <meta name = "format-detection" content = "telephone=no">
+  <script type="text/javascript" src="../../static/js/mobiscroll.javascript.min.js"></script>
+  <link rel="stylesheet" href="../../static/css/mobiscroll.javascript.min.css"/>
+</head>
+<body id="app">
+  <div class="content-wrapper">
+    <form id="form">
+      <p>
+        <label for="patient-name">患者姓名:</label>
+        <input id="patient-name" placeholder="请选择" value=""></input>
+        <span class="arraw-into"></span>
+      </p>
+      <div id="patient-info">
+      </div>
+      <p>
+        <label>当前回访时间:</label>
+        <input id="current-return-visit-time" readonly placeholder="1991-01-01 04:00" value=""></input>
+        <span class="arraw-into"></span>
+      </p>
+      <p>
+        <label>状态:</label>
+        <input id="status" readonly placeholder="只能下拉选择" value=""/>
+        <span class="arraw-into"></span>
+      </p>
+      <p>
+        <label>内容:</label>
+        <input id="content-text" readonly placeholder="可以编辑或者选择" value=""/>
+        <span class="arraw-into"></span>
+      </p>
+      <p>
+        <label>医生:</label>
+        <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input>
+        <span class="arraw-into"></span>
+      </p>
+    </form>
+    <div class="save">保存</div>
+  </div>
+</body>
+</html>

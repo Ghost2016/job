@@ -1,0 +1,18 @@
+<!-- 最外层会包裹一层wrapper -->
+<!-- <div class="._gDialog-wrapper"> -->
+  <div class="_mask"></div>
+  <div class="_gDialog">
+    <div class="_gDialog-title"><%= titleText%></div>
+    <div class="_gDialog-content"><%= contentText%></div>
+    <div class="_gDialog-footer">
+      <!--  -->
+      <div class="_gDialog-footer-cancel" style="display:<%=!hasCancel?'none':'block'%>">
+        <span><%= cancelText%></span>
+      </div>
+      <div class="_gDialog-footer-ensure">
+        <span><%= ensureText%></span>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+

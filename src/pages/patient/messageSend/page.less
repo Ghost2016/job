@@ -1,0 +1,36 @@
+
+#templateUl{
+  font-size: 0;
+  padding: 0.4rem 0;
+  &>li {
+    margin-bottom:0.4rem;
+    color:#349dfa;
+    font-size: 0.24rem;
+    width:25%;
+    list-style: none;
+    display: inline-block;
+    text-align: center;
+    &>span{
+      padding:0.18rem 0.32rem;
+      display: inline-block;
+      border: 1px solid #349dfa;
+      border-radius: 0.04rem;
+    }
+    &:nth-last-child(1),&:nth-last-child(2),&:nth-last-child(3),&:nth-last-child(4){
+      // color:red;
+      margin-bottom:0;
+    }
+  }
+}
+.msgContent{
+  font-size: 0.3rem;
+  text-align: center;
+  &>textarea{
+    width:6.9rem;
+    height:5.2rem;
+    background: #f0f0f0;
+    border: 0;
+    padding:0.3rem;
+    box-sizing: border-box;
+  }
+}

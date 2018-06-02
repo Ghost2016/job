@@ -1,0 +1,57 @@
+@import '../../../assets/less/utils.less';
+
+.content-wrapper>ul{
+  padding: 0.2rem 0.4rem 0 0.4rem;
+  li{
+    background: #fff;
+    list-style: none;
+    margin:0.2rem 0;
+    font-size:0.3rem;
+    display: flex;
+    position: relative;
+    height:1.1rem;
+    line-height:1.1rem;
+    &:first-child{
+      margin:0
+    }
+    span{
+      width:1rem;
+      height:100%;
+      // background: red;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0.5rem 0.5rem;
+    }
+    &.income span{
+      .bg-image('../img/statistics-income')
+    }
+    &.pre-save span{
+      .bg-image('../img/statistics-pre-save')
+    }
+    &.work-quantity span{
+      .bg-image('../img/statistics-work-quantity')
+    }
+    &.receive-patients span{
+      .bg-image('../img/statistics-receive-patients')
+    }
+    &.return-visit span{
+      .bg-image('../img/statistics-return-visit')
+    }
+    &.out-work span{
+      .bg-image('../img/statistics-out-work')
+    }
+    div{
+      flex:1;
+    }
+    a{
+      width:1rem;
+      height:100%;
+      width:1rem;
+      // background: red;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0.5rem 0.5rem;
+      .bg-image('../img/enter-arrow')
+    }
+  }
+}

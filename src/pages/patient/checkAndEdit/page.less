@@ -1,0 +1,98 @@
+@import '../../../assets/less/utils.less';
+
+.teeth-position-check-items{
+  .teeth-position-check-item{
+    background: #fff;
+    text-align: center;
+    margin-bottom:0.4rem;
+    p{
+      // background: #fff;
+      display: flex;
+      height:1.2rem;
+      box-sizing: border-box;
+      justify-content: space-between;
+      line-height:1.2rem;
+      padding: 0 0.4rem;
+      border-bottom: 1px solid #e9e9e9;
+      &#special-p{
+        height:auto;
+        // display: block;
+        // justify-content: center;
+        &>span{
+          -webkit-user-select:auto;/*webkit浏览器*/
+          user-select:auto;
+          display: inline-block;
+          flex:1;
+          font-size: 0.3rem;
+          margin:0.35rem 0;
+          margin-left:0.2rem;
+          text-align: right;
+          text-orientation: upright;
+          position: relative;
+          line-height:1.8;
+        }
+      }
+      & .no-focus-needed{
+        display: block;
+        color: #969696;
+      }
+      label{
+        color: #969696;
+      }
+      input{
+        font-size: 0.3rem;
+        // background: yellow;
+        flex:1;
+        margin-left:0.2rem;
+        text-align: right;
+        position: relative;
+      }
+      .arraw-into{
+        margin-left: 0.1rem;
+        height:1.2rem;
+        line-height:1.2rem;
+        width: 0.3rem;
+        .bg-image('../img/enter-arrow');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .locate-icon{
+        .bg-image('../img/locate-icon');
+      }
+    }
+    textarea{
+      margin-top:0.3rem;
+      width: 6.9rem;
+      height: 5.2rem;
+      background: #f0f0f0;
+      border: 0;
+      padding: 0.3rem;
+      box-sizing: border-box;
+    }
+  }
+  .option{
+    padding:0.6rem 0 0.78rem 0;
+    &-delete,&-save{
+      margin:0 0.5rem;
+      display: inline-block;
+      padding:0.2rem 0.4rem;
+      width:20%;
+      color:#fff;
+      background-color: #c8c8c8;
+      border-radius: 0.2rem;
+    }
+    &-save{
+      background-color: #1468f3;
+    }
+  }
+}
+.addMore{
+  color:#1468f3;
+  height: 0.8rem;
+  line-height:0.8rem;
+  margin: 0.8rem auto 0.92rem auto;
+  text-align: center;
+  width:60%;
+  background-color: #fff;
+}

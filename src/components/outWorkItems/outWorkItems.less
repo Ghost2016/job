@@ -1,0 +1,49 @@
+@import '../../assets/less/utils.less';
+@import '../paymentItems/paymentItems.less';
+
+._out-work-items{
+  margin: 0.4rem;
+}
+._out-work-item{
+  &-header{
+    height:1rem;
+    line-height:1rem;
+    padding-left:0.32rem;
+  }
+  &-footer{
+    height:0.54rem;
+  }
+  &-content{
+    &>ul{
+      font-size: 0;
+      &>li{
+        background: #f9f9f9;
+        padding-left:0.32rem;
+        box-sizing: border-box;
+        border-bottom:0.1rem solid #fff;
+        display: inline-block;
+        width:50%;
+        font-size: 0.24rem;
+        height:0.88rem;
+        line-height:0.88rem;
+        
+        &>label{
+
+        }
+        &>span{
+
+        }
+      }
+      &>div{
+        padding-left:0.32rem;
+        background: #f9f9f9;
+        box-sizing: border-box;
+        width:100%;
+        &>div{
+          font-size:0.24rem;
+          padding:0.3rem 0;
+        }
+      }
+    }
+  }
+}

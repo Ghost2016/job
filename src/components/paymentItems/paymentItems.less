@@ -1,0 +1,112 @@
+@import '../../assets/less/utils.less';
+
+._payment-infos{
+  border-radius: 0.2rem;
+  // background: #fff;
+  margin:0 0.45rem 0 0.34rem;
+}
+._payment-info{
+  margin-top:0.6rem;
+  &-header{
+    border-radius: 0.2rem 0.2rem 0 0;
+    color:#fff;
+    // background: #2d93f9;
+    background-image: linear-gradient(to right,#41a1f4, #3585f0); 
+    font-size:0.3rem;
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      width:0;
+      height:0;
+      border: 0.16rem transparent solid;
+      border-bottom-color:#fff;
+      bottom: 0;
+      position: absolute;
+      left:0.4rem;
+    }
+    &-time{
+      padding:0 0.32rem;
+      height:1rem;
+      line-height:1rem;
+    }
+    &-person{
+      padding:0 0.32rem;
+      display: flex;
+      height:0.6rem;
+      line-height: 0.6rem;
+      background-color:#3b97f2;
+      font-size:0.24rem; 
+      &>div{
+        flex:1;
+      }
+    }
+    &-money{
+      padding:0 0.32rem;
+      height:1.1rem;
+      // line-height:0.55rem;
+      &>ul{
+        margin:auto 0;
+        font-size: 0;
+        padding: 0.2rem 0;
+        &>li{
+          font-size:0.24rem;
+          width:50%;
+          display: inline-block;
+          &:nth-of-type(2n){
+            // color:red;
+            padding-left:0.32rem;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+  }
+  &-content{
+    
+    &-title{
+      background: #fff;
+      display: flex;
+      height: 0.86rem;
+      line-height: 0.86rem;
+      padding:0 0.32rem;
+      justify-content: space-between;
+      >span{
+        display: block;
+      }
+    }
+    &-item{
+      font-size:0.24rem;
+      height:1.12rem;
+      line-height:1.12rem;
+      display: flex;
+      background-color: #f9f9f9;
+      justify-content: space-between;
+      .border-bottom(10,solid,#fff);
+      padding:0 0.32rem;
+      &:last-child::before{
+        border:0;
+      }
+      >span{
+        display: block;
+      }
+      >div{
+        text-align: right;
+        line-height:1;
+        margin: auto 0;
+      }
+    }
+  }
+  &-footer{
+    padding:0 0.32rem 0 0.32rem;
+    background: #fff;
+    height:0.86rem;
+    line-height: 0.86rem;
+    text-align: right;
+    border-radius: 0 0 0.2rem 0.2rem;
+    font-size: 0.24rem;
+    &>span{
+      font-size: 0.3rem;
+    }
+  }
+}

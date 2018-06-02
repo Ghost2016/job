@@ -1,0 +1,65 @@
+@import '../../assets/less/utils.less';
+@import '../../assets/less/constant.less';
+
+._chart-brief{
+  height:3.8rem;
+  background: #fff;
+  display: flex;
+  width: 100%;
+  &-left, &-right{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    margin: auto 0 auto 0.6rem;
+    >li{
+      position: relative;
+      flex:1;
+      display: flex;
+      flex-direction: column;
+      font-size:0.42rem;
+      >span{
+        &:first-child{
+          margin-left:0.4rem;
+          font-size: 0.24rem;
+          line-height:0.6rem;
+        }
+        >span{
+          font-size: 0.24rem;
+        }
+      }
+    }
+  }
+  &-left>li{
+    border-right: 1px solid gray;
+  }
+  &-li:before{
+    position: absolute;
+    left:0;
+    display: inline-block;
+    content: '';
+    height:0.24rem;
+    width:0.24rem;
+    top:0.16rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+  &-current-month-work:before, &-average-daily-work:before{
+    border-radius: 50%;
+    background: #2979f7;
+    
+  }
+  &-average-daily-work:before{
+    background: #ff9f09;
+  }
+  &-daily-max-work:before{
+    .bg-image('../img/daily-max-work');
+  }
+  &-daily-min-work:before{
+    .bg-image('../img/daily-min-work');
+  }
+  &-right{
+    flex:1;
+    display: flex;
+  }
+}

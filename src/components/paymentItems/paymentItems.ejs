@@ -1,0 +1,53 @@
+<!-- <div class="_payment-infos"> -->
+<% for (var i=0; i<3; i++) { %>
+  <div class="_payment-info">
+    <header class="_payment-info-header">
+      <div class="_payment-info-header-time">2018年10月8号 18：01</div>
+      <div class="_payment-info-header-person">
+        <div>医生：<span>谢逊</span></div>
+        <div>护士：<span>谢逊</span></div>
+        <div>前台：<span>谢逊</span></div>
+      </div>
+      <div class="_payment-info-header-money">
+        <ul>
+          <li>
+              应收：<span>¥12234.34</span>
+          </li>
+          <li>
+              欠费：<span>¥12234.34</span>
+          </li>
+          <li>
+              实收：<span>¥12234.34</span>
+          </li>
+          <li>
+              上次欠费：<span>¥12234.34</span>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="_payment-info-content">
+      <div class="_payment-info-content-title">
+        <span>
+          消费名称
+        </span>
+        <span>
+          金额
+        </span>
+      </div>
+      <% for (var j=0; j<3; j++) { %>
+      <div class="_payment-info-content-item">
+        <span>一次性注射器</span>
+        <div>
+          ￥20.00</br>
+          <span style="color:#b4b4b4;line-height: 0.5rem;">X1
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <footer class="_payment-info-footer">
+      共4件商品&nbsp;&nbsp;合计¥<span>112234.34</span>
+    </footer>
+  </div>
+<% } %>
+<!-- </div> -->
+

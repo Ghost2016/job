@@ -1,0 +1,250 @@
+@import '../../../assets/less/utils.less';
+@import '../../../assets/less/constant.less';
+
+#app{
+  .bg-image('../img/history-performance-background');
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  .content-wrapper{
+    padding:0.5rem 0.3rem 0 0.3rem;
+    .history-work-quantity{
+      color:#fff;
+      padding-bottom: 0.5rem;
+      font-size: 0.3rem;
+      div{
+        &:first-child{
+          
+        }
+        &:last-child{
+          font-size: 0.6rem;
+          font-weight: 800;
+        }
+        .unit{
+          font-size: 0.3rem;
+        }
+        >a{
+          margin-left:0.1rem;
+          display: inline-block;
+          width: 0.8rem;
+          height:0.5rem;
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          &.eye-open{
+            .bg-image('../img/eye-open')
+          }
+          &.eye-close{
+            .bg-image('../img/eye-close')
+          }
+        }
+      }
+    }
+    .history-detail{
+      
+      &-brief{
+        color:#fff;
+        display: flex;
+        height:2.8rem;
+        font-size: 0.3rem;
+        margin-bottom: -0.3rem;
+        >div{
+          // height:100%;
+          // background: green;
+          flex:1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          &:nth-of-type(2n-1) {
+            // background: linear-gradient(#1669f700,#1669f7ff)
+            background-image: linear-gradient(rgba(22,105,247,0), rgba(22,105,247,1));
+          }
+          &:nth-of-type(2n) {
+            // background: red;
+            background-image:  linear-gradient(rgba(22,105,247,1),rgba(22,105,247,0))
+          }
+          &:first-child{
+            span:nth-child(2){
+              padding-left:0.2rem;
+            }
+          }
+          &:last-child{
+            span:nth-child(2){
+              padding-right:0.2rem;
+            }
+          }
+          span{
+            margin:0.1rem;
+            &:last-child{
+              color: #1ee42f;
+              font-size: 0.24rem;
+            }
+          }
+        }
+      }
+      &-content{
+        border-radius: 0.3rem 0.3rem 0 0;
+        position: relative;
+        // height: 5.34rem;
+        background: #f5fafd;
+        // background: #fff;
+        z-index:2;
+        overflow: scroll;
+        // 去掉滑动时的弹性
+        -webkit-overflow-scrolling: initial;  
+        &-list{
+          width:200%;
+          height:100%;
+          // display: flex;
+          font-size: 0;
+          &-item{
+            font-size: 0.24rem;
+            display: inline-block;
+            width:12.5%;
+            // display: flex;
+            // flex-direction: column;
+            &:first-child>div{
+              border-radius: 0.3rem 0 0 0;
+            }
+            &-header{
+              height:1.04rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              
+              // border-radius: 0.3rem 0 0 0 ;
+              font-size: 0.3rem;
+              color:#6c6c6c;
+              &-day{
+
+              }
+            }
+            &-content{
+              background: #fff;
+              border-right: 1px solid @bottom-border-color-light-gray;
+              box-sizing: border-box;
+              &-date{
+                color:#939393;
+                font-size:0.36rem;
+                display: block;
+                padding:0.36rem;
+                text-align: center;
+              }
+              &-detail{
+                display: flex;
+                flex-direction: column;
+                span{
+                  display: inline-block;
+                  font-size:0.24rem;
+                  height:0.5rem;
+                  line-height: 0.5rem;
+                  text-align: center;
+                  color:#262626;
+                  &::before{
+                    // content: '初';
+                    display: inline-block;
+                    float: left;
+                    margin-left:0.1rem;
+                    width: 0.4rem;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 0.4rem;
+                    height:0.4rem;
+                    background-position: center;
+                    background-size: 50%;
+                    background-repeat: no-repeat;
+                    color:#fff;
+                  }
+                }
+                &-first::before{
+                  content: '初';
+                  background-color: #f7a15c;
+                }
+                &-re::before{
+                  content: '复';
+                  background-color: #6bda55;
+                }
+                &-apponitment::before{
+                  content: '约';
+                  background-color: #e279f2;
+                }
+                &-miss::before{
+                  content: '爽';
+                  background-color: #ee6868  ;
+                }
+                &-visit::before{
+                  content: '访';
+                  background-color: #68b0ee;
+                }
+              }
+              &-amount{
+                display: block;
+                // background: lightblue;
+                .bg-image('../img/history-performance-item-bottom');
+                padding:0.2rem;
+                font-size: 0.24rem;
+                color: rgb(255, 255, 255);
+                text-align: center;
+              }
+            }
+            
+          }
+        }
+
+      }
+      &-footer{
+        color: #939393;
+        
+        background: #f5fafd;
+        padding:0.14rem;
+        text-align: center;
+        border-radius: 0 0 0.3rem 0.3rem;
+      }
+    }
+  }
+}
+
+.float{
+  &-date{
+    // top:18.5vh;
+    font-size:0.28rem;
+    // position: fixed;
+    // text-align: center;
+    // width:100%;
+    &-center{
+      position: absolute;
+      /* width: 100%; */
+      text-align: center;
+      top: 2.04rem;
+      left: 2.6rem;
+      &>span{
+        border-radius: 0.5rem;
+        width:2.3rem;
+        // margin-left: 2.94rem;
+        display: block;
+        color: #1669f7;
+        background: white;
+        // padding:0.1rem 0.15rem;
+        box-sizing: border-box;
+      }
+    }
+    &-left,&-right{
+      width:0.8rem;
+      height:1.05rem;
+      background: center no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 3.0rem;
+      left: 0;
+      .bg-image('../img/left-arrow-white');
+      // background-position: 0% 50%;
+    }
+    &-right{
+      left:auto;
+      right:0;
+      .bg-image('../img/right-arrow-white');
+      // background-position: 100% 50%;
+    }
+  }
+}

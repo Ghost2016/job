@@ -1,0 +1,58 @@
+@import '../../assets/less/utils.less';
+
+._anamnesis-items{
+  margin:0.09rem 0.4rem 0 0.4rem;
+  font-size:0.3rem;
+}
+._anamnesis-item{
+  margin-top:0.2rem;
+  background: #fff;
+  height:2.24rem;
+  position: relative;
+  display: flex;
+  &-status{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0.8rem;
+    width: 0.8rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    &.first{
+      .bg-image('../img/status-first')
+    }
+    &.not-first{
+      .bg-image('../img/status-not-first')
+    }
+  }
+  &-left{
+    display: flex;
+    flex-direction: column;
+    padding:0.4rem 0 0.4rem 0.6rem;
+    &>div{
+      flex:1;
+    }
+  }
+  &-right{
+    padding:0.4rem 0.3rem 0.4rem 0;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    &>div{
+      flex:1;
+      &:last-child{
+        // position: absolute;
+        // top: 0; 
+        // left: 0;
+        height: 0.8rem;
+        width: 0.8rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        .bg-image('../img/arrow-blue')
+      }
+    }
+  }
+}
