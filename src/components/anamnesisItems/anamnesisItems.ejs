@@ -1,26 +1,15 @@
 <!-- <div class="_anamnesis-items"> -->
-<% for (var i=0; i<3; i++) { %>
+<% var length = items.length%>
+<% for (var i=0; i<length; i++) { %>
   <div class="_anamnesis-item">
-    <div class="_anamnesis-item-status first"></div>
+    <div class="_anamnesis-item-status <%=items[i].seeno===1?'first':'not-first'%>"></div>
     <div class="_anamnesis-item-left">
-      <div>医生:<span>谢逊</span></div>
-      <div>诊断:<span>蛀牙</span></div>
-      <div>检查:<span>血常规 口腔检查</span></div>
+      <div>医生:<span><%=items[i].docname||''%></span></div>
+      <div>诊断:<span><%=items[i].narrate||''%></span></div>
+      <div>检查:<span><%=''%></span></div>
     </div>
     <div class="_anamnesis-item-right">
-      <div>2015-08-15</div>
-      <div></div>
-    </div>
-  </div>
-  <div class="_anamnesis-item">
-    <div class="_anamnesis-item-status not-first"></div>
-    <div class="_anamnesis-item-left">
-      <div>医生:<span>谢逊</span></div>
-      <div>诊断:<span>蛀牙</span></div>
-      <div>检查:<span>血常规 口腔检查</span></div>
-    </div>
-    <div class="_anamnesis-item-right">
-      <div>2015-08-15</div>
+      <div><%=items[i].seedate.substring(0,10)||''%></div>
       <div></div>
     </div>
   </div>

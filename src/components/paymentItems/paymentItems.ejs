@@ -1,26 +1,28 @@
 <!-- <div class="_payment-infos"> -->
-<% for (var i=0; i<3; i++) { %>
+<% var total = 0%>
+<% var length = items.length %>
+<% for (var i=0; i<length; i++) { %>
   <div class="_payment-info">
     <header class="_payment-info-header">
       <div class="_payment-info-header-time">2018年10月8号 18：01</div>
       <div class="_payment-info-header-person">
-        <div>医生：<span>谢逊</span></div>
-        <div>护士：<span>谢逊</span></div>
-        <div>前台：<span>谢逊</span></div>
+        <div>医生：<span><%=items[i].ysname||''%></span></div>
+        <div>护士：<span><%=items[i].hsname||''%></span></div>
+        <div>前台：<span><%=items[i].sfname||''%></span></div>
       </div>
       <div class="_payment-info-header-money">
         <ul>
           <li>
-              应收：<span>¥12234.34</span>
+              应收：<span>¥<%=items[i].ys||0%></span>
           </li>
           <li>
-              欠费：<span>¥12234.34</span>
+              欠费：<span>¥<%=items[i].bcqf||0%></span>
           </li>
           <li>
-              实收：<span>¥12234.34</span>
+              实收：<span>¥<%=items[i].ss||0%></span>
           </li>
           <li>
-              上次欠费：<span>¥12234.34</span>
+              上次欠费：<span>¥<%=items[i].scqf||0%></span>
           </li>
         </ul>
       </div>
@@ -34,18 +36,22 @@
           金额
         </span>
       </div>
-      <% for (var j=0; j<3; j++) { %>
+      <% if('list' in items[i]){ %>
+      <% var length1 = items[i].list.length %>
+      <% for (var j=0; j<length1; j++) { %>
       <div class="_payment-info-content-item">
-        <span>一次性注射器</span>
+        <span><%=items[i].list[j].sfname||''%></span>
         <div>
-          ￥20.00</br>
-          <span style="color:#b4b4b4;line-height: 0.5rem;">X1
+          ￥<%=items[i].list[j].gsum||0%></br>
+          <span style="color:#b4b4b4;line-height: 0.5rem;">X<%=items[i].list[j].sl||0%></span>
         </div>
       </div>
+      <%total += (items[i].list[j].gsum||0)*(items[i].list[j].sl||0)%>
+      <% } %>
       <% } %>
     </div>
     <footer class="_payment-info-footer">
-      共4件商品&nbsp;&nbsp;合计¥<span>112234.34</span>
+      共<%=items[i].list.length||0%>件商品&nbsp;&nbsp;合计¥<span><%=total%></span>
     </footer>
   </div>
 <% } %>
