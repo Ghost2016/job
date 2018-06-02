@@ -1,5 +1,6 @@
 <!-- <div class="_out-work-items"> -->
-<% for (var i=0; i<3; i++) { %>
+<% var length = items.length%>
+<% for (var i=0; i<length; i++) { %>
   <div class="_payment-info _out-work-item">
     <header class="_payment-info-header _out-work-item-header">
       系统编码：<span>123456</span>
@@ -8,48 +9,48 @@
       <ul>
         <li>
           <label>取件人：</label>
-          <span>张无忌</span>
+          <span><%=items[i].incept||''%></span>
         </li>
         <li>
           <label>加工件数：</label>
-          <span>5</span>
+          <span><%=items[i].inumber||0%></span>
         </li>
         <li>
           <label>送件时间：</label>
-          <span>2010-01-01</span>
+          <span><%=items[i].date1.substring(0,10)||''%></span>
         </li>
         <li>
           <label>回件时间：</label>
-          <span>2010-01-01</span>
+          <span><%=items[i].date2.substring(0,10)||''%></span>
         </li>
         <li>
           <label>当前状态：</label>
-          <span>哈哈</span>
+          <span><%=items[i].status||''%></span>
         </li>
         <li>
           <label>医生：</label>
-          <span>李医生</span>
+          <span><%=items[i].docname||''%></span>
         </li>
         <li>
           <label>加工单位：</label>
-          <span>嘿嘿嘿单位</span>
+          <span><%=items[i].factory||''%></span>
         </li>
         <li>
           <label>加工单号：</label>
-          <span>89757</span>
+          <span><%=items[i].returnno||''%></span>
         </li>
         <li>
           <label>加工价格：</label>
-          <span>10086元</span>
+          <span><%=items[i].cost||''%></span>
         </li>
         <li>
           <label>患者价格：</label>
-          <span>10086元</span>
+          <span><%=items[i].price||''%></span>
         </li>
         <div>
-          <div>1牙位左上123，加工内容描述，色号描述；</div>
-          <div>1牙位左上123，加工内容描述，色号描述；</div>
-          <div>1牙位左上123，加工内容描述，色号描述；</div>
+          <div><%=items[i].place||''%></div>
+          <!--<div>1牙位左上123，加工内容描述，色号描述；</div>-->
+          <!--<div>1牙位左上123，加工内容描述，色号描述；</div>-->
         </div>
       </ul>
     </div>
