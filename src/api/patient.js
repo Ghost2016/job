@@ -13,7 +13,7 @@ export function fetchPatientList({ today }) {
     data: {
       'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
       'Data': {
-        'Today': '2017-05-19' || today,
+        'Today': today,
         'lx': 'all'
       }
     },

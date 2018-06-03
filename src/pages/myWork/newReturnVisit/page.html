@@ -15,33 +15,42 @@
       <p id="patient-name-p">
         <label for="patient-name">患者姓名:</label>
         <!-- <input id="patient-name" placeholder="请选择" disabled value=""></input> -->
-        <a id="patient-name">请选择</a>
+        <a id="patient-name"></a>
         <span class="arraw-into"></span>
       </p>
       <div id="patient-info">
       </div>
       <p>
         <label>当前回访时间:</label>
-        <input id="current-return-visit-time" readonly placeholder="1991-01-01 04:00" value=""></input>
+        <input id="current-return-visit-time" readonly placeholder="" value=""></input>
         <span class="arraw-into"></span>
       </p>
       <p id="status-p">
         <label>状态:</label>
-        <a id="status" value="1">已回访</a>
+        <a id="status" value=""></a>
         <span class="arraw-into"></span>
       </p>
-      <p>
+      <p id="content-text-p">
         <label>内容:</label>
         <input id="content-text" readonly placeholder="可以编辑或者选择" value=""/>
+        <!-- <a id="content-text"></a> -->
         <span class="arraw-into"></span>
       </p>
-      <p>
+      <p id="doctor-name-p">
         <label>医生:</label>
-        <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input>
+        <!-- <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input> -->
+        <a id="doctor-name"></a>
         <span class="arraw-into"></span>
+      </p>
+      <p style="height:3rem">
+        <label>随访结果:</label>
+        <!-- <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input> -->
+        <!-- <a id="doctor-name"></a> -->
+        <textarea id="visit-result" style="background-color: #fff;outline: none;width:70%;border: 0;resize: none;padding:10px 0;height:3rem;box-sizing: border-box;"></textarea>
+        <!-- <span class="arraw-into"></span> -->
       </p>
     </form>
-    <div class="save">保存</div>
+    <div id="save" class="save">保存</div>
   </div>
 </body>
 </html>

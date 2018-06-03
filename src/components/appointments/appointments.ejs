@@ -1,6 +1,6 @@
 <% var length = items.length %>
 <% for (var i=0; i<length; i++) { %>
-<div class="appointment-item">
+<div class="appointment-item" data-no="<%=items[i].no%>">
   <div class="appointment-item-left">
     <!-- 左边左上角标签 -->
       <% switch(items[i].type){       //注意这里没有代码块结束符号，而是要和下面合并在一个代码块里，才能正常  

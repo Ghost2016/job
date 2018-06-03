@@ -16,7 +16,7 @@ moduleConfig.rules.push({
     formatter: eslintFormatter,
     emitError: false,
     emitWarning: true,
-    fix: true
+    fix: false
   }
 })
 moduleConfig.rules.push({

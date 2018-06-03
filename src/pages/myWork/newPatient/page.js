@@ -6,7 +6,7 @@ require('@/lib/common.js')
 import './page.less'
 import { newPatient, fetchPatientDetailByBlh, deletePatientByBlh, editPatient } from '@/api/patient'
 import { fetchPatientSrc, fetchDoctorList } from '@/api/common'
-
+import { getSearchParam } from '@/lib/utils'
 // const native = require('@/lib/native.js')
 // $('#app').html('通过jquery')
 // window.location.href = '../../index/index/page.html'
@@ -21,18 +21,21 @@ var patientSrc = []
 var patientSrcSelector = null
 var doctorList = []
 var doctorListSelector = null
-var isAdd = false
-var blh = 0
+var isAdd = !getSearchParam('isEdit')
+var blh = '32058880'
 $(function() {
   if (!isAdd) {
-    fetchPatientDetailByBlh().then(
+    loading()
+    fetchPatientDetailByBlh(blh).then(
       res => {
+        loadingdone()
         console.log(res)
         blh = res.data.Data[0].blh
         fillData(res.data.Data)
       }
     ).catch(
       e => {
+        loadingdone()
         console.log(e)
       }
     )
@@ -58,29 +61,38 @@ $(function() {
         docid: $('#doctor-name').val() - 0,
         // 封装后的结果
         docname: $('#doctor-name_dummy').val(),
-        hzsource: $('#patient-src')[0].textContent,
+        hzsource: $('#patient-src_dummy').val(),
         address: $('#patient-addr').html()
       }
       console.log(form)
-      return
+      // return
       if (isAdd) {
+        loading()
         newPatient(form).then(
           res => {
+            loadingdone()
             console.log(res)
+            if (res.data.Data) {
+              alert('新增成功，病历号：' + res.data.Data)
+            }
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
       } else {
         form.blh = blh
+        loading()
         editPatient(form).then(
           res => {
+            loadingdone()
             console.log(res)
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
@@ -118,15 +130,17 @@ $(function() {
     $(this).children('span').addClass('is-checked')
     $(this).siblings('label').children('span').removeClass('is-checked')
   })
-  function validate() {
-    return true
-  }
 })
-
+// 验证数据
+function validate() {
+  return true
+}
 // 获取医生列表
 function fetchDoctorSrcList() {
+  loading()
   fetchDoctorList().then(
     res => {
+      loadingdone()
       console.log(res)
       var length = res.data.Data.length
       for (var i = 0; i < length; i++) {
@@ -142,6 +156,7 @@ function fetchDoctorSrcList() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -149,8 +164,10 @@ function fetchDoctorSrcList() {
 
 // 获取患者来源列表
 function fetchPatientSrcList() {
+  loading()
   fetchPatientSrc().then(
     res => {
+      loadingdone()
       var length = res.data.Data.length
       for (var i = 0; i < length; i++) {
         patientSrc.push({ value: i, text: res.data.Data[i].name })
@@ -165,6 +182,7 @@ function fetchPatientSrcList() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -200,12 +218,15 @@ function fillData(data) {
 }
 // 删除
 function deletePatient() {
+  loading()
   deletePatientByBlh(blh).then(
     res => {
+      loadingdone()
       console.log(res)
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )

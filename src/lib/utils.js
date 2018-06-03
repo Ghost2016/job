@@ -22,15 +22,16 @@ export function Timer({ LeftArrowId, RightArrowId, TextId, onAdd, onMinus, regFo
   this.changeIndex = 0
   this.textDom = $(`#${TextId}`)
   this.regFormat = regFormat || 'YYYY年MM月DD日'
-  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(`${this.regFormat}`)
-  this.textDom.html(this.formattedTime)
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format('YYYY-MM-DD')
+  this.formattedTimeText = moment(this.today).format(this.regFormat)
+  this.textDom.html(this.formattedTimeText)
   $(`#${LeftArrowId}`).on('click', () => {
     this.minusOneDay()
-    onMinus()
+    onMinus(this.formattedTime)
   })
   $(`#${RightArrowId}`).on('click', () => {
     this.addOneDay()
-    onAdd()
+    onAdd(this.formattedTime)
   })
 }
 Timer.prototype.getParsedTime = function() {
@@ -38,13 +39,15 @@ Timer.prototype.getParsedTime = function() {
 }
 Timer.prototype.addOneDay = function() {
   this.changeIndex++
-  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
-  this.textDom.html(this.formattedTime)
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format('YYYY-MM-DD')
+  this.formattedTimeText = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
+  this.textDom.html(this.formattedTimeText)
 }
 Timer.prototype.minusOneDay = function() {
   this.changeIndex--
-  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
-  this.textDom.html(this.formattedTime)
+  this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format('YYYY-MM-DD')
+  this.formattedTimeText = moment(this.today).add(this.changeIndex, 'days').format(this.regFormat)
+  this.textDom.html(this.formattedTimeText)
 }
 
 // 转换成YYYY-MM-DD格式

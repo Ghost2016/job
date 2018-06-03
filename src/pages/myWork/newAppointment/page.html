@@ -12,31 +12,34 @@
 <body id="app">
   <div class="content-wrapper">
     <form id="form">
-      <p>
+      <p id="patient-name-p">
         <label for="patient-name" name="username">患者姓名:</label>
-        <input id="patient-name" placeholder="王大爷"></input>
+        <!-- <input id="patient-name" placeholder=""></input> -->
       </p>
-      <p>
+      <p id="patient-phone-number-p">
         <label>手机:</label>
-        <input id="patient-phone-number" placeholder="136666666666"></input>
+        <!-- `<input id="patient-phone-number" placeholder=""></input> -->
       </p>
       <p>
         <label>预约时间:</label>
-        <input id="appointment-time" readonly placeholder="1991-01-01 04:00"></input>
-      </p>
-      <p>
-        <label>就诊时长:</label>
-        <input id="duration" readonly placeholder="30min" value=""/>
+        <input id="appointment-time" readonly placeholder=""></input>
         <span class="arraw-into"></span>
       </p>
       <p>
+        <label>就诊时长:</label>
+        <input id="duration" readonly placeholder="" value=""/>
+        <!-- <a id="duration"></a> -->
+        <span class="arraw-into"></span>
+      </p>
+      <p id="content-text-p">
         <label>内容:</label>
         <input id="content-text" readonly placeholder="可以编辑或者选择" value=""/>
         <span class="arraw-into"></span>
       </p>
-      <p>
+      <p id="doctor-name-p">
         <label>医生:</label>
-        <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input>
+        <!-- <input id="doctor-name" readonly placeholder="默认当前医生或者选择" value=""></input> -->
+        <a id="doctor-name"></a>
         <span class="arraw-into"></span>
       </p>
     </form>

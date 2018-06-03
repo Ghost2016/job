@@ -1,35 +1,35 @@
 <!-- <div class="_statistics-detail"> -->
   <div class="_statistics-detail-header">
     <% switch(type){       //注意这里没有代码块结束符号，而是要和下面合并在一个代码块里，才能正常  
-      case 'income': %>  
-      <span class="_statistics-detail-header-income">总收入：<b>11000.00元</b></span>
+      case 1: %>  
+      <span class="_statistics-detail-header-income"><%=data.title%></span>
           <% break; %>    //但是这里就不需要合并，可以换行开始新的代码块  
-    <% case 'pre-save': %>  
-      <span class="_statistics-detail-header-pre-save">总收入：<b>11000.00元</b></span>
+    <% case 2: %>  
+      <span class="_statistics-detail-header-pre-save"><%=data.title%></span>
             <% break; %>  
-    <% case 'out-work': %>  
-      <span class="_statistics-detail-header-out-work">总收入：<b>11000.00元</b></span>
+    <% case 3: %>  
+      <span class="_statistics-detail-header-out-work"><%=data.title%></span>
             <% break; %>  
-    <% case 'receive-patients': %>  
-      <span class="_statistics-detail-header-receive-patients">总收入：<b>11000.00元</b></span>
+    <% case 4: %>  
+      <span class="_statistics-detail-header-receive-patients"><%=data.title%></span>
             <% break; %>  
-    <% case 'work-quantity': %>  
-      <span class="_statistics-detail-header-work-quantity">总收入：<b>11000.00元</b></span>
+    <% case 5: %>  
+      <span class="_statistics-detail-header-work-quantity"><%=data.title%></span>
         <% break; %>
-    <% case 'return-visit': %>  
-      <span class="_statistics-detail-header-return-visit">总收入：<b>11000.00元</b></span>
+    <% case 6: %>  
+      <span class="_statistics-detail-header-return-visit"><%=data.title%></span>
         <% break; %>
    <% } %>
-    
   </div>
   <div class="_statistics-detail-content">
     <ul>
-      <% for (var i=0; i<4; i++) { %>
+      <% var length = data.list.length%>
+      <% for (var i=0; i<length; i++) { %>
       <li>
-        <span>label<%=i%></span>
-        <span>value<%=i%></span>
+        <span><%=data.list[i].key%></span>
+        <span><%=data.list[i].value%></span>
       </li>
-      <% } %>
+      <% } %>  
     </ul>
   </div>
   

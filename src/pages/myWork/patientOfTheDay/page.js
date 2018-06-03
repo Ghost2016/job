@@ -7,6 +7,7 @@ require('@/lib/common.js')
 
 import { fetchPatientList } from '@/api/patient'
 import { Timer } from '@/lib/utils.js'
+import { getSearchParam } from '@/lib/utils'
 
 const patientInfos = require('@/components/patientInfos/patientInfos.js')
 
@@ -16,12 +17,13 @@ var fzpatientList = []
 // 初诊
 var czpatientList = []
 // 当前tab的值
-var tabIndex = 0
+var tabIndex = getSearchParam('type') === 'fz' ? 1 : 0
 // 当前时间
 // var today = new Date()
 // 改变的时间
 // var changeIndex = 0
 $(function() {
+  $(`#tab>ul>li:eq(${tabIndex})`).addClass('active').siblings().removeClass('active')
   var timer = new Timer({
     LeftArrowId: 'left-arrow',
     RightArrowId: 'right-arrow',
@@ -51,14 +53,17 @@ $(function() {
 // 获取数据
 function fetchData(date) {
   // fetchPatientList({ today: parseTime() }).then(
+  loading()
   fetchPatientList({ today: date }).then(
     res => {
+      loadingdone()
       patientList = res.data.Data
       updateTabs()
       updatePatients()
     }
   ).catch(
     e => {
+      loadingDone()
       console.log(e)
     }
   )

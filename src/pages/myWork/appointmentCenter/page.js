@@ -53,18 +53,34 @@ $(function() {
 })
 // 获取数据
 function fetchData(date) {
+  loading()
   fetchApointmentList({ today: date }).then(
     res => {
+      loadingdone()
       const data = res.data.Data
       updateAppointments(data)
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
 }
 // 更新预约条目
 function updateAppointments(data) {
-  Appointments.render('appointments', data)
+  Appointments.render('appointments',data, {
+    onItemClick: (selectedItem) => {
+      console.log(selectedItem)
+      Native.saveLocalParam('selectedAppointmentItem', selectedItem)
+      console.log(Native.getLocalParam('selectedAppointmentItem'))
+      return
+      Native.startNextActivity(
+        {
+          nexturl: HTML_BASE_URL_PREFIX + `myWork/newAppointment/page.html?no=${selectedItem.no}&isEdit=true&type=${selectedItem.yylx === '有号预约' ? 'yhyy': 'whyy'}`,
+          title: `编辑${selectedItem.yylx}`,
+        }
+      )
+    }
+  })
 }

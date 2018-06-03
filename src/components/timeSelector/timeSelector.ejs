@@ -2,12 +2,17 @@
   <span class="_time-selecor-header">选择时间段</span>
   <ul class="_time-selector-content">
     <li class="_time-selector-content-item">
-      <input class="_time-selector-content-item-input" id="_time-selector-content-item-start" value="2018-02-01（星期二）" readonly/>
+      <!-- <input class="_time-selector-content-item-input" id="_time-selector-content-item-start" value="2018-02-01（星期二）" readonly/> -->
+      <input class="_time-selector-content-item-input" id="_time-selector-content-item-start" value="" readonly/>
     </li>
     <div class="_time-selector-devider"></div>
     <li class="_time-selector-content-item">
-      <input class="_time-selector-content-item-input" id="_time-selector-content-item-end" value="2018-02-19（星期三）" readonly></input>
+      <input class="_time-selector-content-item-input" id="_time-selector-content-item-end" value="" readonly></input>
+      <!-- <input class="_time-selector-content-item-input" id="_time-selector-content-item-end" value="2018-02-19（星期三）" readonly></input> -->
     </li>
   </ul>
   <div class="_time-selector-search">查询</div>
+  <% if(isPreSave) {%>
+  <div id="_pre-save-money">全部预存款剩余：<span><%=0%></span>元</div>
+  <% } %>
 <!-- </div> -->

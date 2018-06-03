@@ -2,9 +2,9 @@ const Appointments = require('./appointments.ejs')
 import './appointments.less'
 
 const exportModule = {}
-exportModule.render = function(id, jsonObj) {
+exportModule.render = function(id, jsonObj, option) {
   exportModule.id = id
-  // console.log(jsonObj)
+  console.log(jsonObj)
   jsonObj.map((item) => {
     if (item.isff === '已回访') {
       item.type = 4
@@ -24,6 +24,13 @@ exportModule.render = function(id, jsonObj) {
   const ele = document.getElementById(id)
   ele.classList.add('_patient-infos')
   ele.innerHTML = Appointments(tempObj)
+  $('.appointment-item').on('click', function() {
+    let selectedItem = jsonObj.filter( (item) => {
+      return item.no === $(this).attr('data-no') - 0
+    })
+    option.onItemClick && option.onItemClick(selectedItem[0])
+  })
+  
   return exportModule
 }
 module.exports = exportModule

@@ -28,13 +28,13 @@ Native.startNextActivity = function(jsonValue) {
  * @param {*} val Value表示存储的值内容
  */
 Native.saveLocalParam = function(key, val) {
-  window.js.saveLocalParam(key, val)
+  window.js.saveLocalParam(key, JSON.stringify(val))
 }
 /**
  * @param {*} key key表示存储的字段名。
  */
 Native.getLocalParam = function(key) {
-  return window.js.getLocalParam(key)
+  return JSON.parse(window.js.getLocalParam(key)) || ''
 }
 
 // 4. 读取登录数据

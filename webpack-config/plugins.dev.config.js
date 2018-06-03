@@ -7,7 +7,7 @@ const pluginsConfig = require('./inherit/plugins.config.js');
 pluginsConfig.push(new webpack.DefinePlugin({
   APP_ENV: JSON.stringify('develop'),
   // HTML_BASE_URL_PREFIX: JSON.stringify('http://10.9.37.129:8087/'),
-  HTML_BASE_URL_PREFIX: JSON.stringify('http://192.168.0.88:8087/')
+  HTML_BASE_URL_PREFIX: JSON.stringify('http://192.168.10.24:8087/')
 }))
 
 pluginsConfig.push(new webpack.LoaderOptionsPlugin({
