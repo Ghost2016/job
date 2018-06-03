@@ -11,30 +11,50 @@
   <div class="content-wrapper">
     <div class="history-work-quantity">
       <div>历史总工作量</div>
-      <div><span>2596780.00<span class="unit">元</span></span><a class="eye-open"></a></div>
+      <div>
+        <span id="allsf">0.00</span><span class="unit">元</span>
+        <span class="hide-num" style="display:none">******</span>
+        <a class="eye-open" id="eye"></a>
+      </div>
     </div>
     <div class="history-detail">
       
       <div class="history-detail-brief">
         <div>
-          <span>999人</span>
+          <span id="mxhz">0人</span>
           <span>本月新增患者</span>
-          <span>查看趋势></span>
+          <span id="turn-to-new">查看趋势></span>
         </div>
         <div>
-          <span>12000元</span>
+          <span id="mgjss">0元</span>
           <span>本月总工作量</span>
-          <span>查看趋势></span>
+          <span id="turn-to-workload">查看趋势></span>
         </div>
         <div>
-          <span>999次</span>
+          <span id="mff">0次</span>
           <span>本月共计回访</span>
-          <span>查看趋势></span>
+          <span id="turn-to-return">查看趋势></span>
         </div>
       </div>
       <div class="history-detail-content">
-        <ul class="history-detail-content-list">
-          <li class="history-detail-content-list-item">
+        <ul class="history-detail-content-list" id="days">
+          <!--<li class="history-detail-content-list-item">
+            <div class="history-detail-content-list-item-header">
+              <span class="history-detail-content-list-item-header-day">一</span>
+            </div>
+            <div class="history-detail-content-list-item-content">
+              <span class="history-detail-content-list-item-content-date">01</span>
+              <div class="history-detail-content-list-item-content-detail">
+                <span class="history-detail-content-list-item-content-detail-first">88人</span>
+                <span class="history-detail-content-list-item-content-detail-re">88人</span>
+                <span class="history-detail-content-list-item-content-detail-apponitment">88人</span>
+                <span class="history-detail-content-list-item-content-detail-miss">88人</span>
+                <span class="history-detail-content-list-item-content-detail-visit">88人</span>
+              </div>
+              <span class="history-detail-content-list-item-content-amount">1000.00元</span>
+            </div>
+          </li>-->
+          <!--<li class="history-detail-content-list-item">
             <div class="history-detail-content-list-item-header">
               <span class="history-detail-content-list-item-header-day">一</span>
             </div>
@@ -145,33 +165,17 @@
               </div>
               <span class="history-detail-content-list-item-content-amount">1000.00元</span>
             </div>
-          </li>
-          <li class="history-detail-content-list-item">
-            <div class="history-detail-content-list-item-header">
-              <span class="history-detail-content-list-item-header-day">一</span>
-            </div>
-            <div class="history-detail-content-list-item-content">
-              <span class="history-detail-content-list-item-content-date">01</span>
-              <div class="history-detail-content-list-item-content-detail">
-                <span class="history-detail-content-list-item-content-detail-first">88人</span>
-                <span class="history-detail-content-list-item-content-detail-re">88人</span>
-                <span class="history-detail-content-list-item-content-detail-apponitment">88人</span>
-                <span class="history-detail-content-list-item-content-detail-miss">88人</span>
-                <span class="history-detail-content-list-item-content-detail-visit">88人</span>
-              </div>
-              <span class="history-detail-content-list-item-content-amount">1000.00元</span>
-            </div>
-          </li>
+          </li>-->
         </ul>
         
       </div>
-      <div class="history-detail-footer">2018/02业绩一览</div>
+      <div class="history-detail-footer" id="date-title"></div>
     </div>
   </div>
   <div class="float-date">
     <div class="float-date-left"></div>
     <div class="float-date-center">
-      <span id="date">2018/02</span>
+      <span id="date"></span>
     </div>
     <div class="float-date-right"></div>
   </div>
