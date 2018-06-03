@@ -2,7 +2,7 @@ const Appointments = require('./appointments.ejs')
 import './appointments.less'
 
 const exportModule = {}
-exportModule.render = function(id, jsonObj) {
+exportModule.render = function(id, jsonObj, isSingle) {
   exportModule.id = id
   // console.log(jsonObj)
   jsonObj.map((item) => {
@@ -18,8 +18,9 @@ exportModule.render = function(id, jsonObj) {
       item.type = 1
     }
     item.date = (item.bdate && item.bdate.substring(11, 16)) || (item.ffdate && item.ffdate.substring(11, 16))
+    item.date1 = (item.bdate && (item.bdate.substring(0, 4) + '/' + item.bdate.substring(5, 7) + '/' + item.bdate.substring(8, 10))) || (item.ffdate.substring(0, 4) + '/' + item.ffdate.substring(5, 7) + '/' + item.ffdate.substring(8, 10))
   })
-  const tempObj = { items: jsonObj }
+  const tempObj = { items: jsonObj, isSingle: isSingle }
   console.log(tempObj)
   const ele = document.getElementById(id)
   ele.classList.add('_patient-infos')

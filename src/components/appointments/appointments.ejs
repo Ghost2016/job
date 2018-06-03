@@ -34,7 +34,11 @@
     <!-- 左边姓名-->
     <div class="appointment-item-left-name">
       <!-- 王七里 -->
+      <% if(!isSingle){%>
       <%=items[i].name %>
+      <%}else {%>
+      <%=items[i].date1%>
+      <%}%>
     </div>
   </div>
   <div class="appointment-item-right">
