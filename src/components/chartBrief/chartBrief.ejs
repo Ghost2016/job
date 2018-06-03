@@ -2,21 +2,21 @@
 <!-- <div class="_chart-brief"> -->
 <% if(type===1){%>
   <ul class="_chart-brief-left">
-    <li class="_chart-brief-current-month-work _chart-brief-li">
+    <li class="_chart-brief-current-month-visit _chart-brief-li">
       <span>本月总就诊数(人次)</span>
       <span><%=data.ahz||0%></span>
     </li>
-    <li class="_chart-brief-average-daily-work _chart-brief-li">
+    <li class="_chart-brief-average-daily-visit _chart-brief-li">
       <span>日均就诊(人次)</span>
       <span><%=(data.eday||0)%></span>
     </li>
   </ul>
   <ul class="_chart-brief-right">
-    <li class="_chart-brief-daily-max-work _chart-brief-li">
+    <li class="_chart-brief-daily-max-visit _chart-brief-li">
       <span>日最高就诊(人次)</span>
       <span><%=data.maxr||0%><span> <%=data.maxd.substring(5,7) + '/' + data.maxd.substring(8,10)%></span></span>
     </li>
-    <li class="_chart-brief-daily-min-work _chart-brief-li">
+    <li class="_chart-brief-daily-min-visit _chart-brief-li">
       <span>日最低就诊(人次)</span>
       <span><%=data.minr||0%><span> <%=data.mind.substring(5,7) + '/' + data.mind.substring(8,10)%></span></span>
     </li>
@@ -45,21 +45,21 @@
 </ul>
 <%}else if(type===3){%>
 <ul class="_chart-brief-left">
-  <li class="_chart-brief-current-month-work _chart-brief-li">
+  <li class="_chart-brief-current-month-return _chart-brief-li">
     <span>本月总回访量(次)</span>
     <span><%=data.allff||0%></span>
   </li>
-  <li class="_chart-brief-average-daily-work _chart-brief-li">
+  <li class="_chart-brief-average-daily-return _chart-brief-li">
     <span>日均回访量(次)</span>
     <span><%=data.eday||0%></span>
   </li>
 </ul>
 <ul class="_chart-brief-right">
-  <li class="_chart-brief-daily-max-work _chart-brief-li">
+  <li class="_chart-brief-daily-max-return _chart-brief-li">
     <span>日最大回访量(次)</span>
     <span><%=data.maxff||0%><span><%=data.maxd.substring(5,7) + '/' + data.maxd.substring(8,10)%></span></span>
   </li>
-  <li class="_chart-brief-daily-min-work _chart-brief-li">
+  <li class="_chart-brief-daily-min-return _chart-brief-li">
     <span>日最低回访量(次)</span>
     <span><%=data.minff|0%><span><%=data.mind.substring(5,7) + '/' + data.mind.substring(8,10)%></span></span>
   </li>
