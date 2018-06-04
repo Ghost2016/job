@@ -7,9 +7,10 @@ require('@/lib/common.js')
 
 import { fetchPatientList, fetchDoctorList } from '@/api/common'
 import { addReturnVisit, editReturnVisit, deleteReturnVisit } from '@/api/returnVisit'
-
+// import { getSearchParam } from '@/lib/utils'
 // 如果是进行添加
-var isAdd = true
+var isAdd = getSearchParam('isEdit') ? false : true
+// alert(isAdd)
 var sid = 0
 var statusSelector = null
 var patientSelector = null
@@ -87,31 +88,39 @@ $(function() {
         result: $('#visit-result').val()
       }
       console.log(form)
-      return
+      // return
       if (isAdd) {
+        loading()
         addReturnVisit(form).then(
           res => {
+            loadingdone()
             console.log(res)
             if (res.data.Data) {
               alert('新增成功')
+              Native.handleBackAction(true)
             }
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
       } else {
         form.sid = sid
+        loading()
         editReturnVisit(form).then(
           res => {
+            loadingdone()
             console.log(res)
             if (res.data.Data) {
               alert('修改成功')
+              Native.handleBackAction(true)
             }
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
@@ -135,8 +144,10 @@ $(function() {
 
 // 获取患者列表
 function fetchPatients() {
+  loading()
   fetchPatientList().then(
     res => {
+      loadingdone()
       const data = res.data.Data
       let tempData = []
       for (let i in data) {
@@ -156,6 +167,7 @@ function fetchPatients() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -163,8 +175,10 @@ function fetchPatients() {
 
 // 获取医生列表
 function fetchDoctorSrcList() {
+  loading()
   fetchDoctorList().then(
     res => {
+      loadingdone()
       let doctorList = []
       console.log(res)
       var length = res.data.Data.length
@@ -181,6 +195,7 @@ function fetchDoctorSrcList() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -191,12 +206,16 @@ function validate() {
 }
 // 删除
 function deleteVisit() {
+  loading()
   deleteReturnVisit().then(
     res => {
+      loadingdone()
       console.log(res)
+      Native.handleBackAction(true)
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )

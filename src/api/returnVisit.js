@@ -11,9 +11,9 @@ import { getToken } from '@/lib/utils'
  *
  */
 export function fetchReturnVisitList({ today }) {
-  if (APP_ENV !== 'production') {
-    today = '2017-05-19'
-  }
+  // if (APP_ENV !== 'production') {
+  //   today = '2017-05-19'
+  // }
   return fetch({
     url: 'FF/List',
     data: {
@@ -58,7 +58,7 @@ export function editReturnVisit({ sid, blh, date, content, docid, state, result 
     data: {
       'actoken': getToken(),
       'Data': {
-        'sid': '13266',
+        'sid': sid || '13266',
         'blh': blh || 1,
         'date': date || '2018-01-01',
         'content': content || '测试回访',
@@ -81,7 +81,7 @@ export function deleteReturnVisit(sid) {
     data: {
       'actoken': getToken(),
       'Data': {
-        'sid': '13266'
+        'sid': sid || '13266'
       }
     },
     method: 'post'

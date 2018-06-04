@@ -28,14 +28,17 @@ $(function() {
 
 // 获取数据
 function fetchData(date) {
+  loading()
   fetchReturnVisitList({ today: date }).then(
     res => {
+      loadingdone()
       const data = res.data.Data
       console.log(data)
       updateReturnVisit(data)
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
