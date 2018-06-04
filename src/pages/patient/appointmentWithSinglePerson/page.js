@@ -32,7 +32,7 @@ function getAppointmentSingle(blh) {
   )
 }
 
-function funRightTouch() {
+window.funRightTouch =  function () {
     // Native.startNextActivity(
     //     {
     //         nexturl: HTML_BASE_URL_PREFIX + 'myWork/newReturnVisit/page.html',

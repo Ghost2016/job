@@ -85,7 +85,7 @@ function updateAppointments(data) {
   })
 }
 
-function funRightTouch() {
+window.funRightTouch =  function () {
     alert(1)
 }
 
