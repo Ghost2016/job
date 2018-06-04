@@ -10,7 +10,7 @@ export function fetchChargeList({ blh }) {
   return fetch({
     url: 'HZ/SFList',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

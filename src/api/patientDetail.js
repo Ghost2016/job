@@ -10,7 +10,7 @@ export function fetchPatientDetail({ blh }) {
   return fetch({
     url: 'HZ/Get',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

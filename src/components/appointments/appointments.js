@@ -8,7 +8,7 @@ exportModule.render = function(id, jsonObj, isSingle) {
   jsonObj.map((item) => {
     if (item.isff === '已回访') {
       item.type = 4
-    } else if (item.isff === '否') {
+    } else if ((item.isff === '否')||(item.isff === '未访')) {
       item.type = 2
     } else if (item.state === '完成') {
       item.type = 0

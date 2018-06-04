@@ -4,18 +4,22 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 import { fetchChargeList } from '@/api/chargeList'
+import { getSearchParam } from '@/lib/utils'
 
 const paymentItems = require('@/components/paymentItems/paymentItems.js')
 
 let chargeListData = {}
+let blh = getSearchParam('blh')||'32054077'
 
 $(function() {
-  getChargeList({ blh: '32054077' })
+  getChargeList({ blh: blh })
 })
 
 function getChargeList(blh) {
+    loading()
   fetchChargeList(blh).then(
         res => {
+            loadingdone()
           chargeListData = res
           updateData(chargeListData)
           if ('list' in chargeListData.data.Data) {

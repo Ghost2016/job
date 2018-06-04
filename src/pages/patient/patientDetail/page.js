@@ -4,15 +4,100 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 import { fetchPatientDetail } from '@/api/patientDetail'
+import { getSearchParam } from '@/lib/utils'
+const Native = require('@/lib/native.js')
 
 let patientDetailData = {}
+let blh = getSearchParam('blh')||'32054077'
 $(function() {
-  getPatientDetail({ blh: '32054077' })
+  getPatientDetail({ blh: blh })
+    $('#turn-to-payment').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/paymentRecord/page.html?blh=' + blh,
+                nextparam: '',
+                title: $(this).html(),
+                flag:1,
+            }
+        )
+    })
+    $('#turn-to-anamnesis').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/anamnesisList/page.html?blh=' + blh,
+                nextparam: '',
+                title: $(this).html(),
+                flag:6,
+            }
+        )
+    })
+    $('#turn-to-return').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/returnVisitRecordToSinglePerson/page.html?blh=' + blh,
+                nextparam: '',
+                title: $(this).html(),
+                flag:6,
+            }
+        )
+    })
+    $('#turn-to-outwork').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/outWorkInfo/page.html?blh=' + blh,
+                nextparam: '',
+                title: $(this).html(),
+                flag:1,
+            }
+        )
+    })
+    $('#turn-to-appointment').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/appointmentWithSinglePerson/page.html?blh=' + blh,
+                nextparam: '',
+                title: $(this).html(),
+                flag:6,
+            }
+        )
+    })
+    $('#turn-to-appointment-edit').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?isEdit=' + false + '&type=yhyy',
+                nextparam: '',
+                title: '新增有号预约',
+                flag:1,
+            }
+        )
+    })
+    $('#turn-to-message').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/messageSend/page.html',
+                nextparam: '',
+                title: $(this).html(),
+                flag:1,
+            }
+        )
+    })
+    $('#turn-to-patient-edit').on('click',function (e) {
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newPatient/page.html?isEdit=' + true,
+                nextparam: '',
+                title: '编辑患者',
+                flag:1,
+            }
+        )
+    })
 })
 
 function getPatientDetail(blh) {
+    loading()
   fetchPatientDetail(blh).then(
         res => {
+            loadingdone()
           patientDetailData = res
           updateData(patientDetailData)
         }

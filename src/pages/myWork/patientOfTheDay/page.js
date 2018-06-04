@@ -10,6 +10,7 @@ import { Timer } from '@/lib/utils.js'
 import { getSearchParam } from '@/lib/utils'
 
 const patientInfos = require('@/components/patientInfos/patientInfos.js')
+const Native = require('@/lib/native.js')
 
 var patientList = []
 // 复诊
@@ -48,6 +49,18 @@ $(function() {
     tabIndex = $this.index()
     updatePatients()
   })
+
+    $('#patientInfos').on('click','._patient-info',function (e) {
+      var blh = $(e.currentTarget).children('._patient-info-bottom').children().first().children().last().html()
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/patientDetail/page.html?blh=' + blh,
+                nextparam: '',
+                title: '患者详情',
+                flag:1,
+            }
+        )
+    })
 })
 
 // 获取数据

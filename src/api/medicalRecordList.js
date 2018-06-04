@@ -10,7 +10,7 @@ export function fetchAnamnesisList({ blh }) {
   return fetch({
     url: 'Emr/List',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

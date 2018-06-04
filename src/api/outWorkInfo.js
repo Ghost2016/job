@@ -10,7 +10,7 @@ export function fetchOutWorkList({ blh }) {
   return fetch({
     url: 'HZ/WJGList',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

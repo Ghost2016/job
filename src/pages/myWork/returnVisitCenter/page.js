@@ -8,6 +8,8 @@ import { fetchReturnVisitList } from '@/api/returnVisit'
 const Appointments = require('@/components/appointments/appointments.js')
 import { Timer } from '@/lib/utils.js'
 
+const Native = require('@/lib/native.js')
+
 $(function() {
   var timer = new Timer({
     LeftArrowId: 'left-arrow',
@@ -42,3 +44,15 @@ function fetchData(date) {
 function updateReturnVisit(data) {
   Appointments.render('appointments', data)
 }
+
+function funRightTouch() {
+    Native.startNextActivity(
+        {
+            nexturl: HTML_BASE_URL_PREFIX + 'myWork/newReturnVisit/page.html',
+            nextparam: '',
+            title: '新增回访',
+            flag:1,
+        }
+    )
+}
+

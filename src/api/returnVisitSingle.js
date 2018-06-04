@@ -8,7 +8,7 @@ export function fetchReturnVisitSingle({ blh }) {
   return fetch({
     url: 'HZ/FFList',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

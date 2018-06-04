@@ -8,7 +8,7 @@ export function fetchAppointmentSingle({ blh }) {
   return fetch({
     url: 'HZ/YYList',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh
       }

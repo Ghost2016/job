@@ -84,3 +84,8 @@ function updateAppointments(data) {
     }
   })
 }
+
+function funRightTouch() {
+    alert(1)
+}
+

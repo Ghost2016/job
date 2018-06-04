@@ -82,8 +82,10 @@ $(function() {
 })
 
 function getHistoryPerformance(today) {
+    loading()
   fetchHistoryPerformance(today).then(
         res => {
+            loadingdone()
           historyPerformanceData = res
           updateData(historyPerformanceData)
         }

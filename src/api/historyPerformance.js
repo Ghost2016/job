@@ -8,7 +8,7 @@ export function fetchHistoryPerformance({ today }) {
   return fetch({
     url: 'Month/Fee',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'Today': today
       }

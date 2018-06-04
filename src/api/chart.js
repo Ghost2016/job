@@ -8,7 +8,7 @@ export function fetchPatientStatistics({ today }) {
   return fetch({
     url: 'Month/HZ',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'Today': today
       }
@@ -21,7 +21,7 @@ export function fetchChargeStatistics({ today }) {
   return fetch({
     url: 'Month/SF',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'Today': today
       }
@@ -34,7 +34,7 @@ export function fetchReturnStatistics({ today }) {
   return fetch({
     url: 'Month/FF',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'Today': today
       }
