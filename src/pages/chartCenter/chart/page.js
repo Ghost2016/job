@@ -19,23 +19,48 @@ let chargeStatisticsData = {}
 let returnStatisticsData = {}
 
 $(function() {
-  if (type === 1) {
-    getPatientStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
-  } else if (type === 2) {
-    getChargeStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
-  } else if (type === 3) {
-    getReturnStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
-  }
+  updateData()
+  $('#chart-detail').on('click','.left-arrow',function () {
+      if (today.getMonth() === 1) {
+          today.setFullYear(today.getFullYear() - 1)
+          today.setMonth(12)
+      } else {
+          today.setMonth(today.getMonth() - 1)
+      }
+      updateData()
+  })
+    $('#chart-detail').on('click','.right-arrow',function () {
+        if (today.getMonth() === 12) {
+            today.setFullYear(today.getFullYear() + 1)
+            today.setMonth(1)
+        } else {
+            today.setMonth(today.getMonth() + 1)
+        }
+        updateData()
+    })
 })
 
+function updateData() {
+    if (type === 1) {
+        getPatientStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
+    } else if (type === 2) {
+        getChargeStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
+    } else if (type === 3) {
+        getReturnStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
+    }
+}
+
 function getPatientStatistics(today) {
+    loading()
   fetchPatientStatistics(today).then(
         res => {
+            loadingdone()
           patientStatisticsData = res
           if ('Data' in patientStatisticsData.data) {
             ChartBrief.render('chart-brief', patientStatisticsData.data.Data, type)
             if ('days' in patientStatisticsData.data.Data) {
               ChartDetail.render('chart-detail', patientStatisticsData.data.Data.days, type)
+                $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
         }
@@ -47,8 +72,10 @@ function getPatientStatistics(today) {
 }
 
 function getChargeStatistics(today) {
+    loading()
   fetchChargeStatistics(today).then(
         res => {
+            loadingdone()
           chargeStatisticsData = res
           if ('Data' in chargeStatisticsData.data) {
             ChartBrief.render('chart-brief', chargeStatisticsData.data.Data, type)
@@ -65,8 +92,10 @@ function getChargeStatistics(today) {
 }
 
 function getReturnStatistics(today) {
+    loading()
   fetchReturnStatistics(today).then(
         res => {
+            loadingdone()
           returnStatisticsData = res
           if ('Data' in returnStatisticsData.data) {
             ChartBrief.render('chart-brief', returnStatisticsData.data.Data, type)
