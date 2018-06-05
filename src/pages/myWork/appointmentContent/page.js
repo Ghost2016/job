@@ -6,6 +6,7 @@ import { fetchReturnVisitContent, fetchAppointmentContent } from '@/api/common'
 import { getSearchParam } from '@/lib/utils'
 // 是否是预约
 const isAppointment = getSearchParam('isAppointment') || false
+const Native = require('@/lib/native.js')
 
 $(function(){
   if(isAppointment) {
@@ -66,3 +67,7 @@ $(function(){
     window.js.setBackWithValue($('#input').val() || $('.item-p .is-checked').attr('data-text'));
   })
 })
+
+window.funRightTouch =  function () {
+    window.js.setBackWithValue($('#input').val() || $('.item-p .is-checked').attr('data-text'));
+}
