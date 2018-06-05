@@ -45,39 +45,10 @@ service.interceptors.request.use(config => {
  */
 service.interceptors.response.use(
   response => {
-    // 如果是获取用户信息，则会在本地存一份
-    if (response.config.url.indexOf('getSessionInfo') > -1) {
-      const userInfo = response.data
-      sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
-    }
-    // 拦截返回数据
-    switch (response.ret) {
-      // 成功
-      case 0:
-        break
-      // 系统提示内容(通用提示)
-      case 100000:
-        break
-      // 系统维护中，请稍候…
-      case 100001:
-        break
-      // hash一致,不用更新cache
-      case 100002:
-        break
-      // 必须先登录
-      case 102000:
-        break
-      // 第三方登录失败
-      case 102001:
-        break
-      // 登录失败!请检查用户名和密码!
-      case 102002:
-        break
-      // 完善个人资料
-      case 102004:
-        break
-      default:
-        break
+    // 如果有错误信息
+    if (response.data.Msg) {
+      window.$alert(response.data.Msg)
+      return
     }
     return response
   },

@@ -122,16 +122,19 @@ $(function() {
       form.blh = $('#patient-name').val()
       // 如果是新增
       if(isAdd) {
+        loading()
         newAppointmentWithNumber(form).then(
           res => {
+            loadingdone()
             console.log(res)
             if( res.data.Data ) {
               console.log('新增成功')
-              alert('新增成功')
+              Native.handleBackAction(true)
             }
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
@@ -139,12 +142,15 @@ $(function() {
         form.no = no
         console.log(form)
         return
+        loading()
         editAppointmentWithNumber(form).then(
           res => {
+            loadingdone()
             console.log(res)
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
@@ -158,23 +164,33 @@ $(function() {
       // return
       // 如果是新增
       if(isAdd) {
+        loading()
         newAppointmentWithOutNumber(form).then(
           res => {
+            loadingdone()
             console.log(res)
+            if(data.data.Data) {
+              Native.handleBackAction(true)
+            }
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
       } else { //如果是编辑
         form.no = no
+        loading()
         editAppointmentWithOutNumber(form).then(
           res => {
+            loadingdone()
             console.log(res)
+            Native.handleBackAction(true)
           }
         ).catch(
           e => {
+            loadingdone()
             console.log(e)
           }
         )
@@ -190,8 +206,10 @@ function _validate() {
 
 // 获取患者列表
 function fetchPatients() {
+  loading()
   fetchPatientList().then(
     res => {
+      loadingdone()
       const data = res.data.Data
       console.log(data)
       let tempData = []
@@ -213,6 +231,7 @@ function fetchPatients() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -220,8 +239,10 @@ function fetchPatients() {
 
 // 获取医生列表
 function fetchDoctorSrcList() {
+  loading()
   fetchDoctorList().then(
     res => {
+      loadingdone()
       let doctorList = []
       console.log(res)
       var length = res.data.Data.length
@@ -238,6 +259,7 @@ function fetchDoctorSrcList() {
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )
@@ -245,12 +267,16 @@ function fetchDoctorSrcList() {
 
 // 删除
 function handleDelete(no) {
+  loading()
   deleteAppointment(no).then(
     res => {
+      loadingdone()
       console.log(res)
+      Native.handleBackAction(true)
     }
   ).catch(
     e => {
+      loadingdone()
       console.log(e)
     }
   )

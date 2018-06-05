@@ -76,5 +76,14 @@ Native.backAction = function() {
 Native.setTitle = function(title) {
   window.js.setTitle(title)
 }
+/**
+ * 关闭当前页面
+ * @param {Boolean} needRefresh 前一页面是否需要刷新
+ */
+Native.handleBackAction = function(needRefresh) {
+  needRefresh && window.js.saveLocalParam('sp_pre_refresh_data', '1')
+  // alert(window.js.getLocalParam('sp_pre_refresh_data'))
+  window.js.backAction()
+}
 
 module.exports = Native

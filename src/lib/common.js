@@ -6,6 +6,8 @@ require('./dialog')
 require('@assets/css/dialog.css')
 
 window.Native = require('@/lib/native')
+window.getSearchParam = require('@/lib/utils').getSearchParam
+window.$alert = window.alert
 // import moment from 'moment'
 // moment.locale('zh-cn');
 $(function() {

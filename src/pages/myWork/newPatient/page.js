@@ -74,6 +74,7 @@ $(function() {
             console.log(res)
             if (res.data.Data) {
               alert('新增成功，病历号：' + res.data.Data)
+              Native.handleBackAction(true)
             }
           }
         ).catch(
@@ -88,7 +89,10 @@ $(function() {
         editPatient(form).then(
           res => {
             loadingdone()
-            console.log(res)
+            if (res.data.Data) {
+              alert('编辑成功，病历号：' + form.blh)
+              Native.handleBackAction(true)
+            }
           }
         ).catch(
           e => {
@@ -189,6 +193,8 @@ function fetchPatientSrcList() {
 }
 // 填充数据
 function fillData(data) {
+  // 有问题的返回数据
+  return
   data = [
     {
       'name': '测试2',
@@ -223,6 +229,7 @@ function deletePatient() {
     res => {
       loadingdone()
       console.log(res)
+      Native.handleBackAction(true)
     }
   ).catch(
     e => {
