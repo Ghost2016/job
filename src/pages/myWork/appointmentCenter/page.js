@@ -18,21 +18,38 @@ import { fetchApointmentList } from '@/api/appointment'
 const GDialog = require('@/components/gDialog/gDialog.js')
 const Appointments = require('@/components/appointments/appointments.js')
 import { Timer } from '@/lib/utils.js'
+const Native = require('@/lib/native.js')
 
-GDialog.render('gDialog', {
-  titleText: '选择预约方式',
-  hasCancel: true,
-  onEnsureClick: () => {
-    GDialog.dismiss()
-    console.log('无号预约')
-  },
-  onCancelClick: () => {
-    GDialog.dismiss()
-    console.log(' 有号预约')
-  }
-})
+
 
 $(function() {
+    GDialog.render('gDialog', {
+        titleText: '选择预约方式',
+        hasCancel: true,
+        onEnsureClick: () => {
+            GDialog.dismiss()
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=whyy',
+                    nextparam: '',
+                    title: '新增无号预约',
+                    flag:1,
+                }
+            )
+        },
+        onCancelClick: () => {
+            GDialog.dismiss()
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy',
+                    nextparam: '',
+                    title: '新增有号预约',
+                    flag:1,
+                }
+            )
+        }
+    })
+
   var timer = new Timer({
     LeftArrowId: 'left-arrow',
     RightArrowId: 'right-arrow',
@@ -86,6 +103,6 @@ function updateAppointments(data) {
 }
 
 window.funRightTouch =  function () {
-    alert(1)
+    GDialog.show()
 }
 

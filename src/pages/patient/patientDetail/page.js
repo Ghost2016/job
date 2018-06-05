@@ -8,6 +8,7 @@ import { getSearchParam } from '@/lib/utils'
 const Native = require('@/lib/native.js')
 
 let patientDetailData = {}
+let patientName = ''
 let blh = getSearchParam('blh')||'32054077'
 $(function() {
   getPatientDetail({ blh: blh })
@@ -26,7 +27,7 @@ $(function() {
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/anamnesisList/page.html?blh=' + blh,
                 nextparam: '',
-                title: $(this).html(),
+                title: '病历列表',
                 flag:6,
             }
         )
@@ -36,7 +37,7 @@ $(function() {
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/returnVisitRecordToSinglePerson/page.html?blh=' + blh,
                 nextparam: '',
-                title: $(this).html(),
+                title: patientName + '的回访',
                 flag:6,
             }
         )
@@ -46,7 +47,7 @@ $(function() {
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/outWorkInfo/page.html?blh=' + blh,
                 nextparam: '',
-                title: $(this).html(),
+                title: '外加工信息',
                 flag:1,
             }
         )
@@ -56,7 +57,7 @@ $(function() {
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/appointmentWithSinglePerson/page.html?blh=' + blh,
                 nextparam: '',
-                title: $(this).html(),
+                title: patientName + '的预约',
                 flag:6,
             }
         )
@@ -117,6 +118,7 @@ function updateData(data) {
       $('#blh').text('病历号 ' + data.data.Data[0].blh)
     }
     if (data.data.Data[0].name) {
+        patientName = data.data.Data[0].name.replace(/\d*/g, '')
       $('#name').text(data.data.Data[0].name.replace(/\d*/g, ''))
     }
     if (data.data.Data[0].ys) {

@@ -7,11 +7,44 @@ const Appointments = require('@/components/appointments/appointments.js')
 import { fetchAppointmentSingle } from '@/api/appointmentSingle'
 import { getSearchParam } from '@/lib/utils'
 const Native = require('@/lib/native.js')
+const GDialog = require('@/components/gDialog/gDialog.js')
 
 let appointmentSingleData = {}
 let blh = getSearchParam('blh')||'32045124'
 
+
+
+
+
+
 $(function() {
+    GDialog.render('gDialog', {
+        titleText: '选择预约方式',
+        hasCancel: true,
+        onEnsureClick: () => {
+            GDialog.dismiss()
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=whyy',
+                    nextparam: '',
+                    title: '新增无号预约',
+                    flag:1,
+                }
+            )
+        },
+        onCancelClick: () => {
+            GDialog.dismiss()
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy',
+                    nextparam: '',
+                    title: '新增有号预约',
+                    flag:1,
+                }
+            )
+        }
+    })
+
   getAppointmentSingle({ blh:blh })
 })
 
@@ -33,13 +66,5 @@ function getAppointmentSingle(blh) {
 }
 
 window.funRightTouch =  function () {
-    // Native.startNextActivity(
-    //     {
-    //         nexturl: HTML_BASE_URL_PREFIX + 'myWork/newReturnVisit/page.html',
-    //         nextparam: '',
-    //         title: '新增回访',
-    //         flag:1,
-    //     }
-    // )
-    alert(1)
+    GDialog.show()
 }
