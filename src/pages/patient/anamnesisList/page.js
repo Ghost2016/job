@@ -20,7 +20,7 @@ $(function() {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/editAnamnesisRecord/page.html?blh=' + blh,
                 nextparam: '',
                 title: '编辑病历记录',
-                flag:1,
+                flag:8,
             }
         )
     })

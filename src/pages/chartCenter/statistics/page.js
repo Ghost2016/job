@@ -7,6 +7,7 @@ import './page.less'
 import { fetchStatistics } from '@/api/statistics.js'
 const timeSelector = require('@/components/timeSelector/timeSelector')
 const statisticsDetail = require('@/components/statisticsDetail/statisticsDetail')
+import { getSearchParam } from '@/lib/utils'
 /**
  * 收入统计
  * type:
@@ -17,7 +18,7 @@ const statisticsDetail = require('@/components/statisticsDetail/statisticsDetail
  * 5 回访统计
  * 6 外加工统计
  */
-const type = 2
+const type = parseInt(getSearchParam('type'))||6
 $(function() {
   statisticsDetail.render('statistics-detail', {
     type
@@ -31,8 +32,10 @@ $(function() {
 })
 
 function fetchData({Start,End,type}) {
+    loading()
   fetchStatistics({Start,End,type}).then(
     res => {
+        loadingdone()
       const data = res.data.Data
       console.log(data)
       timeSelector.setPreSaveMoney(data.syje)

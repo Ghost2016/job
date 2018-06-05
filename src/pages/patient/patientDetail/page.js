@@ -64,7 +64,7 @@ $(function() {
     $('#turn-to-appointment-edit').on('click',function (e) {
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?isEdit=' + false + '&type=yhyy',
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy',
                 nextparam: '',
                 title: '新增有号预约',
                 flag:1,
@@ -77,17 +77,17 @@ $(function() {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/messageSend/page.html',
                 nextparam: '',
                 title: $(this).html(),
-                flag:1,
+                flag:7,
             }
         )
     })
     $('#turn-to-patient-edit').on('click',function (e) {
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newPatient/page.html?isEdit=' + true,
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newPatient/page.html?isEdit=1',
                 nextparam: '',
                 title: '编辑患者',
-                flag:1,
+                flag:8,
             }
         )
     })

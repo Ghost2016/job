@@ -10,7 +10,10 @@ exportModule.render = function(id, jsonObj) {
       data = data || {}
       var innerData = {
         title: '',
-        list: []
+        list: [],
+        extend:[],
+        cz: (data.cz||0) + '人初诊',
+        fz: (data.fz||0) + '人复诊'
       }
       switch (type) {
         case 1:
@@ -18,38 +21,88 @@ exportModule.render = function(id, jsonObj) {
           for(let i in data.list) {
             innerData.list.push(
               {
-                key: data.list[i].sf_fs + '元',
-                value: data.list[i].sf
+                key: data.list[i].sf_fs,
+                value: (data.list[i].sf||0) + '元'
               }
             )
           }
           break;
         case 2:
           innerData.title = `当前预存款余额：<b>${data.syje || 0}元</b>`
-          innerData.list.push(
-            {
-              key: '充值金额',
-              value: data.inje + '元'
+            if('inje' in data){
+                innerData.list.push(
+                    {
+                        key: '充值金额',
+                        value: (data.inje) + '元'
+                    }
+                )
             }
-          )
-          innerData.list.push(
-            {
-              key: '消费金额',
-              value: data.outje + '元'
-            }
-          )
+          if('outje' in data){
+              innerData.list.push(
+                  {
+                      key: '消费金额',
+                      value: (data.outje) + '元'
+                  }
+              )
+          }
           break;
         case 3:
-          // url = 'Rpt/GZL'
+            innerData.title = `总工作量：<b>${data.allje || 0}元</b>`
+            for(let i in data.list) {
+              if(data.list[i].name){
+                  innerData.list.push(
+                      {
+                          key: data.list[i].name,
+                          value: (data.list[i].sfje||0) + '元'
+                      }
+                  )
+              }
+            }
           break;
         case 4:
-          // url = 'Rpt/JZ'
+            innerData.title = `总计接诊：<b>${data.all || 0}人</b>`
+            for(let i in data.list) {
+                if(data.list[i].name){
+                    innerData.list.push(
+                        {
+                            key: data.list[i].name,
+                            value: '接诊' + ((data.list[i].cz + data.list[i].fz)||0) + '人'
+                        }
+                    )
+                    innerData.extend.push(
+                        {
+                          cz: (data.list[i].cz||0) + '人初诊',
+                          fz: (data.list[i].fz||0) + '人复诊'
+                        }
+                    )
+                }
+            }
           break;
         case 5:
-          // url = 'Rpt/HF'
+            innerData.title = `总计回访：<b>${data.allhf || 0}次</b>`
+            for(let i in data.list) {
+                if(data.list[i].name){
+                    innerData.list.push(
+                        {
+                            key: data.list[i].name,
+                            value: '回访' + (data.list[i].hf||0) + '次'
+                        }
+                    )
+                }
+            }
           break;
         case 6:
-          // url = 'Rpt/WJG'
+            innerData.title = `总计外加工：<b>${data.allhf || 0}次</b>`
+            for(let i in data.list) {
+                if(data.list[i].name){
+                    innerData.list.push(
+                        {
+                            key: data.list[i].name,
+                            value: '外加工' + (data.list[i].jg||0) + '次'
+                        }
+                    )
+                }
+            }
           break;
         default:
           break;

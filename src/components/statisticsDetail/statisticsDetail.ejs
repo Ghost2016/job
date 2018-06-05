@@ -6,12 +6,17 @@
           <% break; %>    //但是这里就不需要合并，可以换行开始新的代码块  
     <% case 2: %>  
       <span class="_statistics-detail-header-pre-save"><%=data.title%></span>
-            <% break; %>  
+            <% break; %>
     <% case 3: %>  
       <span class="_statistics-detail-header-out-work"><%=data.title%></span>
             <% break; %>  
     <% case 4: %>  
-      <span class="_statistics-detail-header-receive-patients"><%=data.title%></span>
+      <span class="_statistics-detail-header-receive-patients"><%=data.title%>
+          <div style="position: absolute;top: 0.08rem;right: 0.3rem;">
+            <div class="czfz" style="line-height: 0.26rem"><%=data.cz%></div>
+            <div class="czfz" style="line-height: 0.26rem"><%=data.fz%></div>
+          </div>
+      </span>
             <% break; %>  
     <% case 5: %>  
       <span class="_statistics-detail-header-work-quantity"><%=data.title%></span>
@@ -28,6 +33,12 @@
       <li>
         <span><%=data.list[i].key%></span>
         <span><%=data.list[i].value%></span>
+          <%if(type===4){%>
+        <div>
+            <div class="czfz"><%=data.extend[i].cz%></div>
+            <div class="czfz"><%=data.extend[i].fz%></div>
+        </div>
+          <%}%>
       </li>
       <% } %>  
     </ul>
