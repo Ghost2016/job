@@ -6,21 +6,42 @@ import './page.less'
 require('@/lib/common.js')
 
 import { fetchPatientList, fetchDoctorList } from '@/api/common'
-import { addReturnVisit, editReturnVisit, deleteReturnVisit } from '@/api/returnVisit'
-// import { getSearchParam } from '@/lib/utils'
+import { addReturnVisit, editReturnVisit, deleteReturnVisit,getReturnVisit } from '@/api/returnVisit'
+import { getSearchParam } from '@/lib/utils'
+const Native = require('@/lib/native.js')
+const GDialog = require('@/components/gDialog/gDialog.js')
 // 如果是进行添加
 var isAdd = getSearchParam('isEdit') ? false : true
+// var isAdd = 0
+// var sid = 14
 // alert(isAdd)
-var sid = 0
+var sid = parseInt(getSearchParam('sid'))
 var statusSelector = null
 var patientSelector = null
 var doctorListSelector = null
 $(function() {
+    GDialog.render('gDialog', {
+        titleText: '确定要删除数据吗',
+        hasCancel: true,
+        ensureText: '确定',
+        cancelText: '取消',
+        onEnsureClick: () => {
+            GDialog.dismiss()
+            deleteVisit(sid)
+        },
+        onCancelClick: () => {
+            GDialog.dismiss()
+
+        }
+    })
+
+
   if (!isAdd) {
     const patientInfos = require('@/components/patientInfos/patientInfos.js')
-    patientInfos.render('patient-info', {
-      a: 1
-    })
+    // patientInfos.render('patient-info', {
+    //   a: 1
+    // })
+      fetchReturnVisitDetail(sid)
   }
 
   var opt = {}
@@ -205,9 +226,9 @@ function validate() {
   return true
 }
 // 删除
-function deleteVisit() {
+function deleteVisit(sid) {
   loading()
-  deleteReturnVisit().then(
+  deleteReturnVisit(sid).then(
     res => {
       loadingdone()
       console.log(res)
@@ -221,7 +242,33 @@ function deleteVisit() {
   )
 }
 
+//获取回访详情
+function fetchReturnVisitDetail(sid) {
+    getReturnVisit(sid).then(
+        res => {
+            const itemDetail = res.data.Data[0]
+            $('#patient-name').html(itemDetail.name)
+            $('#patient-name').val(itemDetail.blh)
+            $('#current-return-visit-time').val(itemDetail.ffdate)
+            $('#status').html(itemDetail.isff)
+            $('#status').val(itemDetail.isff)
+            $('#content-text').val(itemDetail.ffcontext)
+            $('#doctor-name').html(itemDetail.docname)
+            $('#doctor-name').val(itemDetail.doctid)
+            $('#visit-result').val(itemDetail.ffyj)
+        }
+    ).catch(
+        e => {
+            console.log(e)
+        }
+    )
+}
+
 // 选好状态后更新
 window.funSelectCallBack = function(value) {
   $('#content-text').val(value)
+}
+
+window.funRightTouch =  function () {
+    GDialog.show()
 }

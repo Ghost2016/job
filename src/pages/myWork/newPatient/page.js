@@ -4,9 +4,10 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 }
 require('@/lib/common.js')
 import './page.less'
-import { newPatient, fetchPatientDetailByBlh, deletePatientByBlh, editPatient } from '@/api/patient'
+import { newPatient, fetchPatientDetail, deletePatientByBlh, editPatient } from '@/api/patient'
 import { fetchPatientSrc, fetchDoctorList } from '@/api/common'
 import { getSearchParam } from '@/lib/utils'
+const GDialog1 = require('@/components/gDialog/gDialog.js')
 // const native = require('@/lib/native.js')
 // $('#app').html('通过jquery')
 // window.location.href = '../../index/index/page.html'
@@ -22,16 +23,32 @@ var patientSrcSelector = null
 var doctorList = []
 var doctorListSelector = null
 var isAdd = !getSearchParam('isEdit')
-var blh = '32058880'
+// var isAdd = 0
+var blh = getSearchParam('blh')||'100272'
 $(function() {
+    GDialog1.render('gDialog1', {
+        titleText: '确定要删除数据吗',
+        hasCancel: true,
+        ensureText: '确定',
+        cancelText: '取消',
+        onEnsureClick: () => {
+            GDialog1.dismiss()
+            deletePatient(blh)
+        },
+        onCancelClick: () => {
+            GDialog1.dismiss()
+
+        }
+    })
+
   if (!isAdd) {
     loading()
-    fetchPatientDetailByBlh(blh).then(
+    fetchPatientDetail(blh).then(
       res => {
         loadingdone()
         console.log(res)
         blh = res.data.Data[0].blh
-        fillData(res.data.Data)
+        fillData(res.data.Data[0])
       }
     ).catch(
       e => {
@@ -61,7 +78,7 @@ $(function() {
         docid: $('#doctor-name').val() - 0,
         // 封装后的结果
         docname: $('#doctor-name_dummy').val(),
-        hzsource: $('#patient-src_dummy').val(),
+        hzsource: $('#patient-src').html(),
         address: $('#patient-addr').html()
       }
       console.log(form)
@@ -194,36 +211,44 @@ function fetchPatientSrcList() {
 // 填充数据
 function fillData(data) {
   // 有问题的返回数据
-  return
-  data = [
-    {
-      'name': '测试2',
-      'sex': '男',
-      'age': '18岁',
-      'cfz': '复诊患者',
-      'xfje': null,
-      'qf': null,
-      'blh': 1703076588,
-      'ys': '',
-      'jzsj': '2018-05-25 01:23:03',
-      'yysj': null,
-      'yybz': null,
-      'bl': null
-    }
-  ][0]
+  // return
+  // data = [
+  //   {
+  //     'name': '测试2',
+  //     'sex': '男',
+  //     'age': '18岁',
+  //     'cfz': '复诊患者',
+  //     'xfje': null,
+  //     'qf': null,
+  //     'blh': 1703076588,
+  //     'ys': '',
+  //     'jzsj': '2018-05-25 01:23:03',
+  //     'yysj': null,
+  //     'yybz': null,
+  //     'bl': null
+  //   }
+  // ][0]
   console.log(data)
+    $('#patient-number').val(blh)
   $('#patient-name').val(data.name),
-  $('#patient-phone-number').val(),
-  $('#patient-tel-number').val(),
+  $('#patient-phone-number').val(data.tel2),
+  $('#patient-tel-number').val(data.tel),
   $('#sex-p .is-checked').attr('data-sex'),
-  $('#patient-birthday').val(),
-  $('#doctor-name').val() - 0,
-  $('#doctor-name')[0].textContent,
-  $('#patient-src')[0].textContent,
-  $('#patient-addr').val()
+  $('#patient-birthday').val(data.birth),
+  $('#doctor-name').val(data.doctend),
+  $('#doctor-name').html(data.doctorname),
+  $('#patient-src').html(data.hzsource),
+  $('#patient-addr').html(data.address)
+    $('.checkbox-radio-label-box').each(function () {
+        // console.log($(this))
+        var that = $(this)
+        if(that[0].dataset.sex === data.sex){
+            that.addClass('is-checked')
+        }
+    })
 }
 // 删除
-function deletePatient() {
+function deletePatient(blh) {
   loading()
   deletePatientByBlh(blh).then(
     res => {
@@ -237,4 +262,9 @@ function deletePatient() {
       console.log(e)
     }
   )
+}
+
+window.funRightTouch =  function () {
+    // GDialog1.show()
+    deletePatient(blh)
 }

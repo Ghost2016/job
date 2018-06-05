@@ -13,6 +13,10 @@ let blh = getSearchParam('blh')||'32045124'
 
 $(function() {
   getReturnVisitSingle({ blh:  blh})
+    $('#appointment-record').on('click','.appointment-item-right-tel',function (e) {
+        e.stopPropagation()
+        window.js.invokeCall(e.target.dataset.tel)
+    })
 })
 
 function getReturnVisitSingle(blh) {
