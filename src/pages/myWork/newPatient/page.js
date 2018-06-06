@@ -139,6 +139,11 @@ $(function() {
     }
   })
 
+    // 选择地址
+    $("#addr-select").click(function() {
+        Native.chooseLocation();
+    })
+
   // 使用日期控件
   window.mobiscroll.date('#patient-birthday', {
     // theme: 'ios',
@@ -154,6 +159,47 @@ $(function() {
 })
 // 验证数据
 function validate() {
+    var name =  $('#patient-name').val();
+    if (name.length == 0)
+    {
+        Native.showToast('请输入患者姓名');
+        return false;
+    }
+
+    var phone =  $('#patient-phone-number').val();
+    if (phone.length == 0)
+    {
+        Native.showToast('请输入手机号码');
+        return false;
+    }
+
+    var sex =  $('#sex-p .is-checked').attr('data-sex');
+    if (sex == undefined)
+    {
+        Native.showToast('请选择性别');
+        return false;
+    }
+
+    var birth =  $('#patient-birthday').val();
+    if (birth == undefined || birth.length == 0)
+    {
+        Native.showToast('请选择出生年月');
+        return false;
+    }
+
+    var dName =  $('#doctor-name').val();
+    if (dName == undefined || dName.length == 0)
+    {
+        Native.showToast('请选择医生');
+        return false;
+    }
+
+    var hzSource =$('#patient-src').val();
+    if (hzSource == undefined || hzSource.length == 0)
+    {
+        Native.showToast('请选择患者来源');
+        return false;
+    }
   return true
 }
 // 获取医生列表
@@ -267,4 +313,12 @@ function deletePatient(blh) {
 window.funRightTouch =  function () {
     // GDialog1.show()
     deletePatient(blh)
+}
+
+
+// 选好状态后更新
+window.setLocation = function(lat,lon,address) {
+    // 更新地址
+    $('#patient-addr').val(address);
+
 }

@@ -47,6 +47,27 @@ Native.backAction = function() {
   window.js.backAction()
 }
 
+/**
+ * 选择患者
+ */
+Native.selectPatient = function() {
+    window.js.selectPatient()
+}
+
+/**
+ * 显示toast
+ */
+Native.showToast = function(value) {
+    window.js.showToast(value)
+}
+
+/**
+ * 选择地址
+ */
+Native.chooseLocation = function() {
+    window.js.chooseLocation()
+}
+
 // 6. 当前页面对上一页面数据有更新，则在当前页面直接调用backAction前执行如下方法
 //    js.saveLocalParam(“sp_pre_refresh_data”, “1”)
 

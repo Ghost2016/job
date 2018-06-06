@@ -66,6 +66,8 @@ $(function() {
         Native.startNextActivity(
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy',
+                // nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?isEdit=' + false + '&type=yhyy',
+                // nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy&name='+$('#name').html(),
                 nextparam: '',
                 title: '新增有号预约',
                 flag:1,

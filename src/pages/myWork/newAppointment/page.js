@@ -20,6 +20,11 @@ var no = parseInt(getSearchParam('no')) || -1
 // 弹出框
 var patientSelector = null
 var doctorListSelector = null
+
+var patientBLH;
+
+// 获取是否有患者
+const patientName = getSearchParam('name');
 $(function() {
     GDialog.render('gDialog', {
         titleText: '确定要删除数据吗',
@@ -56,6 +61,12 @@ $(function() {
       `<input id="patient-phone-number" placeholder=""></input>`
     )
   }
+
+  if (patientName!=undefined || patientName.length!=0)
+  {
+      $('#patient-name').html(patientName);
+  }
+
   if (!isAdd) {
     fetchAppointmentDetail()
   }
@@ -217,40 +228,77 @@ $(function() {
 
 // 检查数据
 function _validate() {
+    var name =  $('#patient-name').val();
+    if (name.length == 0)
+    {
+        Native.showToast('请选择患者姓名');
+        return false;
+    }
+
+    if(!WithNumer) {
+        var phone =  $('#patient-phone-number').val();
+        if (phone.length == 0)
+        {
+            Native.showToast('请输入手机号码');
+            return false;
+        }
+    }
+
+    var date =  $('#appointment-time').val();
+    if (date == undefined || date.length == 0)
+    {
+        Native.showToast('请选择就诊时间');
+        return false;
+    }
+
+    var dName =  $('#doctor-name').val()+'';
+    if (dName == undefined || dName.length == 0)
+    {
+        Native.showToast('请选择医生');
+        return false;
+    }
+
+    var hzSource =$('#content-text').val()+'';
+    if (hzSource == undefined || hzSource.length == 0)
+    {
+        Native.showToast('请选择内容');
+        return false;
+    }
   return true
 }
 
 // 获取患者列表
 function fetchPatients() {
-  loading()
-  fetchPatientList().then(
-    res => {
-      loadingdone()
-      const data = res.data.Data
-      console.log(data)
-      let tempData = []
-      for (let i in data) {
-        tempData.push({
-          text: data[i].name,
-          value: data[i].blh,
-          tel: data[i].blh
-        })
-      }
-      patientSelector = window.mobiscroll.select('#patient-name', {
-        theme: 'ios',
-        display: 'bottom',
-        minWidth: 200,
-        data: tempData
-      })
-      // patientSelector.setVal()
-      patientSelector.show()
-    }
-  ).catch(
-    e => {
-      loadingdone()
-      console.log(e)
-    }
-  )
+    Native.selectPatient();
+  // loading()
+  // fetchPatientList().then(
+  //   res => {
+  //     loadingdone()
+  //     const data = res.data.Data
+  //     console.log(data)
+  //     let tempData = []
+  //     for (let i in data) {
+  //       tempData.push({
+  //         text: data[i].name,
+  //         value: data[i].blh,
+  //         tel: data[i].blh
+  //       })
+  //     }
+  //     patientSelector = window.mobiscroll.select('#patient-name', {
+  //       theme: 'ios',
+  //       display: 'bottom',
+  //       minWidth: 200,
+  //       data: tempData
+  //     })
+  //     // patientSelector.setVal()
+  //     patientSelector.show()
+  //   }
+  // ).catch(
+  //   e => {
+  //     loadingdone()
+  //     console.log(e)
+  //   }
+  // )
 }
 
 // 获取医生列表
@@ -349,9 +397,26 @@ function fetchAppointmentDetail() {
 
 // 选好状态后更新
 window.funSelectCallBack = function(value) {
-  $('#content-text').val(value)
-}
 
+    try
+    {
+        var object = JSON.parse(value);
+
+        if(object.type == 'patient')
+        {
+            patientBLH = object.blh;
+            $('#patient-name').val(object.blh);
+            $('#patient-name').html(object.name);
+        }
+        else {
+            $('#content-text').val(value)
+        }
+    }catch (e)
+    {
+        $('#content-text').val(value)
+    }
+
+}
 window.funRightTouch =  function () {
     GDialog.show()
 }
