@@ -28,7 +28,7 @@ $(function() {
 
 function getAnamnesisList(blh) {
     loading()
-  fetchAnamnesisList(blh).then(
+    fetchAnamnesisList(blh).then(
         res => {
             loadingdone()
           anamnesisListData = res
