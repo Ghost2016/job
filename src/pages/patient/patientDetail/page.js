@@ -85,7 +85,7 @@ $(function() {
     $('#turn-to-patient-edit').on('click',function (e) {
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newPatient/page.html?isEdit=1',
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newPatient/page.html?isEdit=1&blh=' + blh,
                 nextparam: '',
                 title: '编辑患者',
                 flag:8,

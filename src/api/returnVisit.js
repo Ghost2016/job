@@ -87,3 +87,17 @@ export function deleteReturnVisit(sid) {
     method: 'post'
   })
 }
+
+//获取回访详情
+export function getReturnVisit(sid) {
+    return fetch({
+        url: 'FF/Get',
+        data: {
+            'actoken': getToken(),
+            'Data': {
+                'sid': sid || '13266'
+            }
+        },
+        method: 'post'
+    })
+}

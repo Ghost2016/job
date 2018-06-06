@@ -125,3 +125,16 @@ export function editPatient({ name, phone, tel, sex, birth, docid, docname, hzso
   })
 }
 
+export function fetchPatientDetail(blh) {
+    return fetch({
+        url: 'HZ/GetForEdit',
+        data: {
+            'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+            'Data': {
+                'blh': blh
+            }
+        },
+        method: 'post'
+    })
+}
+

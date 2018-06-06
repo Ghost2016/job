@@ -1,6 +1,6 @@
 <% var length = items.length %>
 <% for (var i=0; i<length; i++) { %>
-<div class="appointment-item" data-no="<%=items[i].no%>">
+<div class="appointment-item" data-no="<%=items[i].no%>" data-yylx="<%=items[i].yylx%>" data-sid="<%=items[i].sid%>">
   <div class="appointment-item-left">
     <!-- 左边左上角标签 -->
       <% switch(items[i].type){       //注意这里没有代码块结束符号，而是要和下面合并在一个代码块里，才能正常  
@@ -50,7 +50,7 @@
           医生：<%=items[i].docname || items[i].doctname %>
         </div>
     </div>
-    <a class="appointment-item-right-tel" href="tel:<%=items[i].tel %>">
+    <a class="appointment-item-right-tel" data-tel="<%=items[i].tel %>">
     </a>
   </div>
 </div>

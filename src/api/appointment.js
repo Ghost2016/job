@@ -64,7 +64,7 @@ export function deleteAppointment(number) {
   })
 }
 
-// 新增无号预约
+// 编辑无号预约
 export function editAppointmentWithOutNumber(obj) {
   return fetch({
     url: 'YY/EditWH',
@@ -76,7 +76,7 @@ export function editAppointmentWithOutNumber(obj) {
   })
 }
 
-// 新增有号预约
+// 编辑有号预约
 export function editAppointmentWithNumber(obj) {
   return fetch({
     url: 'YY/Edit',
@@ -86,4 +86,32 @@ export function editAppointmentWithNumber(obj) {
     },
     method: 'post'
   })
+}
+
+//获取有号预约详情
+export function getAppointmentDetailWithNumber(number) {
+    return fetch({
+        url: 'YY/Get',
+        data: {
+            'actoken': getToken(),
+            'Data': {
+              no: number
+            }
+        },
+        method: 'post'
+    })
+}
+
+//获取无号预约详情
+export function getAppointmentDetailWithoutNumber(number) {
+    return fetch({
+        url: 'YY/GetWH',
+        data: {
+            'actoken': getToken(),
+            'Data': {
+                no: number
+            }
+        },
+        method: 'post'
+    })
 }

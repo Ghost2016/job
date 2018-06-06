@@ -24,6 +24,21 @@ $(function() {
     }
   })
   fetchData(timer.getParsedTime())
+    $('#appointments').on('click','.appointment-item',function () {
+        var that = this
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newReturnVisit/page.html?isEdit=1&sid=' + that.dataset.sid,
+                nextparam: '',
+                title: '编辑回访',
+                flag:8,
+            }
+        )
+    })
+    $('#appointments').on('click','.appointment-item-right-tel',function (e) {
+        e.stopPropagation()
+        window.js.invokeCall(e.target.dataset.tel)
+    })
 })
 
 // 获取数据

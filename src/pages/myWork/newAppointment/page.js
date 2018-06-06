@@ -5,33 +5,49 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 import './page.less'
 require('@/lib/common.js')
 import { newAppointmentWithOutNumber, newAppointmentWithNumber,
-  deleteAppointment, editAppointmentWithOutNumber, editAppointmentWithNumber
+  deleteAppointment, editAppointmentWithOutNumber, editAppointmentWithNumber,getAppointmentDetailWithNumber,getAppointmentDetailWithoutNumber
 } from '@/api/appointment'
 import { fetchPatientList, fetchDoctorList } from '@/api/common'
 import { getSearchParam } from '@/lib/utils'
+const GDialog = require('@/components/gDialog/gDialog.js')
 
 // 新增 编辑
 const isAdd = !getSearchParam('isEdit')
 // 有号 无号 => 相对于病历号而言的
 const WithNumer = getSearchParam('type') === 'yhyy'
 // 删除或者编辑时会用到的预约号
-var no = getSearchParam('no') || -1
+var no = parseInt(getSearchParam('no')) || -1
 // 弹出框
 var patientSelector = null
 var doctorListSelector = null
 $(function() {
+    GDialog.render('gDialog', {
+        titleText: '确定要删除数据吗',
+        hasCancel: true,
+        ensureText: '确定',
+        cancelText: '取消',
+        onEnsureClick: () => {
+            GDialog.dismiss()
+            handleDelete(no)
+        },
+        onCancelClick: () => {
+            GDialog.dismiss()
+
+        }
+    })
   // loading()
   // window.mobiscroll.date('#appointment-time', {})
   // var currYear = (new Date()).getFullYear()
   // 如果是有号
   if (WithNumer) {
+      $('#patient-phone-number-p').css('display','none')
     $('#patient-name-p').append(
       `<a id="patient-name"></a><span class="arraw-into"></span>`
     )
-    $('#patient-phone-number-p').append(
-      `<input id="patient-phone-number" readonly placeholder=""></input>`
+    // $('#patient-phone-number-p').append(
+    //   `<input id="patient-phone-number" readonly placeholder=""></input>`
       // `<input id="patient-phone-number" placeholder=""></input>`
-    )
+    // )
   } else {
     $('#patient-name-p').append(
       `<input id="patient-name"></input>`
@@ -141,7 +157,7 @@ $(function() {
       } else { //如果是编辑
         form.no = no
         console.log(form)
-        return
+        // return
         loading()
         editAppointmentWithNumber(form).then(
           res => {
@@ -284,21 +300,59 @@ function handleDelete(no) {
 
 // 获取预约详情
 function fetchAppointmentDetail() {
-  const itemDetail = Native.getLocalParam('selectedAppointmentItem')
-  console.log(itemDetail)
-  $('#patient-name').html(itemDetail.name)
-  $('#patient-name').val(itemDetail.name)
-  $('#patient-phone-number').val(itemDetail.phone || 13000000000)
-  $('#appointment-time').val(itemDetail.bdate)
-  $('#duration').val(itemDetail.date)
-  $('#content-text').val(itemDetail.context || '')
-  // context
-  // $('#doctor-name').val(itemDetail.doctname || '')
-  $('#doctor-name').html(itemDetail.doctname || '')
+    if(WithNumer){
+        getAppointmentDetailWithNumber(no).then(
+            res => {
+                const itemDetail = res.data.Data[0]
+                // alert(JSON.stringify(res))
+                $('#patient-name').html(itemDetail.name)
+                $('#patient-name').val(itemDetail.blh)
+                // $('#patient-phone-number').val(itemDetail.phone || 13000000000)
+                $('#appointment-time').val(itemDetail.b_date)
+                $('#duration').val(itemDetail.len)
+                $('#content-text').val(itemDetail.content || '')
+                // context
+                // $('#doctor-name').val(itemDetail.doctname || '')
+                $('#doctor-name').html(itemDetail.docname || '')
+                $('#doctor-name').val(itemDetail.doctor)
+            }
+        ).catch(
+            e => {
+                console.log(e)
+            }
+        )
+    }else {
+        getAppointmentDetailWithoutNumber(no).then(
+            res => {
+                const itemDetail = res.data.Data[0]
+                console.log(itemDetail)
+                $('#patient-name').html(itemDetail.newname)
+                $('#patient-name').val(itemDetail.blh)
+                $('#patient-phone-number').val(itemDetail.newtel || '')
+                $('#appointment-time').val(itemDetail.b_date)
+                $('#duration').val(itemDetail.len)
+                $('#content-text').val(itemDetail.newbz || '')
+                // context
+                // $('#doctor-name').val(itemDetail.doctname || '')
+                $('#doctor-name').html(itemDetail.docname || '')
+                $('#doctor-name').val(itemDetail.doctor)
+            }
+        ).catch(
+            e => {
+                console.log(e)
+            }
+        )
+    }
+  // const itemDetail = Native.getLocalParam('selectedAppointmentItem')
+
 }
 
 // 选好状态后更新
 window.funSelectCallBack = function(value) {
   $('#content-text').val(value)
+}
+
+window.funRightTouch =  function () {
+    GDialog.show()
 }
 

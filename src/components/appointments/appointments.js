@@ -19,6 +19,8 @@ exportModule.render = function(id, jsonObj, isSingle) {
     }
     item.date = (item.bdate && item.bdate.substring(11, 16)) || (item.ffdate && item.ffdate.substring(11, 16))
     item.date1 = (item.bdate && (item.bdate.substring(0, 4) + '/' + item.bdate.substring(5, 7) + '/' + item.bdate.substring(8, 10))) || (item.ffdate.substring(0, 4) + '/' + item.ffdate.substring(5, 7) + '/' + item.ffdate.substring(8, 10))
+    item.yylx = item.yylx
+      item.tel = item.tel
   })
   const tempObj = { items: jsonObj, isSingle: isSingle }
   console.log(tempObj)
@@ -27,7 +29,12 @@ exportModule.render = function(id, jsonObj, isSingle) {
   ele.innerHTML = Appointments(tempObj)
   $('.appointment-item').on('click', function() {
     let selectedItem = jsonObj.filter( (item) => {
-      return item.no === $(this).attr('data-no') - 0
+      if('no' in item){
+          return item.no === $(this).attr('data-no') - 0
+      }else if('sid' in item){
+        return item.sid === $(this).attr('data-sid') - 0
+      }
+
     })
     isSingle.onItemClick && isSingle.onItemClick(selectedItem[0])
   })

@@ -67,6 +67,34 @@ $(function() {
   $('#save').on('click', (e) => {
     GDialog.show()
   })
+    
+    $('#appointments').on('click','.appointment-item',function () {
+        var that = this
+        if(that.dataset.yylx === '有号预约'){
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy&isEdit=1&no=' + that.dataset.no,
+                    nextparam: '',
+                    title: '编辑有号预约',
+                    flag:8,
+                }
+            )
+        }else if(that.dataset.yylx === '无号预约'){
+            Native.startNextActivity(
+                {
+                    nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?isEdit=1&no=' + that.dataset.no,
+                    nextparam: '',
+                    title: '编辑无号预约',
+                    flag:8,
+                }
+            )
+        }
+
+    })
+    $('#appointments').on('click','.appointment-item-right-tel',function (e) {
+        e.stopPropagation()
+        window.js.invokeCall(e.target.dataset.tel)
+    })
 })
 // 获取数据
 function fetchData(date) {
