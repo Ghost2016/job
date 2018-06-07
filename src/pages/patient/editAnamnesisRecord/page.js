@@ -4,30 +4,43 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 import { fetchDoctorList } from '@/api/common'
-import { addAnamnesis } from '@/api/anamnesis'
-
-const Native = require('@/lib/native.js')
+import { addAnamnesis, getAnamnesis } from '@/api/anamnesis'
 
 const isAdd = !getSearchParam('isEdit')
 // 前一个页面传递病历号
-const blh = getSearchParam('blh') || 32030515
-const seeno = getSearchParam('seeno') || 0
-const name = getSearchParam('name') || ''
+var blh = getSearchParam('blh') || 32030515
+var seeno = getSearchParam('seeno') || 0
+var name = getSearchParam('name') || ''
 // 操作员
-const operater = 5
+var operater = 5
 // 口腔检查集合，有0-n条记录
-const checks = []
+var checks = []
 // 辅助检查（X光）
-const others = []
+var others = []
 // 诊断记录
-const diagnoses = []
+var diagnoses = []
 // 治疗计划
-const plans = []
+var plans = []
 // 治疗过程
-const cures = []
+var cures = []
 
 var doctorListSelector = null
 $(function() {
+  if(!isAdd) {
+    loading()
+    getAnamnesis({blh:blh,seeno:seeno}).then(
+      res => {
+        loadingdone()
+        console.log(res)
+        fillData(res.data.Data)
+      }
+    ).catch(
+      e => {
+        loadingdone()
+        console.log(e)
+      }
+    )
+  }
   var opt = {}
   opt.date = { preset: 'date' }
   opt.datetime = { preset: 'datetime' }
@@ -61,10 +74,12 @@ $(function() {
         }
     })
     $('#turn-to-mouth').on('click',function (e) {
+      // alert(checks)
+      // return
         Native.startNextActivity(
             {
                 nexturl: HTML_BASE_URL_PREFIX + 'patient/checkAndEdit/page.html?type=checks',
-                nextparam: '',
+                nextparam: {checks: checks},
                 title: '检查编辑',
                 flag:5,
             }
@@ -237,4 +252,25 @@ window.funSelectCallBack = function(jsonString) {
     
     
     console.log(array)
+}
+function fillData(dataSet) {
+  const data = dataSet.main[0]
+  if(!data){$alert('请求失败');return}
+  $('#date').val(data.seedate)
+  // 初诊复诊
+  // czfz: $('#first-or-not-p .is-checked').attr('data-type'),
+  $('#doctor-name').val(data.doctor)
+  $('#narrate').val(data.narrate)
+  $('#ext1').val(data.ext1)
+  $('#history').val(data.history)
+  name = data.name
+  operater = data.operater
+  $('#advice').html(data.advice)
+  $('#doctor-name').html(data.docname)
+  $('#doctor-name').val(data.doctor)
+  checks = dataSet.checks
+  others = dataSet.others
+  diagnoses = dataSet.diagnoses
+  plans = dataSet.plans
+  cures = dataSet.cures
 }

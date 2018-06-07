@@ -19,6 +19,9 @@ var sid = parseInt(getSearchParam('sid'))
 var statusSelector = null
 var patientSelector = null
 var doctorListSelector = null
+
+var patientBLH;
+
 $(function() {
     GDialog.render('gDialog', {
         titleText: '确定要删除数据吗',
@@ -117,7 +120,7 @@ $(function() {
             loadingdone()
             console.log(res)
             if (res.data.Data) {
-              alert('新增成功')
+              Native.showToast('新增回访成功')
               Native.handleBackAction(true)
             }
           }
@@ -135,7 +138,8 @@ $(function() {
             loadingdone()
             console.log(res)
             if (res.data.Data) {
-              alert('修改成功')
+
+              Native.showToast('修改成功')
               Native.handleBackAction(true)
             }
           }
@@ -147,8 +151,7 @@ $(function() {
         )
       }
     } else {
-      alert('验证不通过')
-      // GDialog.show()
+
     }
   })
 
@@ -165,33 +168,34 @@ $(function() {
 
 // 获取患者列表
 function fetchPatients() {
-  loading()
-  fetchPatientList().then(
-    res => {
-      loadingdone()
-      const data = res.data.Data
-      let tempData = []
-      for (let i in data) {
-        tempData.push({
-          text: data[i].name,
-          value: data[i].blh
-        })
-      }
-      patientSelector = window.mobiscroll.select('#patient-name', {
-        theme: 'ios',
-        display: 'bottom',
-        minWidth: 200,
-        data: tempData
-      })
-      // patientSelector.setVal()
-      patientSelector.show()
-    }
-  ).catch(
-    e => {
-      loadingdone()
-      console.log(e)
-    }
-  )
+    Native.selectPatient();
+  // loading()
+  // fetchPatientList().then(
+  //   res => {
+  //     loadingdone()
+  //     const data = res.data.Data
+  //     let tempData = []
+  //     for (let i in data) {
+  //       tempData.push({
+  //         text: data[i].name,
+  //         value: data[i].blh
+  //       })
+  //     }
+  //     patientSelector = window.mobiscroll.select('#patient-name', {
+  //       theme: 'ios',
+  //       display: 'bottom',
+  //       minWidth: 200,
+  //       data: tempData
+  //     })
+  //     // patientSelector.setVal()
+  //     patientSelector.show()
+  //   }
+  // ).catch(
+  //   e => {
+  //     loadingdone()
+  //     console.log(e)
+  //   }
+  // )
 }
 
 // 获取医生列表
@@ -223,6 +227,43 @@ function fetchDoctorSrcList() {
 }
 // 验证
 function validate() {
+
+    var name =  $('#patient-name').val();
+    if (name.length == 0)
+    {
+        Native.showToast('请选择患者姓名');
+        return false;
+    }
+
+
+    var date =  $('#current-return-visit-time').val();
+    if (date == undefined || date.length == 0)
+    {
+        Native.showToast('请选择时间');
+        return false;
+    }
+
+    var status = $('#status_dummy').val();
+    if (status == undefined || status.length == 0)
+    {
+        Native.showToast('请选择状态');
+        return false;
+    }
+
+    var dName =  $('#doctor-name').val()+'';
+    if (dName == undefined || dName.length == 0)
+    {
+        Native.showToast('请选择医生');
+        return false;
+    }
+
+    var hzSource =$('#content-text').val()+'';
+    if (hzSource == undefined || hzSource.length == 0)
+    {
+        Native.showToast('请选择内容');
+        return false;
+    }
+
   return true
 }
 // 删除
@@ -264,10 +305,33 @@ function fetchReturnVisitDetail(sid) {
     )
 }
 
+
 // 选好状态后更新
 window.funSelectCallBack = function(value) {
-  $('#content-text').val(value)
+
+    try
+    {
+        var object = JSON.parse(value);
+
+        if(object.type == 'patient')
+        {
+            patientBLH = object.blh;
+            $('#patient-name').val(object.blh);
+            $('#patient-name').html(object.name);
+        }
+        else {
+            $('#content-text').val(value)
+        }
+    }catch (e)
+    {
+        $('#content-text').val(value)
+    }
+
 }
+// // 选好状态后更新
+// window.funSelectCallBack = function(value) {
+//   $('#content-text').val(value)
+// }
 
 window.funRightTouch =  function () {
     GDialog.show()

@@ -10,6 +10,7 @@ const Native = require('@/lib/native.js')
 let patientDetailData = {}
 let patientName = ''
 let blh = getSearchParam('blh')||'32054077'
+let phone = '';
 $(function() {
   getPatientDetail({ blh: blh })
     $('#turn-to-payment').on('click',function (e) {
@@ -77,13 +78,17 @@ $(function() {
     $('#turn-to-message').on('click',function (e) {
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/messageSend/page.html',
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/messageSend/page.html?phone='+phone,
                 nextparam: '',
                 title: $(this).html(),
                 flag:7,
             }
         )
     })
+    $('#turn-to-phone').on('click',function (e) {
+        window.js.invokeCall(phone);
+    })
+
     $('#turn-to-patient-edit').on('click',function (e) {
         Native.startNextActivity(
             {
@@ -139,6 +144,11 @@ function updateData(data) {
     }
     if (data.data.Data[0].yybz) {
       $('#yybz').text(data.data.Data[0].yybz)
+    }
+
+    if (data.data.Data[0].phone)
+    {
+        phone = data.data.Data[0].phone;
     }
   }
 }

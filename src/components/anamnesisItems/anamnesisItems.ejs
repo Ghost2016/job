@@ -1,7 +1,7 @@
 <!-- <div class="_anamnesis-items"> -->
 <% var length = items.length%>
 <% for (var i=0; i<length; i++) { %>
-  <div class="_anamnesis-item">
+  <div class="_anamnesis-item" data-no="<%=items[i].seeno%>">
     <div class="_anamnesis-item-status <%=items[i].seeno===1?'first':'not-first'%>"></div>
     <div class="_anamnesis-item-left">
       <div>医生:<span><%=items[i].docname||''%></span></div>

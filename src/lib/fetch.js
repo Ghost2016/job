@@ -47,7 +47,8 @@ service.interceptors.response.use(
   response => {
     // 如果有错误信息
     if (response.data.Msg) {
-      window.$alert(response.data.Msg)
+      // window.$alert(response.data.Msg)
+        Native.showToast(response.data.Msg)
       return
     }
     return response

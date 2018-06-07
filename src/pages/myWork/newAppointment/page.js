@@ -55,10 +55,10 @@ $(function() {
     // )
   } else {
     $('#patient-name-p').append(
-      `<input id="patient-name"></input>`
+      `<input id="patient-name" placeholder="请输入患者姓名"></input>`
     )
     $('#patient-phone-number-p').append(
-      `<input id="patient-phone-number" placeholder=""></input>`
+      `<input id="patient-phone-number" placeholder="请输入电话号码"></input>`
     )
   }
 
@@ -155,7 +155,7 @@ $(function() {
             loadingdone()
             console.log(res)
             if( res.data.Data ) {
-              console.log('新增成功')
+                Native.showToast('新增有号预约成功')
               Native.handleBackAction(true)
             }
           }
@@ -173,6 +173,8 @@ $(function() {
         editAppointmentWithNumber(form).then(
           res => {
             loadingdone()
+             Native.showToast('编辑成功')
+             Native.handleBackAction(true)
             console.log(res)
           }
         ).catch(
@@ -196,7 +198,8 @@ $(function() {
           res => {
             loadingdone()
             console.log(res)
-            if(data.data.Data) {
+            if(res.data.Data) {
+              Native.showToast('新增无号预约成功')
               Native.handleBackAction(true)
             }
           }
@@ -213,6 +216,7 @@ $(function() {
           res => {
             loadingdone()
             console.log(res)
+              Native.showToast('编辑成功')
             Native.handleBackAction(true)
           }
         ).catch(
@@ -247,7 +251,13 @@ function _validate() {
     var date =  $('#appointment-time').val();
     if (date == undefined || date.length == 0)
     {
-        Native.showToast('请选择就诊时间');
+        Native.showToast('请选择时间');
+        return false;
+    }
+
+    if (!parseInt($('#duration').val()) || parseInt($('#duration').val())<=0)
+    {
+        Native.showToast('请选择时长');
         return false;
     }
 
@@ -374,8 +384,8 @@ function fetchAppointmentDetail() {
             res => {
                 const itemDetail = res.data.Data[0]
                 console.log(itemDetail)
-                $('#patient-name').html(itemDetail.newname)
-                $('#patient-name').val(itemDetail.blh)
+                $('#patient-name').val(itemDetail.newname)
+
                 $('#patient-phone-number').val(itemDetail.newtel || '')
                 $('#appointment-time').val(itemDetail.b_date)
                 $('#duration').val(itemDetail.len)

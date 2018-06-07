@@ -13,11 +13,13 @@ let anamnesisListData = {}
 let blh = getSearchParam('blh')||'32054077'
 
 $(function() {
-  getAnamnesisList({ blh: blh })
+    getAnamnesisList({ blh: blh })
     $('#anamnesisItems').on('click','._anamnesis-item',function (e) {
+        const seeno = $(this).attr('data-no')
+        // return
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/editAnamnesisRecord/page.html?blh=' + blh,
+                nexturl: HTML_BASE_URL_PREFIX + 'patient/editAnamnesisRecord/page.html?isEdit=true&blh=' + blh + '&seeno=' + seeno,
                 nextparam: '',
                 title: '编辑病历记录',
                 flag:8,

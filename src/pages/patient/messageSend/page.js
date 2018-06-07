@@ -5,6 +5,9 @@ require('@/lib/common.js')
 import './page.less'
 import { getCommonMsg } from '@/api/message'
 
+
+let phone = getSearchParam('phone')||'13888888888'
+
 $(function() {
   loading()
   getCommonMsg().then(
@@ -30,6 +33,7 @@ $(function() {
   })
   $('#send').on('click', () => {
     // todo
+      Native.sendSmgWithPhone(phone,$('#t-msg').val());
   })
 })
 

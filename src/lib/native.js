@@ -68,6 +68,13 @@ Native.chooseLocation = function() {
     window.js.chooseLocation()
 }
 
+/**
+ * 发送短信
+ */
+Native.sendSmgWithPhone = function(phone,value) {
+    window.js.sendSmgWithPhone(phone,value)
+}
+
 // 6. 当前页面对上一页面数据有更新，则在当前页面直接调用backAction前执行如下方法
 //    js.saveLocalParam(“sp_pre_refresh_data”, “1”)
 

@@ -90,7 +90,7 @@ $(function() {
             loadingdone()
             console.log(res)
             if (res.data.Data) {
-              alert('新增成功，病历号：' + res.data.Data)
+              Native.showToast('新增成功，病历号：' + res.data.Data)
               Native.handleBackAction(true)
             }
           }

@@ -16,3 +16,14 @@ export function addAnamnesis(obj) {
     method: 'post'
   })
 }
+
+export function getAnamnesis(obj) {
+  return fetch({
+    url: 'Emr/Get',
+    data: {
+      "actoken": getToken(),
+      "Data": obj,
+    },
+    method: 'post'
+  })
+}
