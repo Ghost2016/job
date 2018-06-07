@@ -11,11 +11,11 @@ exportModule.render = function(id, jsonObj, isSingle) {
     } else if ((item.isff === '否')||(item.isff === '未访')) {
       item.type = 2
     } else if (item.state === '完成') {
-      item.type = 0
+      item.type = 1
     } else if (item.state === '爽约') {
       item.type = 3
     } else if (item.state === '预约') {
-      item.type = 1
+      item.type = 0
     }
     item.date = (item.bdate && item.bdate.substring(11, 16)) || (item.ffdate && item.ffdate.substring(11, 16))
     item.date1 = (item.bdate && (item.bdate.substring(0, 4) + '/' + item.bdate.substring(5, 7) + '/' + item.bdate.substring(8, 10))) || (item.ffdate.substring(0, 4) + '/' + item.ffdate.substring(5, 7) + '/' + item.ffdate.substring(8, 10))

@@ -4,9 +4,17 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 
+const topSet = new Set()
+const bottomSet = new Set()
+var p = {
+  p1: '',
+  p2: '',
+  p3: '',
+  p4: '',
+  id: getSearchParam('id')
+}
 $(function() {
-  const topSet = new Set()
-  const bottomSet = new Set()
+  
   // console.log(map)
   const baseFontSize = $('html').css('fontSize')
   const _height = $('.content-left-top').css('height').slice(0, -2) - 0.6 * baseFontSize.slice(0, -2)
@@ -114,3 +122,27 @@ $(function() {
     $('.content-right-top>span').addClass('select')
   })
 })
+
+window.funRightTouch = function(value) {
+  $('.content-left-top>span').each(function(i,obj) {
+    if($(obj).hasClass('select')){
+      p.p1 += $(obj).html()
+    }
+  })
+  $('.content-right-top>span').each(function(i,obj) {
+    if($(obj).hasClass('select')){
+      p.p2 += $(obj).html()
+    }
+  })
+  $('.content-left-bottom>span').each(function(i,obj) {
+    if($(obj).hasClass('select')){
+      p.p3 += $(obj).html()
+    }
+  })
+  $('.content-right-bottom>span').each(function(i,obj) {
+    if($(obj).hasClass('select')){
+      p.p4 += $(obj).html()
+    }
+  })
+  js.setBackWithValue(JSON.stringify(p));
+}
