@@ -20,9 +20,8 @@ import {fetchApointmentList} from '@/api/appointment'
 const GDialog = require('@/components/gDialog/gDialog.js')
 const Appointments = require('@/components/appointments/appointments.js')
 import {Timer} from '@/lib/utils.js'
-import { getSearchParam } from '@/lib/utils'
+// import { getSearchParam } from '@/lib/utils'
 const Native = require('@/lib/native.js')
-
 
 $(function () {
     GDialog.render('gDialog', {
@@ -57,12 +56,16 @@ $(function () {
         RightArrowId: 'right-arrow',
         TextId: 'timer-text',
         regFormat: 'YYYY年MM月DD日的预约',
+        inputId:'timer-hidden',
         onAdd: function (date) {
             fetchData(date)
         },
         onMinus: function (date) {
             fetchData(date)
-        }
+        },
+        onChange: function (date) {
+          fetchData(date)
+      }
     })
     fetchData(timer.getParsedTime())
     // todo
@@ -86,8 +89,9 @@ $(function () {
             console.log(this.id);//this表示调用该插件的对象
         }
     }
-
-    // window.mobiscroll.date('#timer-text', opt)
+    $('#appointment-time').on('click', function() {
+      timer.show()
+    })
 
     $('#appointments').on('click', '.appointment-item', function () {
         var that = this

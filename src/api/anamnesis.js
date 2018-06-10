@@ -27,3 +27,25 @@ export function getAnamnesis(obj) {
     method: 'post'
   })
 }
+
+export function editAnamnesis(obj) {
+  return fetch({
+    url: 'Emr/Edit',
+    data: {
+      "actoken": getToken(),
+      "Data": obj,
+    },
+    method: 'post'
+  })
+}
+
+export function deleteAnamnesis(obj) {
+  return fetch({
+    url: 'Emr/Delete',
+    data: {
+      "actoken": getToken(),
+      "Data": obj,
+    },
+    method: 'post'
+  })
+}

@@ -203,6 +203,7 @@ exportModule.render = function(id, jsonObj, type) {
 
   // })
 
+    // 获取平均值
   function avg(data) {
     var sum = 0
     for (var i = 0; i < data.length; i++) {
@@ -211,143 +212,141 @@ exportModule.render = function(id, jsonObj, type) {
     return (sum / data.length).toFixed(0)
   }
   /* eslint-disable */
-  var xdata = tempObj.map(function (item) {
+  if(type === 1) {
+    var xdata = tempObj.map(function (item) {
       return item.d.substring(8,10)
-  })
-  var ydata1 = tempObj.map(function (item) {
-        return item.xhz
-  })
-  var ydata2 = tempObj.map(function (item) {
-        return item.fz
-  })
-  var ydataAvg1 = avg(ydata1)
+    })
+    var ydata1 = tempObj.map(function (item) {
+          return item.xhz
+    })
+    var ydata2 = tempObj.map(function (item) {
+          return item.fz
+    })
+    var ydataAvg1 = avg(ydata1)
     var ydataAvg2 = avg(ydata2)
     console.log(xdata,ydata1,ydata2,ydataAvg1)
-  HighCharts.chart('chart-container',{
-    chart: {
-      type: 'area',
-        height: 300,
-      // panning: true, 
-      // pinchType:'x',
-      // minRange: 1,
-      // zoomType: 'x'
-    },
-    title: {
-        text: ''
-    },
-      credits: {
-          enabled: false
+
+    HighCharts.chart('chart-container',{
+      chart: {
+        type: 'area',
+        height: 200,
       },
-    subtitle: {
-    },
-    // scrollbar: {
-    //   enabled: true,
-    //   height: 5,
-    //   barBackgroundColor: '#ff6722',
-    //   barBorderRadius: 1,
-    //   barBorderWidth: 0,
-    //   buttonBackgroundColor: 'white',
-    //   buttonBorderWidth: 0,
-    //   buttonArrowColor: 'white',
-    //   buttonBorderRadius: 0,
-    //   rifleColor: '#ff6722',
-    //   trackBackgroundColor: '#ffd9d9',
-    //   trackBorderWidth: 1,
-    //   trackBorderColor: '#ffd9d9',
-    //   trackBorderRadius: 4
-    // },
-    xAxis: {
-        // min: 0,
-        // max: 10, // 显示4个
-        // allowDecimals: false,
-        // minRange: 1,
-        gridLineStyle:'solid',
-        gridLineColor:'#f1f1f1',
-        gridLineWidth:1,
-        tickLength:3,
-        tickWidth:3,
-        tickPosition:'inside',
-        tickmarkPlacement: 'on',
-        tickColor:'#f7a01c',
-        categories:xdata,
-        labels: {
-          formatter: function () {
-            return this.value; // clean, unformatted number for year
-          },
-            style:{
-              color:'#f7a01c',
-            }
-        },
-    },
-    yAxis: {
-      tickWidth:0,//去掉刻度
-      gridLineWidth: 0,//去掉y轴方向的横线
-      labels: {
-          enabled: false,
-      },//去掉刻度数字
       title: {
+          text: ''
+      },
+        credits: {
+            enabled: false
+        },
+      subtitle: {
+      },
+      xAxis: {
+          // min: 0,
+          // max: 10, // 显示4个
+          gridLineStyle:'solid',
+          gridLineColor:'#f1f1f1',
+          gridLineWidth:1,
+          tickLength:3,
+          tickWidth:3,
+          tickPosition:'inside',
+          tickmarkPlacement: 'on',
+          tickColor:'#f7a01c',
+          categories:xdata,
+          labels: {
+            formatter: function () {
+              return this.value; // clean, unformatted number for year
+            },
+              style:{
+                color:'#f7a01c',
+              }
+          },
+      },
+      yAxis: {
+        tickWidth:0,//去掉刻度
+        gridLineWidth: 0,//去掉y轴方向的横线
+        labels: {
+            enabled: false,
+        },//去掉刻度数字
+        title: {
+            enabled:false,
+          // text: '访问量'
+        },
+        plotLines:[
+            {
+                color: '#1ECC6F',
+                dashStyle:'dot',
+                value: ydataAvg1,
+                zIndex:5,
+                width:2,
+            },
+            {
+                color:'#FF52B7',
+                dashStyle:'dot',
+                value: ydataAvg2,
+                zIndex:5,
+                width:2,
+            },
+        ],
+      },
+      tooltip: {
           enabled:false,
-        // text: '访问量'
+          // pointFormat: '{series.name} 制造 <b>{point.y:,.0f}</b>枚弹头'
+          pointFormat: '{series.name}<b>{point.y:,.0f}</b>'
       },
-      plotLines:[
-          {
-              color: '#1ECC6F',
-              dashStyle:'dot',
-              value: ydataAvg1,
-              zIndex:5,
-              width:2,
-          },
-          {
-              color:'#FF52B7',
-              dashStyle:'dot',
-              value: ydataAvg2,
-              zIndex:5,
-              width:2,
-          },
-      ],
-    },
-    tooltip: {
-        enabled:false,
-        // pointFormat: '{series.name} 制造 <b>{point.y:,.0f}</b>枚弹头'
-        pointFormat: '{series.name}<b>{point.y:,.0f}</b>'
-    },
-      legend:{
-        enabled:false,
+        legend:{
+          enabled:false,
+        },
+      plotOptions: {
+          area: {
+              // dataLabels: {
+              //     enabled: true,
+              //     formatter: function() {
+              //         return this.y;
+              //     },
+              // },
+              lineWidth:1,
+              // color:['#1ECC6F','#FF52B7'],
+              // fillColor:'rgba(30,204,111,0.1)',
+              // fillOpacity: 0.01,
+              // pointStart: 1940,
+              marker: {
+                  enabled: true,
+                  symbol: 'circle',
+                  radius: 2,
+                  states: {
+                      hover: {
+                          enabled: true
+                      }
+                  }
+              }
+          }
       },
-    plotOptions: {
-        area: {
-            // dataLabels: {
-            //     enabled: true,
-            //     formatter: function() {
-            //         return this.y;
-            //     },
-            // },
-            lineWidth:1,
-            // color:['#1ECC6F','#FF52B7'],
-            // fillColor:'rgba(30,204,111,0.1)',
-            // fillOpacity: 0.01,
-            // pointStart: 1940,
-            marker: {
-                enabled: true,
-                symbol: 'circle',
-                radius: 2,
-                states: {
-                    hover: {
-                        enabled: true
-                    }
-                }
-            }
-        }
-    },
-    series: [
-    {
-        // name: '美国',
-        data: ydata1,
-        color: '#1ECC6F',
-        fillColor:'rgba(30,204,111,0.05)',
+      series: [
+      {
+          // name: '美国',
+          data: ydata1,
+          color: '#1ECC6F',
+          fillColor:'rgba(30,204,111,0.05)',
+          dataLabels: {
+              enabled: true,
+              color:'#1ECC6F',
+              allowOverlap: true,
+              style:{
+                  textOutline: "",
+                  fontSize: '8px',
+                  fontWeight:'',
+              },
+              formatter: function() {
+                  return this.y;
+              },
+          },
+      },
+      {
+        data: ydata2,
+        color:'#FF52B7',
+        fillColor:'rgba(255,82,183,0.05)',
         dataLabels: {
             enabled: true,
-            color:'#1ECC6F',
+            color:'#FF52B7',
             allowOverlap: true,
             style:{
                 textOutline: "",
@@ -358,27 +357,224 @@ exportModule.render = function(id, jsonObj, type) {
                 return this.y;
             },
         },
-    },
-    {
-      data: ydata2,
-      color:'#FF52B7',
-      fillColor:'rgba(255,82,183,0.05)',
-      dataLabels: {
-          enabled: true,
-          color:'#FF52B7',
-          allowOverlap: true,
-          style:{
-              textOutline: "",
-              fontSize: '8px',
-              fontWeight:'',
-          },
-          formatter: function() {
-              return this.y;
+      }
+      ]
+    });
+  } else if(type === 3) {
+    var xdata = tempObj.map(function (item) {
+      return item.d.substring(8,10)
+    })
+    var ydata = tempObj.map(function (item) {
+          return item.ff
+    })
+    var ydataAvg = avg(ydata)
+    console.log(xdata,ydata,ydataAvg)
+    HighCharts.chart('chart-container',{
+      chart: {
+        type: 'area',
+        height: 200,
+      },
+      title: {
+          text: ''
+      },
+        credits: {
+            enabled: false
+        },
+      subtitle: {
+      },
+      xAxis: {
+          // min: 0,
+          // max: 10, // 显示4个
+          gridLineStyle:'solid',
+          gridLineColor:'#f1f1f1',
+          gridLineWidth:1,
+          tickLength:3,
+          tickWidth:3,
+          tickPosition:'inside',
+          tickmarkPlacement: 'on',
+          tickColor:'#f7a01c',
+          categories:xdata,
+          labels: {
+            formatter: function () {
+              return this.value; // clean, unformatted number for year
+            },
+              style:{
+                color:'#f7a01c',
+              }
           },
       },
-    }
-    ]
-  });
+      yAxis: {
+        tickWidth:0,//去掉刻度
+        gridLineWidth: 0,//去掉y轴方向的横线
+        labels: {
+            enabled: false,
+        },//去掉刻度数字
+        title: {
+            enabled:false,
+          // text: '访问量'
+        },
+        plotLines:[
+            {
+                color: '#1ECC6F',
+                dashStyle:'dot',
+                value: ydataAvg,
+                zIndex:5,
+                width:2,
+            }
+        ],
+      },
+      tooltip: {
+          enabled:false,
+          pointFormat: '{series.name}<b>{point.y:,.0f}</b>'
+      },
+        legend:{
+          enabled:false,
+        },
+      plotOptions: {
+          area: {
+              lineWidth:1,
+              marker: {
+                  enabled: true,
+                  symbol: 'circle',
+                  radius: 2,
+                  states: {
+                      hover: {
+                          enabled: true
+                      }
+                  }
+              }
+          }
+      },
+      series: [
+      {
+          data: ydata,
+          color: '#1ECC6F',
+          fillColor:'rgba(30,204,111,0.05)',
+          dataLabels: {
+              enabled: true,
+              color:'#1ECC6F',
+              allowOverlap: true,
+              style:{
+                  textOutline: "",
+                  fontSize: '8px',
+                  fontWeight:'',
+              },
+              formatter: function() {
+                  return this.y;
+              },
+          },
+      }]
+    });
+  } else if (type === 2) {
+    var xdata = tempObj.map(function (item) {
+      return item.d.substring(8,10)
+    })
+    var ydata = tempObj.map(function (item) {
+          return item.sf || 0
+    })
+    var ydataAvg = avg(ydata)
+    console.log(xdata,ydata,ydataAvg)
+    HighCharts.chart('chart-container',{
+      chart: {
+        type: 'area',
+        height: 200,
+      },
+      title: {
+          text: ''
+      },
+        credits: {
+            enabled: false
+        },
+      subtitle: {
+      },
+      xAxis: {
+          // min: 0,
+          // max: 10, // 显示4个
+          gridLineStyle:'solid',
+          gridLineColor:'#f1f1f1',
+          gridLineWidth:1,
+          tickLength:3,
+          tickWidth:3,
+          tickPosition:'inside',
+          tickmarkPlacement: 'on',
+          tickColor:'#f7a01c',
+          categories:xdata,
+          labels: {
+            formatter: function () {
+              return this.value; // clean, unformatted number for year
+            },
+              style:{
+                color:'#f7a01c',
+              }
+          },
+      },
+      yAxis: {
+        tickWidth:0,//去掉刻度
+        gridLineWidth: 0,//去掉y轴方向的横线
+        labels: {
+            enabled: false,
+        },//去掉刻度数字
+        title: {
+            enabled:false,
+          // text: '访问量'
+        },
+        plotLines:[
+            {
+                // color: '#1ECC6F',
+                color:'purple',
+                dashStyle:'dot',
+                value: ydataAvg,
+                zIndex:5,
+                width:2,
+            }
+        ],
+      },
+      tooltip: {
+          enabled:false,
+          pointFormat: '{series.name}<b>{point.y:,.0f}</b>'
+      },
+        legend:{
+          enabled:false,
+        },
+      plotOptions: {
+          area: {
+              lineWidth:1,
+              marker: {
+                  enabled: true,
+                  symbol: 'circle',
+                  radius: 5,
+                  states: {
+                      hover: {
+                          enabled: true
+                      }
+                  }
+              }
+          }
+      },
+      series: [
+      {
+          data: ydata,
+          color: 'purple',
+          // fillColor:'rgb(102,43,100,0.05)',
+          fillColor:'#fff',
+          dataLabels: {
+              enabled: true,
+              // color:'#1ECC6F',
+              color: 'purple',
+              allowOverlap: true,
+              style:{
+                  y:12,
+                  textOutline: "",
+                  fontSize: '12px',
+                  fontWeight:'',
+              },
+              formatter: function() {
+                  return this.y;
+              },
+          },
+      }]
+    });
+  }
   return exportModule
 }
 module.exports = exportModule

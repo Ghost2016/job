@@ -4,7 +4,7 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 import { fetchDoctorList } from '@/api/common'
-import { addAnamnesis, getAnamnesis } from '@/api/anamnesis'
+import { addAnamnesis, getAnamnesis, editAnamnesis, deleteAnamnesis } from '@/api/anamnesis'
 
 const isAdd = !getSearchParam('isEdit')
 // 前一个页面传递病历号
@@ -74,21 +74,23 @@ $(function() {
         }
     })
     $('#turn-to-mouth').on('click',function (e) {
-      // alert(checks)
-      // return
+      console.log('口腔检查')
+      localStorage.setItem('checkItems', JSON.stringify(checks))
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/checkAndEdit/page.html?type=checks',
-                nextparam: {checks: checks},
+                nexturl: HTML_BASE_URL_PREFIX + `patient/checkAndEdit/page.html?type=checks&isEdit=${!isAdd}`,
+                nextparam:'',
                 title: '检查编辑',
                 flag:5,
             }
         )
     })
     $('#turn-to-auxiliary').on('click',function (e) {
+      console.log('辅助检查（X光）')
+      localStorage.setItem('checkItems', JSON.stringify(others))
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/checkAndEdit/page.html?type=others',
+                nexturl: HTML_BASE_URL_PREFIX + `patient/checkAndEdit/page.html?type=others&isEdit=${!isAdd}`,
                 nextparam: '',
                 title: '检查编辑',
                 flag:5,
@@ -96,9 +98,11 @@ $(function() {
         )
     })
     $('#turn-to-diagnose').on('click',function (e) {
+      console.log('诊断记录')
+      localStorage.setItem('checkItems', JSON.stringify(diagnoses))
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/checkAndEdit/page.html?type=diagnoses',
+                nexturl: HTML_BASE_URL_PREFIX + `patient/checkAndEdit/page.html?type=diagnoses&isEdit=${!isAdd}`,
                 nextparam: '',
                 title: '检查编辑',
                 flag:5,
@@ -106,9 +110,23 @@ $(function() {
         )
     })
     $('#turn-to-treat').on('click',function (e) {
+      console.log('治疗计划')
+      localStorage.setItem('checkItems', JSON.stringify(plans))
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'patient/checkAndEdit/page.html?type=plans',
+                nexturl: HTML_BASE_URL_PREFIX + `patient/checkAndEdit/page.html?type=plans&isEdit=${!isAdd}`,
+                nextparam: '',
+                title: '检查编辑',
+                flag:5,
+            }
+        )
+    })
+    $('#turn-to-cures').on('click',function (e) {
+      console.log('治疗计划')
+      localStorage.setItem('checkItems', JSON.stringify(cures))
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + `patient/checkAndEdit/page.html?type=cures&isEdit=${!isAdd}`,
                 nextparam: '',
                 title: '检查编辑',
                 flag:5,
@@ -136,20 +154,38 @@ $(function() {
             cures: cures,
         }
         loading()
-        addAnamnesis(form).then(
+        if(isAdd) {
+          addAnamnesis(form).then(
             res => {
-                loadingdone()
-                if( res.data.Data ) {
-                    console.log('新增成功')
-                    Native.handleBackAction(true)
-                  }
+              loadingdone()
+              if( res.data.Data ) {
+                  console.log('新增成功')
+                  Native.handleBackAction(true)
+                }
             }
-        ).catch(
+          ).catch(
             e => {
                 loadingdone()
-                console.log('e')
+                console.log(e)
             }
-        )
+          )
+        } else {
+          form.seeno = seeno
+          editAnamnesis(form).then(
+            res => {
+              loadingdone()
+              if( res.data.Data ) {
+                  console.log('编辑成功')
+                  Native.handleBackAction(true)
+                }
+            }
+          ).catch(
+            e => {
+                loadingdone()
+                console.log(e)
+            }
+          )
+        }
     })
 })
 
@@ -183,11 +219,49 @@ function fetchDoctorSrcList() {
 }
 
 window.funRightTouch =  function () {
-    alert('delete')
+    // alert('delete')
+    let form = {
+      blh:blh,
+      seeno: seeno
+    }
+    loading()
+    deleteAnamnesis(form).then(
+      res => {
+        loadingdone()
+        if( res.data.Data ) {
+            console.log('删除成功')
+            Native.handleBackAction(true)
+          }
+      }
+    ).catch(
+      e => {
+          loadingdone()
+          console.log(e)
+      }
+    )
 }
 
 window.funSelectCallBack = function(jsonString) {
+    // alert(jsonString)
     var { array, type } = JSON.parse(jsonString)
+    // 清空数据
+    switch(type) {
+      case 'checks':
+          checks=[]
+          break;
+      case 'others':
+          others=[]
+          break;
+      case 'diagnoses':
+          diagnoses=[]
+          break;
+      case 'plans':
+          plans=[]
+          break;
+      case 'cures':
+          cures=[]
+          break;
+  }
     array.forEach((ele,index) => {
         let tempObj = {
             
@@ -197,7 +271,6 @@ window.funSelectCallBack = function(jsonString) {
                 checks.push({
                     blh: blh,
                     seeno: seeno,
-                    wcheck:ele.text,
                     p1: ele.p1,
                     p2: ele.p2,
                     p3: ele.p3,
@@ -210,7 +283,6 @@ window.funSelectCallBack = function(jsonString) {
                 others.push({
                     blh: blh,
                     seeno: seeno,
-                    wcheck:ele.text,
                     p1: ele.p1,
                     p2: ele.p2,
                     p3: ele.p3,
@@ -223,7 +295,6 @@ window.funSelectCallBack = function(jsonString) {
                 diagnoses.push({
                     blh: blh,
                     seeno: seeno,
-                    wcheck:ele.text,
                     p1: ele.p1,
                     p2: ele.p2,
                     p3: ele.p3,
@@ -236,7 +307,6 @@ window.funSelectCallBack = function(jsonString) {
                 plans.push({
                     blh: blh,
                     seeno: seeno,
-                    wcheck:ele.text,
                     p1: ele.p1,
                     p2: ele.p2,
                     p3: ele.p3,
@@ -246,11 +316,20 @@ window.funSelectCallBack = function(jsonString) {
                 })
                 break;
             case 'cures':
+                cures.push({
+                  blh: blh,
+                  seeno: seeno,
+                  cure:ele.text,
+                  p1: ele.p1,
+                  p2: ele.p2,
+                  p3: ele.p3,
+                  p4: ele.p4,
+                  numb:ele.id,
+                  hzplan:ele.text
+                })
                 break;
         }
     })
-    
-    
     console.log(array)
 }
 function fillData(dataSet) {
@@ -258,7 +337,13 @@ function fillData(dataSet) {
   if(!data){$alert('请求失败');return}
   $('#date').val(data.seedate)
   // 初诊复诊
-  // czfz: $('#first-or-not-p .is-checked').attr('data-type'),
+  $('.checkbox-radio-label-box').each(function(index,element){
+    if($(element).attr('data-type') === data.czfz) {
+      $(element).addClass('is-checked')
+    } else {
+      $(element).removeClass('is-checked')
+    }
+  })
   $('#doctor-name').val(data.doctor)
   $('#narrate').val(data.narrate)
   $('#ext1').val(data.ext1)

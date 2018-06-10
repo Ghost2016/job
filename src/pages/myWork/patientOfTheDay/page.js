@@ -35,7 +35,13 @@ $(function() {
     },
     onMinus: function(date) {
       fetchData(date)
+    },
+    onChange: function(date) {
+      fetchData(date)
     }
+  })
+  $('#appointment-time').on('click', function() {
+    timer.show()
   })
   fetchData(timer.getParsedTime())
   // todo

@@ -48,7 +48,7 @@ function getAnamnesisList(blh) {
 window.funRightTouch =  function () {
     Native.startNextActivity(
         {
-            nexturl: HTML_BASE_URL_PREFIX + 'patient/editAnamnesisRecord/page.html',
+            nexturl: HTML_BASE_URL_PREFIX + 'patient/editAnamnesisRecord/page.html?blh='+blh,
             nextparam: '',
             title: '新增病历信息',
             flag:1,

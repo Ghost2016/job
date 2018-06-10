@@ -12,11 +12,11 @@ const ChartDetail = require('@/components/chartDetail/chartDetail')
 
 var today = new Date()
 
-var type = 1
+var type = getSearchParam('type') - 0 || 1
 
-let patientStatisticsData = {}
-let chargeStatisticsData = {}
-let returnStatisticsData = {}
+var patientStatisticsData = {}
+var chargeStatisticsData = {}
+var returnStatisticsData = {}
 
 $(function() {
   updateData()
@@ -45,8 +45,8 @@ function updateData() {
         getPatientStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
     } else if (type === 2) {
         getChargeStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
-    } else if (type === 3) {
-        getReturnStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
+    } else if (type-0 === 3) {
+      getReturnStatistics({ today: today.getFullYear() + '-' + (today.getMonth() > 8 ? (today.getMonth() + 1) : ('0' + (today.getMonth() + 1))) })
     }
 }
 
@@ -80,7 +80,8 @@ function getChargeStatistics(today) {
           if ('Data' in chargeStatisticsData.data) {
             ChartBrief.render('chart-brief', chargeStatisticsData.data.Data, type)
             if ('days' in chargeStatisticsData.data.Data) {
-              ChartDetail.render('chart-detail', chargeStatisticsData.data.Data, type)
+              ChartDetail.render('chart-detail', chargeStatisticsData.data.Data.days, type)
+              $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
         }
@@ -95,12 +96,14 @@ function getReturnStatistics(today) {
     loading()
   fetchReturnStatistics(today).then(
         res => {
-            loadingdone()
+          loadingdone()
           returnStatisticsData = res
+          console.log(returnStatisticsData)
           if ('Data' in returnStatisticsData.data) {
             ChartBrief.render('chart-brief', returnStatisticsData.data.Data, type)
             if ('days' in returnStatisticsData.data.Data) {
-              ChartDetail.render('chart-detail', returnStatisticsData.data.Data, type)
+              ChartDetail.render('chart-detail', returnStatisticsData.data.Data.days, type)
+              $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
         }

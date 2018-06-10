@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <!-- 去掉对电话号码的错误识别 -->
   <meta name = "format-detection" content = "telephone=no"/>
+  <link rel="stylesheet" href="../../static/css/mobiscroll.javascript.min.css"/>
+  <script type="text/javascript" src="../../static/js/mobiscroll.javascript.min.js"></script>
 </head>
 <body id="app">
   <div class="content-wrapper">
     <div class="time-selector">
       <div id="left-arrow" class="left-arrow arrow"></div>
-      <div class="appointment-time">
+      <div id="appointment-time" class="appointment-time">
         <span id="timer-text">----年--月--日应回访</span>
+        <input style="visibility: hidden;" id="timer-hidden"/>
       </div>
       <div id="right-arrow" class="right-arrow arrow"></div>
     </div>

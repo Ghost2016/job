@@ -11,6 +11,68 @@
   color:#fff;
 }
 .content{
+  display: none;
+  position: relative;
+  // height:10.4rem;
+  text-align: center;
+  padding: 0.6rem 0;
+  background-color: #fff;
+  &-left-top,&-left-bottom,&-right-bottom,&-right-top{
+    position: relative;
+    background-color: #fff;
+    height: 3.5rem;
+    width:3.5rem;
+    display: inline-block;
+    &>span{
+      font-size: 0.24rem;
+      color: @deep-blue;
+      border:3px solid @deep-blue;
+      width:0.4rem;
+      height:0.4rem;
+      line-height: 0.4rem;
+      text-align: center;
+      border-radius: 50%;
+      display: block;
+      position: absolute;
+      &.select{
+        background: @deep-blue;
+        color: #fff;
+      }
+    }
+  }
+  &-left-top,&-right-top{
+    margin-bottom:0.3rem;
+  }
+  &-float{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    width:2rem;
+    height:3.6rem;
+    margin-left: -1rem;
+    margin-top: -1.8rem;
+    // display: flex;
+    // flex-direction: column;
+    color:@deep-blue;
+    &>div{
+      height:1.2rem;
+      &>span{
+        display: inline-block;
+        font-size:0.3rem;
+        border-radius: 0.3rem;
+        border: 0.05rem solid @deep-blue;
+        // width:2rem;
+        padding:0.1rem 0.3rem;
+      }
+      &.select{
+        background: @deep-blue;
+        color: #fff;
+      }
+    }
+  }
+}
+.deciduousTeech{
+  display: none;
   position: relative;
   // height:10.4rem;
   text-align: center;
@@ -85,4 +147,10 @@
       .border-bottom(5,solid,#349dfa)
     }
   }
+}
+.show{
+  display: block;
+}
+.hide{
+  display: none;
 }
