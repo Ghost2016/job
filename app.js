@@ -6,7 +6,7 @@ var compiler = webpack(webpackConf);
 var server = new WebpackDevServer(compiler, {
     contentBase: '/',
     host: '0.0.0.0',
-    port: 8090, // 默认8089
+    port: 8089, // 默认8089
     inline: true, // 可以监控js变化
     // hot: true, // 热启动
     compress: true,
@@ -26,4 +26,4 @@ var server = new WebpackDevServer(compiler, {
         }
     }
 });
-server.listen(8090)
+server.listen(8089)

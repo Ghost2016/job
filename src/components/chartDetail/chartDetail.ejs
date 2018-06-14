@@ -10,9 +10,72 @@
     <div id="chart-container" style="width:34rem;"></div>
   </div>
   <div class="legend">
+    <%if(type === 1){%>
     <div class="legend-item">
-
+      <div class="legend-item-left">
+        <div class="legend-circle1"></div>
+        <div class="legend-text1">为新增患者人数（人次）</div>
+      </div>
+      <div class="legend-item-right">
+        <div class="legend-circle2"></div>
+        <div class="legend-circle2"></div>
+        <div class="legend-circle2"></div>
+        <div class="legend-circle2"></div>
+        <div class="legend-circle2"></div>
+        <div class="legend-text2">初诊均值10人次</div>
+      </div>
     </div>
+    <div class="legend-item">
+      <div class="legend-item-left">
+        <div class="legend-circle1 bg-pink"></div>
+        <div class="legend-text1 text-pink">为复诊患者人数（人次）</div>
+      </div>
+      <div class="legend-item-right">
+        <div class="legend-circle2 bg-pink"></div>
+        <div class="legend-circle2 bg-pink"></div>
+        <div class="legend-circle2 bg-pink"></div>
+        <div class="legend-circle2 bg-pink"></div>
+        <div class="legend-circle2 bg-pink"></div>
+        <div class="legend-text2 text-pink">复诊均值10人次</div>
+      </div>
+    </div>
+    <%}else if(type === 2){%>
+    <div class="legend-item">
+      <div class="legend-item-left">
+        <div class="legend-circle3"></div>
+        <div class="legend-text1 text-blue">为单日收入诊金（元）</div>
+      </div>
+      <div class="legend-item-right">
+        <div class="legend-circle2 bg-blue"></div>
+        <div class="legend-circle2 bg-blue"></div>
+        <div class="legend-circle2 bg-blue"></div>
+        <div class="legend-circle2 bg-blue"></div>
+        <div class="legend-circle2 bg-blue"></div>
+        <div class="legend-text2 text-blue">均值13000元</div>
+      </div>
+    </div>
+    <%}else if(type === 3){%>
+    <div class="legend-item">
+      <div class="legend-item-left">
+        <div class="legend-circle4"></div>
+        <div class="legend-text1 text-bpurple">为回访患者人数（人次）</div>
+      </div>
+      <div class="legend-item-right">
+        <div class="legend-circle2 bg-purple"></div>
+        <div class="legend-circle2 bg-purple"></div>
+        <div class="legend-circle2 bg-purple"></div>
+        <div class="legend-circle2 bg-purple"></div>
+        <div class="legend-circle2 bg-purple"></div>
+        <div class="legend-text2 text-bpurple">回访均值10人次</div>
+      </div>
+    </div>
+    <%}%>
+
+
+
+
+
+
   </div>
 
   <!-- <div class="_chart-detail-chart" id="chart-container">

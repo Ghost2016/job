@@ -1,7 +1,7 @@
 module.exports = {
   contentBase: './build',
   host: '0.0.0.0',
-  port: 8087, // 默认8089
+  port: 8089, // 默认8089
   inline: true, // 可以监控js变化
   // hot: true, // 热启动
   compress: true,

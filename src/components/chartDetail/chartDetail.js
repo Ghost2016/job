@@ -4,7 +4,7 @@ import HighCharts from 'highcharts/highStock'
 const exportModule = {}
 exportModule.render = function(id, jsonObj, type) {
   exportModule.id = id
-  const tempObj = jsonObj
+  const tempObj = {obj: jsonObj,type:type}
   // const tempObj = {
   //   // ...jsonObj
   // }
@@ -213,13 +213,13 @@ exportModule.render = function(id, jsonObj, type) {
   }
   /* eslint-disable */
   if(type === 1) {
-    var xdata = tempObj.map(function (item) {
+    var xdata = tempObj.obj.map(function (item) {
       return item.d.substring(8,10)
     })
-    var ydata1 = tempObj.map(function (item) {
+    var ydata1 = tempObj.obj.map(function (item) {
           return item.xhz
     })
-    var ydata2 = tempObj.map(function (item) {
+    var ydata2 = tempObj.obj.map(function (item) {
           return item.fz
     })
     var ydataAvg1 = avg(ydata1)
@@ -361,10 +361,10 @@ exportModule.render = function(id, jsonObj, type) {
       ]
     });
   } else if(type === 3) {
-    var xdata = tempObj.map(function (item) {
+    var xdata = tempObj.obj.map(function (item) {
       return item.d.substring(8,10)
     })
-    var ydata = tempObj.map(function (item) {
+    var ydata = tempObj.obj.map(function (item) {
           return item.ff
     })
     var ydataAvg = avg(ydata)
@@ -415,7 +415,7 @@ exportModule.render = function(id, jsonObj, type) {
         },
         plotLines:[
             {
-                color: '#1ECC6F',
+                color: '#8d23e6',
                 dashStyle:'dot',
                 value: ydataAvg,
                 zIndex:5,
@@ -436,7 +436,10 @@ exportModule.render = function(id, jsonObj, type) {
               marker: {
                   enabled: true,
                   symbol: 'circle',
-                  radius: 2,
+                  fillColor: '#FFFFFF',
+                  lineColor: '#8d23e6',
+                  lineWidth: 3,
+                  radius: 3,
                   states: {
                       hover: {
                           enabled: true
@@ -448,11 +451,12 @@ exportModule.render = function(id, jsonObj, type) {
       series: [
       {
           data: ydata,
-          color: '#1ECC6F',
-          fillColor:'rgba(30,204,111,0.05)',
+          color: 'rgba(141,35,230,0.8)',
+          fillColor:'rgba(141,35,230,0.1)',
+          lineWidth:3,
           dataLabels: {
               enabled: true,
-              color:'#1ECC6F',
+              color:'#8d23e6',
               allowOverlap: true,
               style:{
                   textOutline: "",
@@ -466,10 +470,10 @@ exportModule.render = function(id, jsonObj, type) {
       }]
     });
   } else if (type === 2) {
-    var xdata = tempObj.map(function (item) {
+    var xdata = tempObj.obj.map(function (item) {
       return item.d.substring(8,10)
     })
-    var ydata = tempObj.map(function (item) {
+    var ydata = tempObj.obj.map(function (item) {
           return item.sf || 0
     })
     var ydataAvg = avg(ydata)
@@ -521,7 +525,7 @@ exportModule.render = function(id, jsonObj, type) {
         plotLines:[
             {
                 // color: '#1ECC6F',
-                color:'purple',
+                color:'#2979F7',
                 dashStyle:'dot',
                 value: ydataAvg,
                 zIndex:5,
@@ -542,7 +546,10 @@ exportModule.render = function(id, jsonObj, type) {
               marker: {
                   enabled: true,
                   symbol: 'circle',
-                  radius: 5,
+                  fillColor: '#FFFFFF',
+                  lineColor: '#2979F7',
+                  lineWidth: 3,
+                  radius: 3,
                   states: {
                       hover: {
                           enabled: true
@@ -554,13 +561,14 @@ exportModule.render = function(id, jsonObj, type) {
       series: [
       {
           data: ydata,
-          color: 'purple',
+          color: '#2979F7',
           // fillColor:'rgb(102,43,100,0.05)',
-          fillColor:'#fff',
+          lineWidth:3,
+          fillColor:'rgba(41,121,247,0.1)',
           dataLabels: {
               enabled: true,
               // color:'#1ECC6F',
-              color: 'purple',
+              color: '#2979F7',
               allowOverlap: true,
               style:{
                   y:12,
