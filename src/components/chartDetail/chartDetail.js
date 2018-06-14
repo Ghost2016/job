@@ -2,9 +2,9 @@ const ChartDetail = require('./chartDetail.ejs')
 import './chartDetail.less'
 import HighCharts from 'highcharts/highStock'
 const exportModule = {}
-exportModule.render = function(id, jsonObj, type) {
+exportModule.render = function(id, jsonObj,avgArr, type) {
   exportModule.id = id
-  const tempObj = {obj: jsonObj,type:type}
+  const tempObj = {obj: jsonObj,type:type,avg:avgArr}
   // const tempObj = {
   //   // ...jsonObj
   // }
@@ -219,12 +219,11 @@ exportModule.render = function(id, jsonObj, type) {
     var ydata1 = tempObj.obj.map(function (item) {
           return item.xhz
     })
-    var ydata2 = tempObj.obj.map(function (item) {
+    var ydata2= tempObj.obj.map(function (item) {
           return item.fz
     })
     var ydataAvg1 = avg(ydata1)
-    var ydataAvg2 = avg(ydata2)
-    console.log(xdata,ydata1,ydata2,ydataAvg1)
+    var ydataAvg2  = avg(ydata2)
 
     HighCharts.chart('chart-container',{
       chart: {

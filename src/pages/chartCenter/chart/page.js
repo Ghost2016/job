@@ -12,7 +12,7 @@ const ChartDetail = require('@/components/chartDetail/chartDetail')
 
 var today = new Date()
 
-var type = getSearchParam('type') - 0 || 1
+var type = getSearchParam('type') - 0 || 3
 
 var patientStatisticsData = {}
 var chargeStatisticsData = {}
@@ -59,7 +59,14 @@ function getPatientStatistics(today) {
           if ('Data' in patientStatisticsData.data) {
             ChartBrief.render('chart-brief', patientStatisticsData.data.Data, type)
             if ('days' in patientStatisticsData.data.Data) {
-              ChartDetail.render('chart-detail', patientStatisticsData.data.Data.days, type)
+                var data1 = patientStatisticsData.data.Data.days.map(function (item) {
+                    return item.xhz
+                })
+                var data2= patientStatisticsData.data.Data.days.map(function (item) {
+                    return item.fz
+                })
+                var avgArr = [avg(data1),avg(data2)]
+              ChartDetail.render('chart-detail', patientStatisticsData.data.Data.days,avgArr, type)
                 $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
@@ -80,7 +87,11 @@ function getChargeStatistics(today) {
           if ('Data' in chargeStatisticsData.data) {
             ChartBrief.render('chart-brief', chargeStatisticsData.data.Data, type)
             if ('days' in chargeStatisticsData.data.Data) {
-              ChartDetail.render('chart-detail', chargeStatisticsData.data.Data.days, type)
+                var data = chargeStatisticsData.data.Data.days.map(function (item) {
+                    return item.sf || 0
+                })
+                var avgArr = [avg(data)]
+              ChartDetail.render('chart-detail', chargeStatisticsData.data.Data.days,avgArr, type)
               $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
@@ -102,7 +113,11 @@ function getReturnStatistics(today) {
           if ('Data' in returnStatisticsData.data) {
             ChartBrief.render('chart-brief', returnStatisticsData.data.Data, type)
             if ('days' in returnStatisticsData.data.Data) {
-              ChartDetail.render('chart-detail', returnStatisticsData.data.Data.days, type)
+                var data = returnStatisticsData.data.Data.days.map(function (item) {
+                    return item.ff
+                })
+                var avgArr = [avg(data)]
+              ChartDetail.render('chart-detail', returnStatisticsData.data.Data.days,avgArr, type)
               $('#chart-detail').children().children().first().children('._chart-detail-time-current').text(today.today.substring(0,4) + '/' + today.today.substring(5,7))
             }
           }
@@ -120,4 +135,13 @@ function updateBrief() {
 
 function updateDetail() {
 
+}
+
+function avg(data) {
+
+    var sum = 0
+    for (var i = 0; i < data.length; i++) {
+        sum += data[i]
+    }
+    return (sum / data.length).toFixed(0)
 }

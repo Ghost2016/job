@@ -22,7 +22,7 @@
         <div class="legend-circle2"></div>
         <div class="legend-circle2"></div>
         <div class="legend-circle2"></div>
-        <div class="legend-text2">初诊均值10人次</div>
+        <div class="legend-text2">初诊均值<%=avg[0]%>人次</div>
       </div>
     </div>
     <div class="legend-item">
@@ -36,7 +36,7 @@
         <div class="legend-circle2 bg-pink"></div>
         <div class="legend-circle2 bg-pink"></div>
         <div class="legend-circle2 bg-pink"></div>
-        <div class="legend-text2 text-pink">复诊均值10人次</div>
+        <div class="legend-text2 text-pink">复诊均值<%=avg[1]%>人次</div>
       </div>
     </div>
     <%}else if(type === 2){%>
@@ -51,7 +51,7 @@
         <div class="legend-circle2 bg-blue"></div>
         <div class="legend-circle2 bg-blue"></div>
         <div class="legend-circle2 bg-blue"></div>
-        <div class="legend-text2 text-blue">均值13000元</div>
+        <div class="legend-text2 text-blue">均值<%=avg[0]%>元</div>
       </div>
     </div>
     <%}else if(type === 3){%>
@@ -66,7 +66,7 @@
         <div class="legend-circle2 bg-purple"></div>
         <div class="legend-circle2 bg-purple"></div>
         <div class="legend-circle2 bg-purple"></div>
-        <div class="legend-text2 text-bpurple">回访均值10人次</div>
+        <div class="legend-text2 text-bpurple">均值<%=avg[0]%>人次</div>
       </div>
     </div>
     <%}%>
