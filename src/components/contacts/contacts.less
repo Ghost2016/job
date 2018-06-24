@@ -3,7 +3,7 @@
 .biaoqian {
   background: rgba(0, 0, 0, 0.6);
   color: #FFFFFF;
-  position: absolute;
+  position: fixed;
   top: 40%;
   left: 41.5%;
   padding: 5% 0;
@@ -12,8 +12,9 @@
   border-radius: 20%;
 }
 ._contact{
-  height:100%;
+  // height:100%;
   &-list{
+    overflow: auto;
     // height:100%;
     &-header{
       height:0.6rem;
@@ -38,6 +39,12 @@
           background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
+        }
+        .girl {
+          .bg-image('../img/patient-avatar-female-default');
+        }
+        .boy {
+          .bg-image('../img/patient-avatar-male-default');
         }
         &-detail{
           flex:1;

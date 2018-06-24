@@ -12,6 +12,8 @@ module.exports = {
         dirVars.srcRootDir,
         // resolve('node_modules/pinyin'),
         // resolve('node_modules/.2.8.3@pinyin')
+        path.resolve(__dirname, 'node_modules/.2.8.3@pinyin')
+        // path.resolve(__dirname, "node_modules/pinyin")
       ],
       loader: 'babel-loader',
       exclude: /node_modules/,

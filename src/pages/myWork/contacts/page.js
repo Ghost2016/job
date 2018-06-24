@@ -2,8 +2,8 @@
 if (APP_ENV!== 'production') { //eslint-disable-line
   // require('./page.html')
 }
-import './page.less'
 require('@/lib/common.js')
+import './page.less'
 import { fetchContacts } from '@/api/patient'
 const Contacts = require('@/components/contacts/contacts.js')
 

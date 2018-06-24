@@ -7,7 +7,7 @@
       <% for(var j=0;j<contacts[l].length;j++){ %>
         <li class="_contact-list-item">
           <div class="_contact-list-item-inner">
-            <div class="_contact-list-item-inner-photo"></div>
+            <div class="_contact-list-item-inner-photo <%= contacts[l][j].sex %>"></div>
             <div class="_contact-list-item-inner-detail">
               <span class="_contact-list-item-inner-detail-name"><%= contacts[l][j].name %></span>
               <span class="_contact-list-item-inner-detail-tel"><%= contacts[l][j].tel %></span>
@@ -17,9 +17,9 @@
       <% } %>
     <% } %>
   </ul>
-  <div class="zhv3 h2c zflist" style="width: 6vw;position: fixed;;bottom: 5%;right: 3%;text-align: center;font-weight: 800;">
+  <div class="zhv3 h2c zflist" style="width: 10vw;position: fixed;;bottom: 5%;right: 3%;text-align: center;font-weight: 800;">
       <% for(var l in contacts){%>
-        <div><%= l%></div>
+        <div style="padding:2px;"><%= l%></div>
       <% } %>
   </div>
   <div class="zhv5 biaoqian" style="display: none;">
