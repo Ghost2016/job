@@ -175,7 +175,16 @@ exportModule.render = function(id, { data }) {
     return false;
   }
   $('._contact-list-item').on('click', function(e) {
-    alert($(this).children('div').children('div').children('span')[0].innerHTML)
+      var zztel = $(this).children('div').children('div').children('span')[1].innerHTML;
+      var zzname =  $(this).children('div').children('div').children('span')[0].innerHTML;
+      if (tel!='暂无')
+      {
+          window.js.invokeCall(zztel);
+      }
+      else
+      {
+          window.js.showToast(zzname+"暂无手机号");
+      }
   })
   return exportModule
 }

@@ -4,13 +4,14 @@ if (APP_ENV!== 'production') { //eslint-disable-line
 require('@/lib/common.js')
 import './page.less'
 import { fetchPatientDetail } from '@/api/patientDetail'
-import { getSearchParam } from '@/lib/utils'
+import { getSearchParam,encodeUTF8,decodeUTF8 } from '@/lib/utils'
 const Native = require('@/lib/native.js')
 
 let patientDetailData = {}
 let patientName = ''
 let blh = getSearchParam('blh')||'32054077'
 let phone = '';
+let bname='';
 $(function() {
   getPatientDetail({ blh: blh })
     $('#turn-to-payment').on('click',function (e) {
@@ -66,7 +67,7 @@ $(function() {
     $('#turn-to-appointment-edit').on('click',function (e) {
         Native.startNextActivity(
             {
-                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy',
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy&blh='+blh+'&name='+encodeUTF8(patientName),
                 // nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?isEdit=' + false + '&type=yhyy',
                 // nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy&name='+$('#name').html(),
                 nextparam: '',

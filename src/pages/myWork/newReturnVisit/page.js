@@ -107,10 +107,20 @@ $(function() {
         blh: $('#patient-name').val(),
         date: $('#current-return-visit-time').val(),
         content: $('#content-text').val(),
-        docid: $('#doctor-name').val(),
-        state: $('#status_dummy').val(),
+        docid: $('#doctor-name_dummy').val(),
+        state: $('#status').val(),
         result: $('#visit-result').val()
       }
+
+        if ($('#doctor-name_dummy').length == 0) {
+            form.docid = $('#doctor-name').html();
+
+        }
+
+
+
+
+
       console.log(form)
       // return
       if (isAdd) {
@@ -243,7 +253,7 @@ function validate() {
         return false;
     }
 
-    var status = $('#status_dummy').val();
+    var status = $('#status').val();
     if (status == undefined || status.length == 0)
     {
         Native.showToast('请选择状态');

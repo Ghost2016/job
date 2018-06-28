@@ -4,7 +4,7 @@
 <% for (var i=0; i<length; i++) { %>
   <div class="_payment-info">
     <header class="_payment-info-header">
-      <div class="_payment-info-header-time">2018年10月8号 18：01</div>
+      <div class="_payment-info-header-time"><%=items[i].sfdate||''%></div>
       <div class="_payment-info-header-person">
         <div>医生：<span><%=items[i].ysname||''%></span></div>
         <div>护士：<span><%=items[i].hsname||''%></span></div>

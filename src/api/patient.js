@@ -1,4 +1,8 @@
 import fetch from '@/lib/fetch'
+import utils from '@/lib/utils'
+
+import { getToken } from '@/lib/utils'
+
 export function test() {
   return fetch.get('/users/123')
 }
@@ -11,7 +15,7 @@ export function fetchPatientList({ today }) {
   return fetch({
     url: 'HZ/List',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'Today': today,
         'lx': 'all'
@@ -30,7 +34,7 @@ export function fetchContacts() {
   return fetch({
     url: 'Comm/WH',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G'
+      'actoken':getToken()
     },
     method: 'post'
   })
@@ -45,7 +49,7 @@ export function newPatient({ name, phone, tel, sex, birth, docid, docname, hzsou
   return fetch({
     url: 'HZ/Add',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'name': name || '测试',
         'phone': phone || '13811223388',
@@ -71,7 +75,7 @@ export function fetchPatientDetailByBlh(blh) {
   return fetch({
     url: 'HZ/Get',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh || '1703076588'
       }
@@ -89,7 +93,7 @@ export function deletePatientByBlh(blh) {
   return fetch({
     url: 'HZ/Delete',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh || 0
       }
@@ -107,7 +111,7 @@ export function editPatient({ name, phone, tel, sex, birth, docid, docname, hzso
   return fetch({
     url: 'HZ/Edit',
     data: {
-      'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+      'actoken': getToken(),
       'Data': {
         'blh': blh || 0,
         'name': name || '测试',
@@ -129,7 +133,7 @@ export function fetchPatientDetail(blh) {
     return fetch({
         url: 'HZ/GetForEdit',
         data: {
-            'actoken': 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G',
+            'actoken': getToken(),
             'Data': {
                 'blh': blh
             }

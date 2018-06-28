@@ -6,7 +6,7 @@
     <div class="_anamnesis-item-left">
       <div>医生:<span><%=items[i].docname||''%></span></div>
       <div>诊断:<span><%=items[i].narrate||''%></span></div>
-      <div>检查:<span><%=''%></span></div>
+      <div>检查:<span><%=items[i].advice||''%></span></div>
     </div>
     <div class="_anamnesis-item-right">
       <div><%=items[i].seedate.substring(0,10)||''%></div>
