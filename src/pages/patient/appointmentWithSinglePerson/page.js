@@ -44,6 +44,18 @@ $(function() {
     //         )
     //     }
     // })
+    $('#appointment-record').on('click', '.appointment-item', function () {
+        var that = this
+        Native.startNextActivity(
+            {
+                nexturl: HTML_BASE_URL_PREFIX + 'myWork/newAppointment/page.html?type=yhyy&isEdit=1&no=' + that.dataset.no,
+                nextparam: '',
+                title: '编辑有号预约',
+                flag: 8,
+            }
+        )
+
+    })
     $('#appointment-record').on('click','.appointment-item-right-tel',function (e) {
         e.stopPropagation()
         window.js.invokeCall(e.target.dataset.tel)

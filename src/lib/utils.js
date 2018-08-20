@@ -25,7 +25,8 @@ export function Timer({ LeftArrowId, RightArrowId, TextId, onAdd, onMinus, regFo
   this.textDom = $(`#${TextId}`)
   // 显示时间文的格式
   this.regFormat = regFormat || 'YYYY年MM月DD日'
-  this.regTimeFormat = regTimeFormat || 'YYYY-MM-DD'
+  // this.regTimeFormat = regTimeFormat || 'YYYY-MM-DD'
+    this.regTimeFormat = 'YYYY-MM-DD'
   // 格式化后的时间
   this.formattedTime = moment(this.today).add(this.changeIndex, 'days').format(this.regTimeFormat)
   // 格式化后的时间文本
@@ -95,7 +96,42 @@ Timer.parseTime = function(date) {
   return moment(date).format('YYYY-MM-DD')
 }
 
+/**
+ *中文转UTF8
+ * @param str
+ * @returns {string}
+ */
+export function encodeUTF8(str) {
+    var temp = "", rs = "";
+    for (var i = 0, len = str.length; i < len; i++) {
+        temp = str.charCodeAt(i).toString(16);
+        rs += "\\u" + new Array(5 - temp.length).join("0") + temp;
+    }
+    return rs;
+}
+/**
+ *
+ * @param str
+ * @returns {void|string|XML}
+ */
+export function decodeUTF8(str) {
+    return str.replace(/(\\u)(\w{4}|\w{2})/gi, function ($0, $1, $2) {
+        return String.fromCharCode(parseInt($2, 16));
+    });
+}
+
+
 export function getToken() {
-  return 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G'
+  return 'EqVGmprQIExNQP4PgRw3FMd2AfBCRVbN'
+  if(window.js)
+  {
+      var loginData = JSON.parse(window.js.getLocalParam('sp_pre_login_data'));
+      // window.js.showToast(loginData.actoken)
+      return loginData.actoken;
+  }
+  else
+  {
+      return 'EqVGmprQIExNQP4PgRw3FKwPIKtKaG0G'
+  }
 }
 

@@ -4,7 +4,8 @@ import axios from 'axios'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: (APP_ENV !== 'production') ? '/v1' : 'http://app.kq123.com/QSYYAPI/api/', //eslint-disable-line
+  // baseURL: (APP_ENV !== 'production') ? '/v1' : 'http://app.kq123.com/QSYYAPI/api/', //eslint-disable-line
+  baseURL: 'http://app.kq123.com/QSYYAPI/api/', //eslint-disable-line
   // 所有的接口都添加上前缀以统一请求
   // baseURL: '/v1',  // api的base_url
   // 请求超时时间

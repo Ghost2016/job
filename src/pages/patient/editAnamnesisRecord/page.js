@@ -206,7 +206,8 @@ function fetchDoctorSrcList() {
                 theme: 'ios',
                 display: 'bottom',
                 minWidth: 200,
-                data: doctorList
+                data: doctorList,
+                lang:'zh'
             })
             doctorListSelector.show()
         }
@@ -242,8 +243,9 @@ window.funRightTouch =  function () {
 }
 
 window.funSelectCallBack = function(jsonString) {
-    // alert(jsonString)
     var { array, type } = JSON.parse(jsonString)
+    // alert(jsonString)
+    // return
     // 清空数据
     switch(type) {
       case 'checks':

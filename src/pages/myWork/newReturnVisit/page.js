@@ -107,14 +107,19 @@ $(function() {
         blh: $('#patient-name').val(),
         date: $('#current-return-visit-time').val(),
         content: $('#content-text').val(),
-        docid: $('#doctor-name').val(),
-        state: $('#status_dummy').val(),
+        docid: $('#doctor-name_dummy').val(),
+        state: $('#status').val() || $('#status_dummy').val(),
         result: $('#visit-result').val()
       }
-      console.log(form)
+
+      form.docid = $('#doctor-name').val();
+
+      // console.log(form)
       // return
       if (isAdd) {
         loading()
+        // console.log('form', form)
+        // return
         addReturnVisit(form).then(
           res => {
             loadingdone()
@@ -214,7 +219,8 @@ function fetchDoctorSrcList() {
         theme: 'ios',
         display: 'bottom',
         minWidth: 200,
-        data: doctorList
+        data: doctorList,
+          lang: 'zh'
       })
       doctorListSelector.show()
     }
@@ -243,7 +249,7 @@ function validate() {
         return false;
     }
 
-    var status = $('#status_dummy').val();
+    var status = $('#status').val();
     if (status == undefined || status.length == 0)
     {
         Native.showToast('请选择状态');

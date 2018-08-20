@@ -38,8 +38,22 @@
       background-color:#3b97f2;
       font-size:0.24rem; 
       &>div{
+        width:20px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        word-break:keep-all;
         flex:1;
+
+        &>span{
+          width:30px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+          word-break:keep-all;
+        }
       }
+
     }
     &-money{
       padding:0 0.32rem;

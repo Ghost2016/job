@@ -6,9 +6,10 @@ exportModule.render = function(id, jsonObj, isSingle) {
   exportModule.id = id
   console.log(jsonObj)
   jsonObj.map((item) => {
+    // alert(JSON.stringify(item));
     if (item.isff === '已回访') {
       item.type = 4
-    } else if ((item.isff === '否')||(item.isff === '未访')) {
+    } else if ((item.isff === '否')||(item.isff === '未回访')) {
       item.type = 2
     } else if (item.state === '完成') {
       item.type = 1

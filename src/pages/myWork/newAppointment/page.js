@@ -8,7 +8,8 @@ import { newAppointmentWithOutNumber, newAppointmentWithNumber,
   deleteAppointment, editAppointmentWithOutNumber, editAppointmentWithNumber,getAppointmentDetailWithNumber,getAppointmentDetailWithoutNumber
 } from '@/api/appointment'
 import { fetchPatientList, fetchDoctorList } from '@/api/common'
-import { getSearchParam } from '@/lib/utils'
+
+import { getSearchParam,encodeUTF8,decodeUTF8 } from '@/lib/utils'
 const GDialog = require('@/components/gDialog/gDialog.js')
 
 // 新增 编辑
@@ -21,10 +22,9 @@ var no = parseInt(getSearchParam('no')) || -1
 var patientSelector = null
 var doctorListSelector = null
 
-var patientBLH;
-
+var patientBLH = getSearchParam('blh');
 // 获取是否有患者
-const patientName = getSearchParam('name');
+const patientName =decodeUTF8(getSearchParam('name'));
 $(function() {
     GDialog.render('gDialog', {
         titleText: '确定要删除数据吗',
@@ -65,9 +65,16 @@ $(function() {
   if (patientName!=undefined || patientName.length!=0)
   {
       $('#patient-name').html(patientName);
+      $('#patient-name').val(patientName);
   }
 
-  if (!isAdd) {
+    if (patientBLH!=undefined || patientBLH.length!=0)
+    {
+        $('#patient-name').val(patientBLH);
+    }
+
+
+    if (!isAdd) {
     fetchAppointmentDetail()
   }
   // 只有有号才会触发
@@ -128,6 +135,9 @@ $(function() {
     defaultValue: new Date(1970, 1, 1, 1, 30, 0)
   })
   $('#save').on('click', () => {
+      if (!_validate()) {
+          return
+      }
     // alert($('#patient-name').val())
     const form = {
       // 没有这一条件
@@ -137,16 +147,22 @@ $(function() {
       date : $('#appointment-time').val(),
       len : parseInt($('#duration').val()) || 0,
       content : $('#content-text').val(),
-      docid : $('#doctor-name').val()
+      docid :$('#doctor-name_dummy').val()
     }
+
+      if ($('#doctor-name_dummy').length == 0) {
+          form.docname = $('#doctor-name').html();
+
+      }
+
+
     console.log(form)
     // return
-    if (!_validate()) {
-      return
-    }
+
     // 如果是有号
     if(WithNumer) {
-      form.blh = $('#patient-name').val()
+      form.blh = $('#patient-name').val();
+      form.docid = $('#doctor-name').val();
       // 如果是新增
       if(isAdd) {
         loading()
@@ -166,7 +182,7 @@ $(function() {
           }
         )
       } else { //如果是编辑
-        form.no = no
+        form.no = no;
         console.log(form)
         // return
         loading()
@@ -188,7 +204,8 @@ $(function() {
     // 如果是无号
     else {
       form.name = $('#patient-name').val()
-      form.phone = $('#patient-phone-number').val()
+      form.phone = $('#patient-phone-number').val();
+      form.docid = $('#doctor-name').val();
       console.log(form)
       // return
       // 如果是新增
@@ -327,7 +344,8 @@ function fetchDoctorSrcList() {
         theme: 'ios',
         display: 'bottom',
         minWidth: 200,
-        data: doctorList
+        data: doctorList,
+          lang: 'zh'
       })
       doctorListSelector.show()
     }

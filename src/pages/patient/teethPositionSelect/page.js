@@ -55,14 +55,32 @@ $(function() {
     $(this).addClass('select')
   })
   $('.content-float-left').on('click', () => {
+    if(hasSelectedAll($('.content-left-top>span'))&&hasSelectedAll($('.content-right-top>span'))) {
+      $('.content-left-top>span').removeClass('select')
+      $('.content-right-top>span').removeClass('select')
+      return
+    }
     $('.content-left-top>span').addClass('select')
     $('.content-right-top>span').addClass('select')
   })
   $('.content-float-right').on('click', () => {
+    if(hasSelectedAll($('.content-left-bottom>span'))&&hasSelectedAll($('.content-right-bottom>span'))) {
+      $('.content-left-bottom>span').removeClass('select')
+      $('.content-right-bottom>span').removeClass('select')
+      return
+    }
     $('.content-left-bottom>span').addClass('select')
     $('.content-right-bottom>span').addClass('select')
   })
   $('.content-float-all').on('click', () => {
+    if(hasSelectedAll($('.content-left-bottom>span'))&&hasSelectedAll($('.content-right-bottom>span'))
+    &&hasSelectedAll($('.content-left-top>span'))&&hasSelectedAll($('.content-right-top>span'))) {
+      $('.content-left-bottom>span').removeClass('select')
+      $('.content-right-bottom>span').removeClass('select')
+      $('.content-left-top>span').removeClass('select')
+      $('.content-right-top>span').removeClass('select')
+      return
+    }
     $('.content-left-bottom>span').addClass('select')
     $('.content-right-bottom>span').addClass('select')
     $('.content-left-top>span').addClass('select')
@@ -109,18 +127,37 @@ $(function() {
     if($(this).hasClass('select')) {
       $(this).removeClass('select')
       return
-    } 
+    }
     $(this).addClass('select')
   })
+
   $('.deciduousTeech-float-left').on('click', () => {
+    if(hasSelectedAll($('.deciduousTeech-left-top>span'))&&hasSelectedAll($('.deciduousTeech-right-top>span'))) {
+      $('.deciduousTeech-left-top>span').removeClass('select')
+      $('.deciduousTeech-right-top>span').removeClass('select')
+      return
+    }
     $('.deciduousTeech-left-top>span').addClass('select')
     $('.deciduousTeech-right-top>span').addClass('select')
   })
   $('.deciduousTeech-float-right').on('click', () => {
+    if(hasSelectedAll($('.deciduousTeech-left-bottom>span'))&&hasSelectedAll($('.deciduousTeech-right-bottom>span'))) {
+      $('.deciduousTeech-left-bottom>span').removeClass('select')
+      $('.deciduousTeech-right-bottom>span').removeClass('select')
+      return
+    }
     $('.deciduousTeech-left-bottom>span').addClass('select')
     $('.deciduousTeech-right-bottom>span').addClass('select')
   })
   $('.deciduousTeech-float-all').on('click', () => {
+    if(hasSelectedAll($('.deciduousTeech-left-bottom>span'))&&hasSelectedAll($('.deciduousTeech-right-bottom>span'))
+    &&hasSelectedAll($('.deciduousTeech-left-top>span'))&&hasSelectedAll($('.deciduousTeech-right-top>span'))) {
+      $('.deciduousTeech-left-bottom>span').removeClass('select')
+      $('.deciduousTeech-right-bottom>span').removeClass('select')
+      $('.deciduousTeech-left-top>span').removeClass('select')
+      $('.deciduousTeech-right-top>span').removeClass('select')
+      return
+    }
     $('.deciduousTeech-left-bottom>span').addClass('select')
     $('.deciduousTeech-right-bottom>span').addClass('select')
     $('.deciduousTeech-left-top>span').addClass('select')
@@ -141,6 +178,10 @@ function getPos($parentNode) {
     }
   })
   return pos
+}
+function hasSelectedAll($node) {
+  // let $node = $('.deciduousTeech-left-top>span')
+  return [].every.call($node, function(item){ return $(item).hasClass('select')})
 }
 // 通过node获取选中的位置(针对乳牙用)
 function getDeciduousPos($parentNode) {
@@ -165,7 +206,12 @@ function _submit(){
   p.p2 += getPos($('.deciduousTeech-right-top>span'))
   p.p3 += getPos($('.deciduousTeech-left-bottom>span'))
   p.p4 += getPos($('.deciduousTeech-right-bottom>span'))
-  js.setBackWithValue(JSON.stringify(p));
+  // alert(JSON.stringify(p))
+  // return
+  setTimeout(() => {
+    js.setBackWithValue(JSON.stringify(p));
+  }, 400)
+  
 }
 // 添加状态
 function addSelectStatus(pos, $parentNode) {

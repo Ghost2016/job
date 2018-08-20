@@ -58,7 +58,8 @@ Native.selectPatient = function() {
  * 显示toast
  */
 Native.showToast = function(value) {
-    window.js.showToast(value)
+    window.js && window.js.showToast(value)
+    !window.js && alert(value)
 }
 
 /**
