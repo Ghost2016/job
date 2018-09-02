@@ -128,10 +128,12 @@ $(function() {
   window.mobiscroll.time('#duration', {
     // theme: 'ios',
     display: 'bottom',
-    timeFormat: `i'min'`,
+    // timeFormat: `i'min'`,
+    timeFormat: `H'小时'i'分钟'`,
     steps: {
       // minute:15
     },
+    lang: 'zh',
     defaultValue: new Date(1970, 1, 1, 1, 30, 0)
   })
   $('#save').on('click', () => {
@@ -166,6 +168,8 @@ $(function() {
       // 如果是新增
       if(isAdd) {
         loading()
+        console.log('form', form)
+        // return
         newAppointmentWithNumber(form).then(
           res => {
             loadingdone()

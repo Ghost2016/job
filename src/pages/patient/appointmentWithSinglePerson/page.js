@@ -11,12 +11,7 @@ const GDialog = require('@/components/gDialog/gDialog.js')
 
 let appointmentSingleData = {}
 let blh = getSearchParam('blh')||'32045124'
-
-
-
-
-
-
+// alert(blh)
 $(function() {
     // GDialog.render('gDialog', {
     //     titleText: '选择预约方式',

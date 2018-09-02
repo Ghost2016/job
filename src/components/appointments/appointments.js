@@ -25,6 +25,7 @@ exportModule.render = function(id, jsonObj, isSingle) {
   })
   const tempObj = { items: jsonObj, isSingle: isSingle }
   console.log(tempObj)
+  // alert(JSON.stringify(tempObj))
   const ele = document.getElementById(id)
   ele.classList.add('_patient-infos')
   ele.innerHTML = Appointments(tempObj)

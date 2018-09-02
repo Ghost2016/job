@@ -55,7 +55,7 @@ $(function() {
   $('#turn-to-new').on('click', function(e) {
     const index = $(this).parent().index()
     Native.startNextActivity({
-      nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=1', // eslint-disable-line
+      nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=1&time='+today.getTime(), // eslint-disable-line
       nextparam: '',
       title: items[index],
       flag: 1
@@ -64,7 +64,7 @@ $(function() {
   $('#turn-to-workload').on('click', function(e) {
     const index = $(this).parent().index()
     Native.startNextActivity({
-            nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=2', // eslint-disable-line
+            nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=2&time='+today.getTime(), // eslint-disable-line
       nextparam: '',
       title: items[index],
       flag: 1
@@ -73,7 +73,7 @@ $(function() {
   $('#turn-to-return').on('click', function(e) {
     const index = $(this).parent().index()
     Native.startNextActivity({
-            nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=3', // eslint-disable-line
+            nexturl: HTML_BASE_URL_PREFIX + 'chartCenter/chart/page.html?type=3&time='+today.getTime(), // eslint-disable-line
       nextparam: '',
       title: items[index],
       flag: 1
@@ -119,7 +119,7 @@ function updateData(data) {
               '<span class="history-detail-content-list-item-content-detail-re">' + (days[i].fz || 0) + '人</span>' +
               '<span class="history-detail-content-list-item-content-detail-apponitment">' + (days[i].yy || 0) + '人</span>' +
               '<span class="history-detail-content-list-item-content-detail-miss">' + (days[i].ls || 0) + '人</span>' +
-              '<span class="history-detail-content-list-item-content-detail-visit">' + (days[i].fz || 0) + '人</span>' +
+              '<span class="history-detail-content-list-item-content-detail-visit">' + (days[i].ff || 0) + '人</span>' +
               '</div>' +
               '<span class="history-detail-content-list-item-content-amount">' + (days[i].sf || 0).toFixed(2) + '元</span>' +
               '</div>' +

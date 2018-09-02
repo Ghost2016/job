@@ -23,6 +23,7 @@ exportModule.render = function(id, jsonObj) {
   }
   const ele = document.getElementById(id)
   ele.classList.add('_gDialog-wrapper')
+
   ele.innerHTML = GDialog(tempObj)
   $('._gDialog-footer-cancel>span')[0].addEventListener('click', (e) => {
     tempObj.onCancelClick && tempObj.onCancelClick(e)

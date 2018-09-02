@@ -6,7 +6,7 @@ import './page.less'
 const Native = require('@/lib/native.js')
 const type = getSearchParam('type')
 const isAdd = !getSearchParam('isEdit')
-var array = JSON.parse(localStorage.getItem('checkItems')).sort((a,b) => {
+let array = JSON.parse(localStorage.getItem('checkItems')).sort((a,b) => {
   return a.numb - b.numb
 })
 array.map((e,i) => {
@@ -105,27 +105,23 @@ function addChecker() {
 
 
 window.funSelectCallBack = function(jsonString) {
-  // alert(jsonString)
+    // alert(jsonString)
     var p = JSON.parse(jsonString)
-    var BreakException = {};
-    try {
-        array.forEach((ele,index) => {
-          // alert(ele.id + ',' + p.id)
-            if((ele.id-0) === (p.id-0)) {
-                ele.p1 = p.p1
-                ele.p2 = p.p2
-                ele.p3 = p.p3
-                ele.p4 = p.p4
-                throw BreakException;
-            }
-        })
-    } catch (e) {
-        if (e !== BreakException) throw e;
-    }
-    console.log(array)
+    array = array.map((item,index ) => {
+      if(item.id === p.id){
+        item.p1 = p.p1;
+        item.p2 = p.p2;
+        item.p3 = p.p3;
+        item.p4 = p.p4;
+      }
+      
+      return item;
+    })
+    // alert(JSON.stringify(array))
 }
 
 window.funRightTouch = function() {
+    alert(1)
     array.forEach((ele,index) => {
         ele.text = $(`#${ele.id} textarea`).val()
     })

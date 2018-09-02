@@ -91,7 +91,8 @@ $(function () {
                 form.hzsource = $('#patient-src').html();
 
             }
-            console.log(form)
+            // alert(JSON.stringify(form))
+            // console.log(form)
             // return
             if (isAdd) {
                 loading()

@@ -5,7 +5,7 @@ require('@/lib/common.js')
 import './page.less'
 import { fetchDoctorList } from '@/api/common'
 import { addAnamnesis, getAnamnesis, editAnamnesis, deleteAnamnesis } from '@/api/anamnesis'
-
+const GDialog = require('@/components/gDialog/gDialog.js')
 const isAdd = !getSearchParam('isEdit')
 // 前一个页面传递病历号
 var blh = getSearchParam('blh') || 32030515
@@ -155,6 +155,7 @@ $(function() {
         }
         loading()
         if(isAdd) {
+          alert(JSON.stringify(form))
           addAnamnesis(form).then(
             res => {
               loadingdone()
@@ -171,6 +172,8 @@ $(function() {
           )
         } else {
           form.seeno = seeno
+          console.log(form);
+          alert(JSON.stringify(form))
           editAnamnesis(form).then(
             res => {
               loadingdone()
@@ -220,28 +223,41 @@ function fetchDoctorSrcList() {
 }
 
 window.funRightTouch =  function () {
-    // alert('delete')
-    let form = {
-      blh:blh,
-      seeno: seeno
+  GDialog.render('gDialog', {
+    titleText: '确定要删除数据吗',
+    hasCancel: true,
+    ensureText: '确定',
+    cancelText: '取消',
+    onEnsureClick: () => {
+      GDialog.dismiss()
+      handleDelete()
+    },
+    onCancelClick: () => {
+      GDialog.dismiss()
     }
-    loading()
-    deleteAnamnesis(form).then(
-      res => {
-        loadingdone()
-        if( res.data.Data ) {
-            console.log('删除成功')
-            Native.handleBackAction(true)
-          }
-      }
-    ).catch(
-      e => {
-          loadingdone()
-          console.log(e)
-      }
-    )
+  }).show()
 }
-
+function handleDelete() {
+  let form = {
+    blh:blh,
+    seeno: seeno
+  }
+  loading()
+  deleteAnamnesis(form).then(
+    res => {
+      loadingdone()
+      if( res.data.Data ) {
+          console.log('删除成功')
+          Native.handleBackAction(true)
+        }
+    }
+  ).catch(
+    e => {
+        loadingdone()
+        console.log(e)
+    }
+  )
+}
 window.funSelectCallBack = function(jsonString) {
     var { array, type } = JSON.parse(jsonString)
     // alert(jsonString)
@@ -333,6 +349,7 @@ window.funSelectCallBack = function(jsonString) {
         }
     })
     console.log(array)
+    fillCheckData()
 }
 function fillData(dataSet) {
   const data = dataSet.main[0]
@@ -346,6 +363,7 @@ function fillData(dataSet) {
       $(element).removeClass('is-checked')
     }
   })
+  
   $('#doctor-name').val(data.doctor)
   $('#narrate').val(data.narrate)
   $('#ext1').val(data.ext1)
@@ -360,4 +378,23 @@ function fillData(dataSet) {
   diagnoses = dataSet.diagnoses
   plans = dataSet.plans
   cures = dataSet.cures
+  fillCheckData()
+}
+
+function fillCheckData() {
+  $(`#checks`).val(getContent(checks))
+  $(`#others`).val(getContent(others))
+  $(`#diagnoses`).val(getContent(diagnoses))
+  $(`#plans`).val(getContent(plans))
+  $(`#cures`).val(getContent(cures))
+}
+
+function getContent(items) {
+  if(items.length > 0) {
+    return items.map(item => {
+      return item.wcheck || item.desc1 || item.diagnose || item.hzplan || item.cure || ''
+    }).join(';')
+  } else {
+    return '点击编辑';
+  }
 }

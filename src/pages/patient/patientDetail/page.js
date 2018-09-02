@@ -134,11 +134,15 @@ function updateData(data) {
     }
     $('#xfje').text((data.data.Data[0].xfje || 0) + '元')
     $('#qf').text((data.data.Data[0].qf || 0) + '元')
+    // alert(JSON.stringify(data.data.Data[0]))
+    if (data.data.Data[0].bl) {
+      $('#bl').text(data.data.Data[0].bl)
+    }
     if (data.data.Data[0].jzsj) {
       $('#jzsj').text(data.data.Data[0].jzsj)
     }
-    if (data.data.Data[0].hfsj) {
-      $('#hfsj').text(data.data.Data[0].hfsj)
+    if (data.data.Data[0].ff) {
+      $('#hfsj').text(data.data.Data[0].ff)
     }
     if (data.data.Data[0].yysj) {
       $('#yysj').text(data.data.Data[0].yysj)

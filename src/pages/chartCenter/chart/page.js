@@ -10,8 +10,7 @@ import { fetchReturnStatistics } from '@/api/chart'
 const ChartBrief = require('@/components/chartBrief/chartBrief')
 const ChartDetail = require('@/components/chartDetail/chartDetail')
 
-var today = new Date()
-
+var today = new Date(parseInt(getSearchParam('time')))
 var type = getSearchParam('type') - 0 || 3
 
 var patientStatisticsData = {}

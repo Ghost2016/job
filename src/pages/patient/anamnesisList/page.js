@@ -32,7 +32,7 @@ function getAnamnesisList(blh) {
     loading()
     fetchAnamnesisList(blh).then(
         res => {
-            loadingdone()
+          loadingdone()
           anamnesisListData = res
           if ('Data' in anamnesisListData.data) {
             anamnesisItems.render('anamnesisItems', anamnesisListData)

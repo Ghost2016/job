@@ -12,7 +12,7 @@ var p = {
   p2: (toothItem && toothItem.p2) || '',
   p3: (toothItem && toothItem.p3) || '',
   p4: (toothItem && toothItem.p4) || '',
-  id: getSearchParam('id')
+  id: getSearchParam('id') - 0
 }
 
 // 当前选中的状态
@@ -206,10 +206,11 @@ function _submit(){
   p.p2 += getPos($('.deciduousTeech-right-top>span'))
   p.p3 += getPos($('.deciduousTeech-left-bottom>span'))
   p.p4 += getPos($('.deciduousTeech-right-bottom>span'))
-  // alert(JSON.stringify(p))
-  // return
+  alert(JSON.stringify(p))
+  window.js.setBackWithValue(JSON.stringify(p));  
+  return
   setTimeout(() => {
-    js.setBackWithValue(JSON.stringify(p));
+    window.js.setBackWithValue(JSON.stringify(p));
   }, 400)
   
 }
