@@ -122,7 +122,7 @@ export function decodeUTF8(str) {
 
 
 export function getToken() {
-  return 'EqVGmprQIExNQP4PgRw3FMd2AfBCRVbN'
+  // return 'EqVGmprQIExNQP4PgRw3FMd2AfBCRVbN'
   if(window.js)
   {
       var loginData = JSON.parse(window.js.getLocalParam('sp_pre_login_data'));

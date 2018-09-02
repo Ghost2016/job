@@ -108,13 +108,13 @@ $(function() {
         date: $('#current-return-visit-time').val(),
         content: $('#content-text').val(),
         docid: $('#doctor-name_dummy').val(),
-        state: $('#status').val() || $('#status_dummy').val(),
+        state: $('#status').val() || || $('#status_dummy').val(),
         result: $('#visit-result').val()
       }
-
-      form.docid = $('#doctor-name').val();
-
-      // console.log(form)
+      if ($('#doctor-name_dummy').length == 0) {
+          form.docid = $('#doctor-name').html();
+      }
+      console.log(form)
       // return
       if (isAdd) {
         loading()

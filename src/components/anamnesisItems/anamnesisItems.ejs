@@ -5,8 +5,13 @@
     <div class="_anamnesis-item-status <%=items[i].seeno===1?'first':'not-first'%>"></div>
     <div class="_anamnesis-item-left">
       <div>医生:<span><%=items[i].docname||''%></span></div>
+<<<<<<< HEAD
       <div>主诉:<span><%=items[i].narrate||''%></span></div>
       <div>医嘱:<span><%=items[i].advice||''%></span></div>
+=======
+      <div>诊断:<span><%=items[i].narrate||''%></span></div>
+      <div>检查:<span><%=items[i].advice||''%></span></div>
+>>>>>>> d3529fce49218d783342d353b9fd419537b98ca4
     </div>
     <div class="_anamnesis-item-right">
       <div><%=items[i].seedate.substring(0,10)||''%></div>
