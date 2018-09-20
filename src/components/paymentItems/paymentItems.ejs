@@ -8,7 +8,7 @@
       <div class="_payment-info-header-person">
         <div>医生：<span><%=items[i].ysname||''%></span></div>
         <div>护士：<span><%=items[i].hsname||''%></span></div>
-        <div>前台：<span><%=items[i].sfname||''%></span></div>
+        <div>收费员：<span><%=items[i].sfname||''%></span></div>
       </div>
       <div class="_payment-info-header-money">
         <ul>
@@ -39,6 +39,7 @@
       <% if('list' in items[i]){ %>
       <% var length1 = items[i].list.length %>
       <% for (var j=0; j<length1; j++) { %>
+      <% if((items[i].list[j].gsum - 0) > 0) { %>
       <div class="_payment-info-content-item">
         <span><%=items[i].list[j].sfname||''%></span>
         <div>
@@ -46,13 +47,16 @@
           <span style="color:#b4b4b4;line-height: 0.5rem;">X<%=items[i].list[j].sl||0%></span>
         </div>
       </div>
+      <% } %>
       <%total += (items[i].list[j].gsum||0)*(items[i].list[j].sl||0)%>
       <% } %>
       <% } %>
     </div>
+    <% if((total-0)!==0) {%>
     <footer class="_payment-info-footer">
       共<%=items[i].list.length||0%>件商品&nbsp;&nbsp;合计¥<span><%=total%></span>
     </footer>
+    <% } %>
   </div>
 <% } %>
 <!-- </div> -->

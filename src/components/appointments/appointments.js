@@ -4,7 +4,7 @@ import './appointments.less'
 const exportModule = {}
 exportModule.render = function(id, jsonObj, isSingle) {
   exportModule.id = id
-  console.log(jsonObj)
+  // alert(JSON.stringify(jsonObj[0]))
   jsonObj.map((item) => {
     // alert(JSON.stringify(item));
     if (item.isff === '已回访') {
@@ -20,8 +20,9 @@ exportModule.render = function(id, jsonObj, isSingle) {
     }
     item.date = (item.bdate && item.bdate.substring(11, 16)) || (item.ffdate && item.ffdate.substring(11, 16))
     item.date1 = (item.bdate && (item.bdate.substring(0, 4) + '/' + item.bdate.substring(5, 7) + '/' + item.bdate.substring(8, 10))) || (item.ffdate.substring(0, 4) + '/' + item.ffdate.substring(5, 7) + '/' + item.ffdate.substring(8, 10))
-    item.yylx = item.yylx
-      item.tel = item.tel
+    item.yylx = item.yylx;
+    item.tel = item.tel;
+    item.patientName = item.name || "";
   })
   const tempObj = { items: jsonObj, isSingle: isSingle }
   console.log(tempObj)

@@ -121,7 +121,7 @@ window.funSelectCallBack = function(jsonString) {
 }
 
 window.funRightTouch = function() {
-    alert(1)
+    // alert(1)
     array.forEach((ele,index) => {
         ele.text = $(`#${ele.id} textarea`).val()
     })

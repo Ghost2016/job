@@ -2,6 +2,7 @@ import fetch from '@/lib/fetch'
 import utils from '@/lib/utils'
 import { getToken } from '@/lib/utils'
 
+
 export function test() {
   return fetch.get('/users/123')
 }

@@ -155,7 +155,7 @@ $(function() {
         }
         loading()
         if(isAdd) {
-          alert(JSON.stringify(form))
+          // alert(JSON.stringify(form))
           addAnamnesis(form).then(
             res => {
               loadingdone()
@@ -173,7 +173,7 @@ $(function() {
         } else {
           form.seeno = seeno
           console.log(form);
-          alert(JSON.stringify(form))
+          // alert(JSON.stringify(form))
           editAnamnesis(form).then(
             res => {
               loadingdone()

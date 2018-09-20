@@ -35,6 +35,8 @@ function getChargeList(blh) {
 
 function updateData(data) {
   if ('Data' in data.data) {
+    // alert(data.data.Data.czk)
+    // alert(data.data.Data.qf)
     $('#allss').text(data.data.Data.allss || '0.00')
     $('#czk').text(data.data.Data.czk || '0.00')
     $('#czk1').text(data.data.Data.qf || '0.00')

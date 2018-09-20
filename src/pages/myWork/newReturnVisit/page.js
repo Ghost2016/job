@@ -107,14 +107,17 @@ $(function() {
         blh: $('#patient-name').val(),
         date: $('#current-return-visit-time').val(),
         content: $('#content-text').val(),
-        docid: $('#doctor-name_dummy').val(),
-        state: $('#status').val() || || $('#status_dummy').val(),
+        // docid: $('#doctor-name_dummy').val(),
+        docid: $('#doctor-name').val(),
+        state: $('#status').val() || $('#status_dummy').val(),
         result: $('#visit-result').val()
       }
-      if ($('#doctor-name_dummy').length == 0) {
-          form.docid = $('#doctor-name').html();
-      }
+      // if ($('#doctor-name_dummy').length == 0) {
+      //   form.docid = $('#doctor-name').html();
+      // }
+      // alert($('#doctor-name_dummy'))
       console.log(form)
+      // alert(JSON.stringify(form))
       // return
       if (isAdd) {
         loading()
@@ -143,7 +146,6 @@ $(function() {
             loadingdone()
             console.log(res)
             if (res.data.Data) {
-
               Native.showToast('修改成功')
               Native.handleBackAction(true)
             }
@@ -208,6 +210,7 @@ function fetchDoctorSrcList() {
   loading()
   fetchDoctorList().then(
     res => {
+      // alert(JSON.stringify(res))
       loadingdone()
       let doctorList = []
       console.log(res)

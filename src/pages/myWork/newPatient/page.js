@@ -23,6 +23,8 @@ var patientSrc = []
 var patientSrcSelector = null
 var doctorList = []
 var doctorListSelector = null
+var latP;
+var lonP;
 var isAdd = !getSearchParam('isEdit')
 // var isAdd = 0
 var blh = getSearchParam('blh') || '100272'
@@ -211,6 +213,11 @@ function validate() {
         Native.showToast('请选择患者来源');
         return false;
     }
+    if(!$('#patient-addr').val())
+    {
+        Native.showToast('请选择患者位置');
+        return false;
+    }
     return true
 }
 
@@ -337,6 +344,9 @@ window.funRightTouch = function () {
 // 选好状态后更新
 window.setLocation = function (lat, lon, address) {
     // 更新地址
+
+    latP = lat;
+    lonP = lon;
     $('#patient-addr').val(address);
 
 }

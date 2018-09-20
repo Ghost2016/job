@@ -14,10 +14,14 @@ var p = {
   p4: (toothItem && toothItem.p4) || '',
   id: getSearchParam('id') - 0
 }
-
+// const reg = /\d/;
+const reg = /[ⅠⅡⅢⅣⅤ]/
+let tab = reg.test(p.p1) || reg.test(p.p2) || reg.test(p.p3) || reg.test(p.p4)
 // 当前选中的状态
-var tab = 0;
+tab = tab ? 1 : 0;
+alert(tab)
 $(function() {
+  initTab()
   // console.log(map)
   const baseFontSize = $('html').css('fontSize')
   const _height = $('.content-left-top').css('height').slice(0, -2) - 0.6 * baseFontSize.slice(0, -2)
@@ -43,8 +47,7 @@ $(function() {
     $($('.content-right-bottom > span')[i]).css('top', ((Math.sin(Math.PI / 2 / 7 * (7 - i)) * _height + 'px')))
     $($('.content-right-bottom > span')[i]).css('left', ((Math.cos(Math.PI / 2 / 7 * (7 - i))) * _width + 'px'))
   }
-  // 绑定状态
-  initTooth()
+  
   // 选
   $('.content').on('click','span', function(){
     // alert($(this).index())
@@ -88,7 +91,8 @@ $(function() {
   })
   // tab
   $('#tab>span').on('click', function(){
-    const index = $(this).index()
+    tab = $(this).index()
+    const index = tab;
     if($(this).hasClass('active')){
       return
     } else {
@@ -163,8 +167,7 @@ $(function() {
     $('.deciduousTeech-left-top>span').addClass('select')
     $('.deciduousTeech-right-top>span').addClass('select')
   })
-  // 绑定状态
-  initDeciduousTeech()
+
   $('#save').on('click', ()=>{
     _submit()
   })
@@ -197,16 +200,18 @@ window.funRightTouch = function(value) {
   _submit()
 }
 function _submit(){
-  p.p1 = getPos($('.content-left-top>span'))
-  p.p2 = getPos($('.content-right-top>span'))
-  p.p3 = getPos($('.content-left-bottom>span'))
-  p.p4 = getPos($('.content-right-bottom>span'))
-
-  p.p1 += getPos($('.deciduousTeech-left-top>span'))
-  p.p2 += getPos($('.deciduousTeech-right-top>span'))
-  p.p3 += getPos($('.deciduousTeech-left-bottom>span'))
-  p.p4 += getPos($('.deciduousTeech-right-bottom>span'))
-  alert(JSON.stringify(p))
+  if(tab === 0) {
+    p.p1 = getPos($('.content-left-top>span'))
+    p.p2 = getPos($('.content-right-top>span'))
+    p.p3 = getPos($('.content-left-bottom>span'))
+    p.p4 = getPos($('.content-right-bottom>span'))
+  } else {
+    p.p1 = getPos($('.deciduousTeech-left-top>span'))
+    p.p2 = getPos($('.deciduousTeech-right-top>span'))
+    p.p3 = getPos($('.deciduousTeech-left-bottom>span'))
+    p.p4 = getPos($('.deciduousTeech-right-bottom>span'))
+  }
+  // alert(JSON.stringify(p))
   window.js.setBackWithValue(JSON.stringify(p));  
   return
   setTimeout(() => {
@@ -243,4 +248,15 @@ function initDeciduousTeech(){
   addSelectStatus(p.p2, $('.deciduousTeech-right-top>span'))
   addSelectStatus(p.p3, $('.deciduousTeech-left-bottom>span'))
   addSelectStatus(p.p4, $('.deciduousTeech-right-bottom>span'))
+}
+function initTab() {
+
+  if(tab===1) {
+    initDeciduousTeech()
+    $('#tab>span:nth(1)').addClass('active').siblings('span').removeClass('active')
+    $('.content').removeClass('show').siblings('div').addClass('show')
+  } else{
+    // 绑定状态
+    initTooth()
+  }
 }

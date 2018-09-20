@@ -25,6 +25,7 @@ var doctorListSelector = null
 var patientBLH = getSearchParam('blh');
 // 获取是否有患者
 const patientName =decodeUTF8(getSearchParam('name'));
+let timeSelector = null
 $(function() {
     GDialog.render('gDialog', {
         titleText: '确定要删除数据吗',
@@ -125,7 +126,7 @@ $(function() {
   var optDateTime = $.extend(opt['datetime'], opt['default'])
   window.mobiscroll.datetime('#appointment-time', optDateTime)
   // 就诊时长
-  window.mobiscroll.time('#duration', {
+  timeSelector = window.mobiscroll.time('#duration', {
     // theme: 'ios',
     display: 'bottom',
     // timeFormat: `i'min'`,
@@ -140,14 +141,14 @@ $(function() {
       if (!_validate()) {
           return
       }
-    // alert($('#patient-name').val())
     const form = {
       // 没有这一条件
       // blh : $('#patient-name').val(),
       // 没有这一条件
       // ppn : $('#patient-phone-number').val(),
       date : $('#appointment-time').val(),
-      len : parseInt($('#duration').val()) || 0,
+      // len : parseInt($('#duration').val()) || 0,
+      len : getTimeLen($('#duration').val()),
       content : $('#content-text').val(),
       docid :$('#doctor-name_dummy').val()
     }
@@ -383,13 +384,17 @@ function fetchAppointmentDetail() {
     if(WithNumer){
         getAppointmentDetailWithNumber(no).then(
             res => {
-                const itemDetail = res.data.Data[0]
-                // alert(JSON.stringify(res))
+              const itemDetail = res.data.Data[0]
+                let minute = itemDetail.len % 60;
+                let hour = parseInt(itemDetail.len /60)
+                timeSelector.setVal(new Date(1970, 1, 1, hour, minute, 0))
+                
                 $('#patient-name').html(itemDetail.name)
                 $('#patient-name').val(itemDetail.blh)
                 // $('#patient-phone-number').val(itemDetail.phone || 13000000000)
                 $('#appointment-time').val(itemDetail.b_date)
-                $('#duration').val(itemDetail.len)
+                // $('#duration').val(itemDetail.len)
+                $('#duration').val(`${hour}小时${minute}分钟`)
                 $('#content-text').val(itemDetail.content || '')
                 // context
                 // $('#doctor-name').val(itemDetail.doctname || '')
@@ -453,3 +458,7 @@ window.funRightTouch =  function () {
     GDialog.show()
 }
 
+function getTimeLen(timeText){
+  const arr = timeText.split(/小时|分钟/)
+  return arr[0] * 60 + arr[1] * 1
+}
